@@ -1,0 +1,564 @@
+[
+    {
+       "name":"Abdominal",
+       "capacity":"Força",
+       "uuid":"7a4aab26f97f47e2b6d5e7e7cf452ee8"
+    },
+    {
+       "name":"Abdominal Bike",
+       "muscles":"Abdominais, Pernas",
+       "capacity":"Força",
+       "uuid":"5b4e6c2eb450421baf0794212fc370f5"
+    },
+    {
+       "name":"Abdominal Crunch",
+       "muscles":"Tríceps, Deltóides, Abdominais, Quadris",
+       "capacity":"Força",
+       "uuid":"8247e7d984cb41db8981f61b57c8fdc9"
+    },
+    {
+       "name":"Abdominal Twist",
+       "muscles":"Músculos Oblíquos, Lombar, Glúteos,  Abdomens",
+       "capacity":"Força",
+       "how_to":"Um exercicío físico de forçaem que praticamnete, se abaixa os quadris a partirde uma posição em pée depois se levanta.",
+       "uuid":"8cb01c5cc6aa4ea692a94450df420162"
+    },
+    {
+       "name":"Afundo",
+       "muscles":"Quadríceps (vasto lateral,vasto medial e vasto intermediário), Isquiotibiais(posterior da coxa), Grácil,Tensor da Fáscia Lata,Sartório, Adutores, Glúteosmáximo e mínimo",
+       "capacity":"Força e Flexibilidade",
+       "how_to":"1. Em pé, dê um passo à frente com uma das pernas (de forma que, quando vocêflexionar os joelhos, a perna de trás fiqueabaixo do tronco e forme um ângulo de 90 graus);2. Flexione o joelho e desça lentamenteaté que o joelho da perna de trás quase otoque o chão;3. Estenda o joelho até perto da posição,evite estender completamente para não perder a tensão sob os músculos que estão sendo exigidos;4. Faça as repetições indicadas, troque a posição ds pernas e execute oexercício novamnete;",
+       "uuid":"66eb1750a3d147eb906fb7a396ce3674"
+    },
+    {
+       "name":"Afundo com o pés no apoio",
+       "capacity":"Força e Resistência",
+       "uuid":"8a9f63f5a8e24742816dd1422fc41947"
+    },
+    {
+       "name":"Agachamento na cadeira",
+       "capacity":"Força",
+       "uuid":"c9708266d755480eb08dbf95724b3ea7"
+    },
+    {
+       "name":"Agachamento na parede (isométrico)",
+       "capacity":"Força",
+       "uuid":"5f23a01ee14c4e97b194461705312e7a"
+    },
+    {
+       "name":"Agachamento profundo com elástico",
+       "capacity":"Força",
+       "uuid":"d6fe5d10ded2485ca70cc6ed7b90050d"
+    },
+    {
+       "name":"Agachamento Unilateral",
+       "capacity":"Força e Resistência",
+       "uuid":"bd2b9b9d019b4c6a8a5d464161bd1f47"
+    },
+    {
+       "name":"Agachamento",
+       "muscles":"Quadríceps, Glúteo,Lombar, Abdomen,Quadril,Panturrilha,Coxa",
+       "capacity":"Força",
+       "uuid":"2ed64180e6f14047b1123b9e14ebe5b4"
+    },
+    {
+       "name":"Agachamneto Pistola",
+       "muscles":"Quadríceps, Flexores do Quadril, Glúteos e Isquiotibiais. ",
+       "capacity":"Equilíbrio",
+       "uuid":"e48ddd3eabfb4f77b06fbd96f2bc4749"
+    },
+    {
+       "name":"Alongamento Abertura",
+       "muscles":"Psoas e Isquiotibiais",
+       "capacity":"Flexibilidade",
+       "uuid":"f1f23f08dc244210bcfe3519e683ab75"
+    },
+    {
+       "name":"Alongamento Agachamento Profundo",
+       "muscles":"Glúteos",
+       "capacity":"Flexibilidade",
+       "uuid":"c80b8c2eb7524e54a841ec8760caef36"
+    },
+    {
+       "name":"Alongamento Antebraço Esticado",
+       "muscles":"Extensor do antebraço",
+       "capacity":"Flexibilidade",
+       "uuid":"aacaaa0e9e3646ba95e63ffa95487545"
+    },
+    {
+       "name":"Alongamento de panturrilha com perna estendida",
+       "muscles":"Panturilhas",
+       "capacity":"Flexibilidade",
+       "uuid":"a60b41bfe3d14b91bbf31755b7771bc5"
+    },
+    {
+       "name":"Alongamento de Quadríceps em Pé",
+       "muscles":"Quadríceps",
+       "capacity":"Flexibilidade e Mobilidade",
+       "uuid":"ff6e8128175f40c3b68bfd8944a082de"
+    },
+    {
+       "name":"Alongamento de Tríceps",
+       "muscles":"Tríceps",
+       "capacity":"Flexibilidade e Força",
+       "uuid":"b6177abd45f54c1cb6f609ce7004127e"
+    },
+    {
+       "name":"Alongamento do Pernas Abertas",
+       "muscles":"Adutores",
+       "capacity":"Flexibilidade",
+       "uuid":"38bdd04c6bf24f6b887b792fe5d3577f"
+    },
+    {
+       "name":"Alongamento do Trapézio Superior",
+       "muscles":"Trapézio superior",
+       "capacity":"Flexibilidade",
+       "uuid":"faa103c3d2a2429385705e28494c367f"
+    },
+    {
+       "name":"Alongamento Flexão Lateral do Pescoço",
+       "muscles":"Esternocleidomastóideo",
+       "capacity":"Flexibilidade",
+       "uuid":"a65545e315544ef8a403365bffbc9352"
+    },
+    {
+       "name":"Alongamento Inclinação",
+       "muscles":"Isquiotibiais e Panturrilha",
+       "capacity":"Flexibilidade",
+       "uuid":"1e528d93ff5948eca7b8583d8dae2e5b"
+    },
+    {
+       "name":"Alongamento lateral do tronco",
+       "muscles":"Costas e Dorsal",
+       "capacity":"Flexibilidade",
+       "uuid":"b275ba46ac7f47f3b4cfb5fc5a8ebf72"
+    },
+    {
+       "name":"Alongamento Mãos nos Pés",
+       "muscles":"Isquiotibiais e Panturrilha",
+       "capacity":"Flexibilidade",
+       "uuid":"8f9c338255c74760a7f5150a55126e9b"
+    },
+    {
+       "name":"Alongamento Meio Ajoelhamento",
+       "muscles":"Psoas e Quadríceps",
+       "capacity":"Flexibilidade",
+       "uuid":"cf8b802c97514c4d95e01210fe0165de"
+    },
+    {
+       "name":"Alongamento Ombro lateral esticado",
+       "muscles":"Deltoide lateral",
+       "capacity":"Flexibilidade",
+       "uuid":"a6c0773309f549bc8e6ad3aa32ab6b96"
+    },
+    {
+       "name":"Alongamento Peito Esticado",
+       "muscles":"Peitorais",
+       "capacity":"Flexibilidade",
+       "uuid":"ecfd168c1a514aa1b323ed77bf61d7ef"
+    },
+    {
+       "name":"Alongamento Pose Arqueada na Parede",
+       "muscles":"Peitorais e Grande dorsal",
+       "capacity":"Flexibilidade",
+       "uuid":"1aa17df0b00f477fa664a41f0fa3cdc9"
+    },
+    {
+       "name":"Alongamento Pose da borboleta",
+       "muscles":"Adutores",
+       "capacity":"Flexibilidade",
+       "uuid":"8824ad1f20aa45f3b5bca5230ee6a5fa"
+    },
+    {
+       "name":"Alongamento Pose da Cobra",
+       "muscles":"Tronco, Ombros, Peito, Braço, Bumbum e Costas",
+       "capacity":"Flexibilidade e Mobilidade",
+       "uuid":"7e24ef965eb745a9b97c2d38b183ee8b"
+    },
+    {
+       "name":"Alongamento Pose da Criança",
+       "muscles":"Grande Dorsal",
+       "capacity":"Flexibilidade",
+       "uuid":"581422e29e5a443786ecd218f718d2a5"
+    },
+    {
+       "name":"Alongamento Pose do Camelo",
+       "muscles":"Reto abdominal e Oblíquos externos",
+       "capacity":"Flexibilidade",
+       "uuid":"9d4b36ac3b67472ab5c59997207e2e08"
+    },
+    {
+       "name":"Alongamento Pose do Gato",
+       "muscles":"Tronco, costas",
+       "capacity":"Respiração",
+       "uuid":"8d70082d603f46e7a0bb4b0966abf2cb"
+    },
+    {
+       "name":"Alongamento Pose do pombo meio sentado",
+       "muscles":"Glúteos",
+       "capacity":"Flexibilidade",
+       "uuid":"99069671a17046f9a41f75dd9fc68647"
+    },
+    {
+       "name":"Alongamento Pose do Sapo",
+       "muscles":"Pélvis, Pernas, Costas",
+       "capacity":"Flexibilidade e Mobilidade",
+       "uuid":"2595acd1170f4cd699d649527a596c45"
+    },
+    {
+       "name":"Alongamento Pose do Triângulo",
+       "muscles":"Tronco, Ombros, Pernas, Costas",
+       "capacity":"Força, Potência, Mobilidade e Equilíbrio ",
+       "uuid":"4169ed9e334948969cfe89b6f79ce7ae"
+    },
+    {
+       "name":"Alongamento Rotação de Pescoço",
+       "muscles":"Esternocleidomastóideo",
+       "capacity":"Flexibilidade",
+       "uuid":"77e31420b458488983fce58f41fa1d05"
+    },
+    {
+       "name":"Alongamento Torção",
+       "muscles":"Glúteos e Oblíquos externos",
+       "capacity":"Flexibilidade",
+       "uuid":"6378b4988ea7407dbf7af8f7eaf18b31"
+    },
+    {
+       "name":"Avanço",
+       "muscles":"Quadríceps (anterior de coxa), Posteriorde coxa, Adutores, Glúteos, Paravertebraislombares",
+       "capacity":"Força e Flexibilidade",
+       "how_to":"O avanço, ou passada, como preferiré um dos exercícios mais intensos eeficientes do treino de pernas, fundamental para a construção de volume e densidade muscular nestaregião. Além disso, ele é umaexcelente alternativa para pessoascom alguns problemas na coluna ou que queiram um estímulo diferente.",
+       "uuid":"9ed3f5fc168b4fe99641141b23be9881"
+    },
+    {
+       "name":"Avanço do Corredor com Equilíbrio",
+       "muscles":"Músculos posteriores da coxa, Glúteos",
+       "capacity":"Força e Equilíbrio",
+       "uuid":"951d6604ccc9446dbaac14997923ddeb"
+    },
+    {
+       "name":"Aviãozinho (stiff unilateral)",
+       "capacity":"Força, Flexibilidade e Equilíbrio",
+       "uuid":"8d90010317c44246aa12140bbc585e14"
+    },
+    {
+       "name":"Bench Dips",
+       "muscles":"Tríceps Braquiais, Ombros, Peitoral, Deltoides, Romboides",
+       "capacity":"Força",
+       "how_to":"O Bench Dips é ótimo para o peitoe também para os tríceps, mas jaque você não tem barras paralelasdisponíveis, pode usar um banco oucadeira para realizar este exercício físico. Esta variação foca mais nostríceps",
+       "uuid":"32b9079b06064caa958fccfc43976b0a"
+    },
+    {
+       "name":"Biceps com elástico",
+       "muscles":"Bíceps",
+       "capacity":"Força",
+       "uuid":"c18d75c842fd4e1683fb42027c02c024"
+    },
+    {
+       "name":"Bicicleta imaginária",
+       "capacity":"Força e Flexibilidade",
+       "uuid":"9d4298c2b0774148ae93e0770441a028"
+    },
+    {
+       "name":"Bom Dia",
+       "muscles":"Isquiotibiais, Lombar",
+       "capacity":"Resistência e Flexibilidade",
+       "uuid":"128f9f262f7041beafc9865e158debe8"
+    },
+    {
+       "name":"Burpee",
+       "muscles":"Ombros, Peitoral, Braços, Pernas, Glúteos",
+       "capacity":"Resistência",
+       "uuid":"66a49ef2128240cc9424fa2719b1065c"
+    },
+    {
+       "name":"Cadeira Isométrica (Wall Sit)",
+       "muscles":"Glúteos, panturrilhas, Coxas",
+       "capacity":"Força e Resistência",
+       "uuid":"849eedd0c6764148855f7b0958caa368"
+    },
+    {
+       "name":"Caminhada",
+       "muscles":"Glúteos, Pernas, Coxas,Abdômem",
+       "capacity":"Resistência",
+       "how_to":"A caminhada é uma atividadepraticada por muitas pessoas.Isso ocorre pelo simples fatode ser um esporte de baixo custo, que pode ser praticado em qualquer lugar, sem grandesdificuldades. É muito comum pessoas organizarem grupos de caminhadas com o intuito de teruma vida mais saudável; evitando problemas como doresnas costas e pressão alta, por exemplo.",
+       "uuid":"ea2ba2538c2a47c7b86dca187276f23e"
+    },
+    {
+       "name":"Caranguejo com toque no pé",
+       "muscles":"Abdômen inferior, Glúteos,Isquiotibiais",
+       "capacity":"Resistência",
+       "uuid":"5356bbdf35164764babacfb0d05db0c3"
+    },
+    {
+       "name":"Chute para trás",
+       "muscles":"Glúteos, Abdominais, Quadríceps, Panturrilhas, Isquiotibiais e Flexores do Quadril.",
+       "capacity":"Equilíbrio, Flexibilidade e Força",
+       "uuid":"8cdffe273f244b0b887323bade08c845"
+    },
+    {
+       "name":"Clamshell",
+       "muscles":"Glúteos, Quadris, Pernas",
+       "capacity":"Mobilidade e Flexibilidade",
+       "uuid":"6f75ffed7372426ea230e7152e681c00"
+    },
+    {
+       "name":"Corrida Estacionária",
+       "muscles":"Glúteo máximo, Quadríceps, Panturrilha, Isquiotibiais,Bíceps e deltoide",
+       "capacity":"Resistência",
+       "how_to":"A corrida estacionária é uma modalidade de corrida sem sair do lugar - o que pode soar estranho para alguns. Correr nolugar não ofreve os mesmosbenefícios que a corrida normal,pois são usados músculos e movimentos diferentes. Porém, éuma ótima opção de treinoaeróbico quando você quer correr,mas, não tem acesso a uma esteiraou não sair ao ar livre.",
+       "uuid":"a91b3e4f50f142c0b5ec53c388fa24b8"
+    },
+    {
+       "name":"Crucifixo com elástico",
+       "capacity":"Força",
+       "uuid":"5d1ed1d426ea40e391f0fe17bb87c12a"
+    },
+    {
+       "name":"Diamond Kicks (Chute Diamante)",
+       "muscles":"Quadríceps, Pernas, Abdomen, Coxas",
+       "capacity":"Flexibilidade e Força",
+       "uuid":"5d75c8e859424f9ca6ac044a6bf5e029"
+    },
+    {
+       "name":"Elevação das pontas dos pés (ou extensão dos pés)",
+       "capacity":"Força e Equilíbrio",
+       "uuid":"14e12245ad644a2d9d2cbb22bdee131b"
+    },
+    {
+       "name":"Elevação de Pernas             com quatro apoios",
+       "muscles":"Abdominais, Glúteos, Quadris, Músculos posteriores da coxa",
+       "capacity":"Mobilidade e Força",
+       "uuid":"8fb2fb2bb1d141d28041d18607a793b5"
+    },
+    {
+       "name":"Elevação do quadril",
+       "muscles":"Quadris, Glúteos, Abdômen,Isquiotibiais, Lombar",
+       "capacity":"Resistência e Força",
+       "uuid":"d965b129841c4d22bf6008541f9a743b"
+    },
+    {
+       "name":"Elevação do quadril comlevantamento de uma perna",
+       "muscles":"Tórax, Músculos Abdominais e a região Lombar, Glúteos, Pernas.",
+       "capacity":"Força",
+       "uuid":"c338e3edd2704633ac106f2c9d2673dd"
+    },
+    {
+       "name":"Elevação lateral com elástico",
+       "capacity":"Força",
+       "uuid":"fe78aa3421b94bffb54973e8059bd409"
+    },
+    {
+       "name":"Flexão Arqueiro",
+       "muscles":"Peito, Ombro, Bíceps, Tríceps",
+       "capacity":"Resistência, Força e Agilidade",
+       "uuid":"46379d5e8bd4472aad9826b5f733402a"
+    },
+    {
+       "name":"Flexão com as mão invertidas",
+       "muscles":"Bíceps, Tríceps",
+       "capacity":"Força e Resistência",
+       "uuid":"0a0c87887acd41a999e33b75724216c7"
+    },
+    {
+       "name":"Flexão com joelhos apoiados",
+       "muscles":"\\xa0Bíceps Femoral, Sartório, Grácil, Semitendinoso, Semimembranoso e Coxa.",
+       "capacity":"Força ",
+       "uuid":"2b7a7b19af40435da0a0577379bb2e3c"
+    },
+    {
+       "name":"Flexão com puxada para trás",
+       "muscles":"Ombros, Costas, Peito, Bíceps, Tríceps",
+       "capacity":"Resistência, Agilidade e Velocidade",
+       "uuid":"029db9ff06c446d58e196586c483409a"
+    },
+    {
+       "name":"Flexão de braço com joelho",
+       "capacity":"Força",
+       "uuid":"21f79ad646f746d38b257fd6313c2bff"
+    },
+    {
+       "name":"Flexão de braço fechada",
+       "muscles":"Peito, Tríceps",
+       "capacity":"Força",
+       "uuid":"bd28cf79b320432b8d9e4abc98ae78d9"
+    },
+    {
+       "name":"Flexão de braço tradicional",
+       "muscles":"Bíceps, Tríceps, Múculos Abdomnais,Ombros, Peito, Costas",
+       "capacity":"Força",
+       "uuid":"5efe61e1a61b4b71957a9b632dc7ecad"
+    },
+    {
+       "name":"Flexão de joelho com fitball",
+       "capacity":"Força",
+       "uuid":"5f984ec5f4fa4abba344c9bc61930b5a"
+    },
+    {
+       "name":"Flexão Diamante",
+       "muscles":"Bíceps, Tríceps, Peito, Ombros",
+       "capacity":"Força e Resistência",
+       "uuid":"0d4d7d78a7024aaca2c8d2e619a5d8fa"
+    },
+    {
+       "name":"Flexão na Parede",
+       "muscles":"Bíceps, Tríceps, Ombro, Peito",
+       "capacity":"Força e Resistência",
+       "uuid":"90651cdce1604cb894633a8f1b5cd8a7"
+    },
+    {
+       "name":"Flexão Pico",
+       "muscles":"Ombros, Costas, Peito, Bíceps, Tríceps",
+       "capacity":"Força, Resistência e Flexibilidade",
+       "uuid":"a3faedcb866442689077f495c3d5d769"
+    },
+    {
+       "name":"Flexão pliométrica",
+       "muscles":"Bíceps, Tríceps, Ombro, Peito",
+       "capacity":"Força, Resistência e Agilidade",
+       "uuid":"a34044fd817842cd892c780362139bd9"
+    },
+    {
+       "name":"Flexão Unilateral na Parede",
+       "muscles":"Peito, Costas, Ombros, Bíceps, Tríceps",
+       "capacity":"Força e Resistência",
+       "uuid":"897518a9b7e94365b31660105fe8c23b"
+    },
+    {
+       "name":"Gate Swings",
+       "muscles":"Tórax, Glúteos, Isquiotibiais, Panturrilhas, Quadriceps",
+       "capacity":"Flexibilidade e Força",
+       "uuid":"4b2d1fc6aa6d4f61b0566386687c93a9"
+    },
+    {
+       "name":"Montanha Alpinista",
+       "muscles":"Abdômen, Ombros, Braços,Pernas",
+       "capacity":"Resistência e Velocidade",
+       "uuid":"3086ac815f4b4648a18fd8a10c02ec66"
+    },
+    {
+       "name":"Mule Kicks ( ou Chute de Mula)",
+       "muscles":"Quadríceps, Ombros, Costas,Braços, Pés, (*Panturrilha)",
+       "capacity":"Resistência e Flexibilidade",
+       "uuid":"32faf9a46d974478bad8359163eb810e"
+    },
+    {
+       "name":"Perdigueiro",
+       "capacity":"Força",
+       "uuid":"cbb8abbb51514664931fcd3be15ec221"
+    },
+    {
+       "name":"Polichinelos",
+       "muscles":"Panturrilhas, Ombros, Braços",
+       "capacity":"Resistência e Mobilidade",
+       "uuid":"5ee79177e82147fda38fd4d874fa8e12"
+    },
+    {
+       "name":"Ponte",
+       "muscles":"Pélvis, Pernas, Peito, Glúteos, Costas",
+       "capacity":"Mobilidade e Flexibilidade",
+       "uuid":"a904d8b69ff34949b710c24423c5fdbc"
+    },
+    {
+       "name":"Prancha alta com toque no ombro",
+       "muscles":"Abdômen, Ombro ",
+       "capacity":"Resistência",
+       "uuid":"fd8aed36a2ae47a6ad932802195305df"
+    },
+    {
+       "name":"Prancha com elevação de pernas",
+       "muscles":"Oblíquos, Glúteos, Grandes Dorsais, Isquiotibiais",
+       "capacity":"Resistência e Flexibilidade",
+       "uuid":"f939cf3d56af45fbabb5daeaa4bcade1"
+    },
+    {
+       "name":"Prancha com movimento de quadril",
+       "muscles":"Quadris, Costas, Glúteos, Coxas",
+       "capacity":"Resistência",
+       "uuid":"540bbaeda5cc495ca28a893e7b41c8f4"
+    },
+    {
+       "name":"Prancha Dinâmica",
+       "muscles":"Abdômen, Costas, Bíceps",
+       "capacity":"Resistência",
+       "uuid":"34401fd95d8540c48cf63830e3f14e88"
+    },
+    {
+       "name":"Prancha Frontal",
+       "muscles":"Abdômen, Pernas, Ombros,Peito, Costas",
+       "capacity":"Resistência",
+       "uuid":"4c60361d33cc4f8982a7890bf83d7d1a"
+    },
+    {
+       "name":"Prancha Lateral com joelho à cotovelo",
+       "muscles":"Ombros, Braços, Quadris, Glúteos",
+       "capacity":"Resistência e Flexibilidade",
+       "uuid":"d6ae6f11fd624e318cfda9e43798aacd"
+    },
+    {
+       "name":"Prancha Lateral com toque do pé",
+       "muscles":"Ombros, Braços, Quadris",
+       "capacity":"Resistência e Flexibilidade",
+       "uuid":"151e38d32f0c4faeac0e2ca7287b3983"
+    },
+    {
+       "name":"Pular Corda",
+       "capacity":"Coordenação motora (Agilidade)",
+       "uuid":"ccba84687a24421db7d3c4d8cdd0b1df"
+    },
+    {
+       "name":"Puxada alta com elástico",
+       "capacity":"Força",
+       "uuid":"57254983810548c690d7d2bb2e84eca4"
+    },
+    {
+       "name":"Remada",
+       "capacity":"Força",
+       "uuid":"f72da467553247e188df142e610d5cd8"
+    },
+    {
+       "name":"Rolar os joelhos",
+       "muscles":"Lombar",
+       "capacity":"Flexibilidade",
+       "uuid":"7429fce188244b02bdf91746eb060cdf"
+    },
+    {
+       "name":"Rosca direta",
+       "capacity":"Força",
+       "uuid":"5f2845bdcf1e460fb6ced6777c9a4168"
+    },
+    {
+       "name":"Rotação de braços",
+       "muscles":"Bíceps, Tríceps, Ombro",
+       "capacity":"Resistência",
+       "uuid":"a79aa70b31f84580a81feeb8e0307c7d"
+    },
+    {
+       "name":"Scisoor Kicks ( Chutes Tesoura)",
+       "muscles":"Reto Abdominal, Iliopsoas, Tensor da Fáscia Lata, Sartório, Pectíneo, Adutor longo, Adutor curto, Oblíquo externo, Oblíquo interno",
+       "capacity":"Força",
+       "uuid":"0149e3363f9c40a3b6fddcc13e4404a7"
+    },
+    {
+       "name":"Superman",
+       "muscles":"Região Lombar, Abdominais, Glúteos, Quadris, Músculos Posteriores da Coxa, Ombros",
+       "capacity":"Mobilidade e Força",
+       "uuid":"cd7ef1e904a64e08830cb3e7a2bd0925"
+    },
+    {
+       "name":"Testa com elástico",
+       "capacity":"Força",
+       "uuid":"c3120f7981cd43d7a4f0b8cc0930c98c"
+    },
+    {
+       "name":"Tríceps no banco",
+       "capacity":"Força",
+       "uuid":"1ae1b7f565bf476eb7f45668820447b1"
+    },
+    {
+       "name":"V - Ups (Subida V)",
+       "muscles":"Tórax, Costas, Abdomens",
+       "capacity":"Força",
+       "uuid":"62ea1e08933747a5a7dd9afb96dae76b"
+    }
+ ]

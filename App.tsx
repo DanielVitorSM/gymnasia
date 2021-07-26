@@ -1,21 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import AppLoading from 'expo-app-loading';
+import { useFonts } from 'expo-font';
+import { enableScreens } from 'react-native-screens';
+import { StatusBar } from 'expo-status-bar';
+import { Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from '@expo-google-fonts/roboto';
+import "reflect-metadata";
+
+import { DatabaseConnectionProvider, createDatabaseConnectionSync } from './src/storage/connection';
+import { AuthProvider, loadSession } from './src/hooks/auth-context';
+
+import { Routes } from './src/routes';
+
+enableScreens();
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    Roboto_400Regular,
+    Roboto_500Medium,
+    Roboto_700Bold
+  });
+  const [sessionLoaded, session] = loadSession();
+  const [connectionCreated] = createDatabaseConnectionSync();
+
+  if(!fontsLoaded || !sessionLoaded || !connectionCreated)
+    return <AppLoading />
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <DatabaseConnectionProvider>
+      <StatusBar 
+        style="light"
+        backgroundColor="transparent"
+        translucent
+      />
+      <AuthProvider hasSession={session}>
+        <Routes />
+      </AuthProvider>
+    </DatabaseConnectionProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

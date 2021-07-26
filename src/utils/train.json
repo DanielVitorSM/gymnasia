@@ -1,0 +1,107 @@
+[
+    {
+        "id": "0",
+        "title": "Recomendado",
+        "data": [
+            {
+                "title": "Alongamento Simples",
+                "difficulty": "Fácil",
+                "duration": "5 min",
+                "description": "Uma alongamento simples para se fazer antes de praticar um esporte muito complicado.",
+                "interval": 5,
+                "uri": "https://blog.livup.com.br/wp-content/uploads/2020/03/alongamento.jpg",
+                "exercises": [
+                    {
+                        "order": 1,
+                        "name":"Esticar o braço",
+                        "gif": "https://conexao.segurosunimed.com.br/wp-content/uploads/2019/07/Exercicios-fisicos-meia-hora.jpg",
+                        "uuid": "wdwadwad",
+                        "time": 5
+                    },
+                    {
+                        "order": 2,
+                        "name":"Virar a cabeça",
+                        "gif": "https://conexao.segurosunimed.com.br/wp-content/uploads/2019/07/Exercicios-fisicos-meia-hora.jpg",
+                        "uuid": "wdwadwad",
+                        "time": 5
+                    },
+                    {
+                        "order": 3,
+                        "name":"Polichinelo",
+                        "gif": "https://conexao.segurosunimed.com.br/wp-content/uploads/2019/07/Exercicios-fisicos-meia-hora.jpg",
+                        "uuid": "wdwadwad",
+                        "time": 5
+                    }
+                ]
+            },
+            {
+                "title": "Alongamento Simples",
+                "difficulty": "Fácil",
+                "duration": "5 min",
+                "description": "Uma alongamento simples para se fazer antes de praticar um esporte muito complicado.",
+                "interval": 10,
+                "uri": "https://blog.livup.com.br/wp-content/uploads/2020/03/alongamento.jpg",
+                "exercises": [
+                    {
+                        "order": 1,
+                        "name":"Esticar o braço",
+                        "gif": "https://i.pinimg.com/originals/7a/3d/a4/7a3da4644fbe3fdf7dd60368e76a61ef.gif",
+                        "uuid": "wdwadwad",
+                        "time": 30
+                    },
+                    {
+                        "order": 2,
+                        "name":"Virar a cabeça",
+                        "gif": "https://i.pinimg.com/originals/7a/3d/a4/7a3da4644fbe3fdf7dd60368e76a61ef.gif",
+                        "uuid": "wdwadwad",
+                        "time": 10
+                    },
+                    {
+                        "order": 3,
+                        "name":"Polichinelo",
+                        "gif": "https://i.pinimg.com/originals/7a/3d/a4/7a3da4644fbe3fdf7dd60368e76a61ef.gif",
+                        "uuid": "wdwadwad",
+                        "time": 20
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "2",
+        "title": "Recente",
+        "data": [
+            {
+                "title": "Alongamento Simples",
+                "difficulty": "Fácil",
+                "duration": "5 min",
+                "description": "Uma alongamento simples para se fazer antes de praticar um esporte muito complicado.",
+                "interval": 10,
+                "uri": "https://blog.livup.com.br/wp-content/uploads/2020/03/alongamento.jpg",
+                "exercises": [
+                    {
+                        "order": 1,
+                        "name":"Esticar o braço",
+                        "gif": "https://i.pinimg.com/originals/7a/3d/a4/7a3da4644fbe3fdf7dd60368e76a61ef.gif",
+                        "uuid": "wdwadwad",
+                        "time": 30
+                    },
+                    {
+                        "order": 2,
+                        "name":"Virar a cabeça",
+                        "gif": "https://i.pinimg.com/originals/7a/3d/a4/7a3da4644fbe3fdf7dd60368e76a61ef.gif",
+                        "uuid": "wdwadwad",
+                        "time": 10
+                    },
+                    {
+                        "order": 3,
+                        "name":"Polichinelo",
+                        "gif": "https://i.pinimg.com/originals/7a/3d/a4/7a3da4644fbe3fdf7dd60368e76a61ef.gif",
+                        "uuid": "wdwadwad",
+                        "time": 20
+                    }
+                ]
+            }
+        ]
+    }
+]
