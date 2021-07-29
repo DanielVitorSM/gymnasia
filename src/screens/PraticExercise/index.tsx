@@ -13,7 +13,7 @@ import { IExerciseTrain } from '../Trains';
 
 export function PraticExercise(){
     const Navigation = useNavigation();
-    const { exerciseActive, nextExercise } = useTrainContext();
+    const { exerciseActive, nextExercise, setFinishedAt } = useTrainContext();
     const [paused, setPaused] = useState(false);
     const [exercise, setExercise] = useState({} as IExerciseTrain);
 
@@ -21,7 +21,8 @@ export function PraticExercise(){
         let next = nextExercise();
         if(next)
             return Navigation.navigate("RestExercise");
-            
+        
+        setFinishedAt(Date.now());
         Navigation.dispatch(CommonActions.reset({
             index: 0,
             routes: [
@@ -54,7 +55,7 @@ export function PraticExercise(){
 
                     <CountdownCircleTimer
                         isPlaying={!paused}
-                        duration={10}
+                        duration={ exerciseActive.time + 1 }
                         colors={[
                             [theme.colors.tertiary, 1],
                         ]}
@@ -62,9 +63,9 @@ export function PraticExercise(){
                         size={120}
                     >
                         {({ remainingTime, animatedColor }) => (
-                            <Animated.Text style={[styles.text, { color: animatedColor }]}>
-                                {remainingTime}
-                            </Animated.Text>
+                            <Text style={[styles.text, { color: animatedColor }]}>
+                                { remainingTime - 1 }
+                            </Text>
                         )}
                     </CountdownCircleTimer>
 

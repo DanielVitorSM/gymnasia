@@ -2,8 +2,9 @@ import React from 'react'
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 
 import { RegisterWeightAndHeight } from '../screens/RegisterWeightAndHeight'
-import { RegisterSuccess } from '../screens/RegisterSuccess'
 import { RegisterBirthAndSex } from '../screens/RegisterBirthAndSex'
+import { RegisterReminder } from "../screens/RegisterReminder";
+import { RegisterSuccess } from '../screens/RegisterSuccess'
 
 import { theme } from '../global/styles/theme';
 
@@ -27,12 +28,16 @@ export function AuthRoutes() {
                 component={RegisterWeightAndHeight}
             />
             <Stack.Screen 
-                name="RegisterSuccess" 
-                component={RegisterSuccess}
-            />
-            <Stack.Screen 
                 name="RegisterBirthAndSex" 
                 component={RegisterBirthAndSex}
+            />
+            <Stack.Screen 
+                name="RegisterReminder" 
+                component={RegisterReminder}
+            />
+            <Stack.Screen 
+                name="RegisterSuccess" 
+                component={RegisterSuccess}
             />
         </Stack.Navigator>
     )

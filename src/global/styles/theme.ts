@@ -2,6 +2,7 @@ export const theme = {
     colors: {
         secondary_100: "#CCCCCC",
         secondary_80: "#AAAAAA",
+        secondary_70: "#888888",
         secondary_60: "#444444",
         secondary_50: "#2A2A2A",
         secondary_20: "#1C1C1C",

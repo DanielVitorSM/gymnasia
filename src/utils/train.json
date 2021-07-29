@@ -8,7 +8,7 @@
                 "difficulty": "Fácil",
                 "duration": "5 min",
                 "description": "Uma alongamento simples para se fazer antes de praticar um esporte muito complicado.",
-                "interval": 5,
+                "interval": 10,
                 "uri": "https://blog.livup.com.br/wp-content/uploads/2020/03/alongamento.jpg",
                 "exercises": [
                     {
@@ -16,21 +16,21 @@
                         "name":"Esticar o braço",
                         "gif": "https://conexao.segurosunimed.com.br/wp-content/uploads/2019/07/Exercicios-fisicos-meia-hora.jpg",
                         "uuid": "wdwadwad",
-                        "time": 5
+                        "time": 30
                     },
                     {
                         "order": 2,
                         "name":"Virar a cabeça",
                         "gif": "https://conexao.segurosunimed.com.br/wp-content/uploads/2019/07/Exercicios-fisicos-meia-hora.jpg",
                         "uuid": "wdwadwad",
-                        "time": 5
+                        "time": 40
                     },
                     {
                         "order": 3,
                         "name":"Polichinelo",
                         "gif": "https://conexao.segurosunimed.com.br/wp-content/uploads/2019/07/Exercicios-fisicos-meia-hora.jpg",
                         "uuid": "wdwadwad",
-                        "time": 5
+                        "time": 60
                     }
                 ]
             },
@@ -39,7 +39,7 @@
                 "difficulty": "Fácil",
                 "duration": "5 min",
                 "description": "Uma alongamento simples para se fazer antes de praticar um esporte muito complicado.",
-                "interval": 10,
+                "interval": 20,
                 "uri": "https://blog.livup.com.br/wp-content/uploads/2020/03/alongamento.jpg",
                 "exercises": [
                     {

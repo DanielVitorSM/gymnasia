@@ -14,7 +14,8 @@ export const styles = StyleSheet.create({
     title: {
         fontSize: 28,
         color: theme.colors.white,
-        fontFamily: theme.fonts.text700
+        fontFamily: theme.fonts.text700,
+        textAlign: "center"
     },
     timer: {
         fontSize: 28,

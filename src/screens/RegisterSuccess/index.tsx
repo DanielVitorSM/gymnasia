@@ -1,18 +1,20 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, SafeAreaView, Image, ActivityIndicator } from 'react-native';
 
-import { BackgroundImage } from '../../components/BackgroundImage';
+import { setDailyNotification } from '../../utils/notification';
 import { useSignupContext } from '../../hooks/signup-context';
+import { BackgroundImage } from '../../components/BackgroundImage';
 import { useAuth } from '../../hooks/auth-context';
 import { styles } from './styles';
-import LogoSvg from '../../assets/logo.svg';
 import CheckPng from '../../assets/check.png';
+import LogoSvg from '../../assets/logo.svg';
 
 export function RegisterSuccess() {
     const { state, setState } = useSignupContext();
     const { newUser } = useAuth();
 
     useEffect(() => {
+        setDailyNotification(state.reminder.getHours(), state.reminder.getMinutes());
         newUser(state);
     }, [])
 

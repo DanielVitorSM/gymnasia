@@ -5,6 +5,8 @@ import { ITrain, IExerciseTrain } from '../screens/Trains';
 export interface ITrainContextData {
     train: ITrain;
     startedAt: number;
+    finishedAt: number;
+    setFinishedAt: Dispatch<SetStateAction<number>>;
     exerciseActive: IExerciseTrain;
     nextExercise: () => boolean;
 }
@@ -12,14 +14,14 @@ export interface ITrainContextData {
 interface ITrainProviderProps {
     children: ReactNode;
     train: ITrain;
-    firstExercise: IExerciseTrain;
+    startedAt: number;
 }
 
 const TrainContext = createContext<ITrainContextData>({} as ITrainContextData);
 
-export function TrainContextProvider({ children, train }: ITrainProviderProps){
+export function TrainContextProvider({ children, train, startedAt }: ITrainProviderProps){
     const [exerciseActive, setExerciseActive] = useState(getExerciseByOrder(train.exercises, 1));
-    let startedAt = Date.now();
+    const [finishedAt, setFinishedAt] = useState(0);
 
     function getExerciseByOrder(exercises: IExerciseTrain[], order: number): IExerciseTrain{
         let result = exercises.find((value) => value.order === order);
@@ -40,7 +42,9 @@ export function TrainContextProvider({ children, train }: ITrainProviderProps){
                 train,
                 startedAt,
                 exerciseActive,
-                nextExercise
+                nextExercise,
+                finishedAt,
+                setFinishedAt
             }}
         >
             { children }

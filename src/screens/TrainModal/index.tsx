@@ -72,7 +72,7 @@ export function TrainModal({ route }: StackScreenProps<RootStackParamsList, "Tra
                             rippleColor={theme.colors.white_transparent}
                         >
                             <View style={styles.circle}>
-                                <Text style={styles.repeat}>{ item.time || item.repeats }</Text>
+                                <Text style={styles.repeat}>{ item.time }</Text>
                             </View>
                             <Text style={styles.name}>{ item.name }</Text>
                         </RectButton>
@@ -83,7 +83,7 @@ export function TrainModal({ route }: StackScreenProps<RootStackParamsList, "Tra
             </View>
             <RectButton
                 style={styles.button}
-                onPress={() => Navigation.navigate("TrainRoutes", { data })}
+                onPress={() => Navigation.navigate("TrainRoutes", { data, startedAt: Date.now() })}
             >
                 <Text style={styles.button_text}>Iniciar Treino</Text>
             </RectButton>

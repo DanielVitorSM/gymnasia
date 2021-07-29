@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import { View, Text, SafeAreaView } from 'react-native'
+import React from 'react'
+import { Text, SafeAreaView } from 'react-native'
 import { format } from 'date-fns';
-import { RectButton } from 'react-native-gesture-handler';
-import { FontAwesome } from '@expo/vector-icons'; 
 
 import { styles } from './styles';
 import { useTrainContext } from '../../hooks/train-context';
 
 export function TrainFinish() {
-    const { startedAt } = useTrainContext();
-    let spendTime = format(Date.now() - startedAt, "mm:ss");
+    const { startedAt, finishedAt } = useTrainContext();
+    let spendTime = format(finishedAt - startedAt, "mm:ss");
 
     return (
         <SafeAreaView style={styles.container}>

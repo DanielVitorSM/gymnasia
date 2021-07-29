@@ -13,7 +13,8 @@ import { useTrainContext } from '../../hooks/train-context';
 export function RestExercise(){
     const Navigation = useNavigation();
     const { exerciseActive, train } = useTrainContext();
-    const [time, setTime] = useState(train.interval);
+    let isStart = exerciseActive.order == 1 ? true : false
+    const [time, setTime] = useState(isStart ? 3 : train.interval);
     const helper = addSeconds(new Date(0), time);
     const timer = format(helper, "mm:ss");
 
@@ -43,7 +44,7 @@ export function RestExercise(){
         <SafeAreaView style={styles.container}>
             <View style={styles.content}>
                 <Text style={styles.title}>
-                    Descanso
+                    { isStart ? "Preparando para \n começar" : "Descanço" }
                 </Text>
 
                 <Text style={styles.timer}>
@@ -51,12 +52,15 @@ export function RestExercise(){
                 </Text>
 
                 <View style={styles.control}>
+                {
+                    !isStart &&
                     <RectButton 
                         style={[styles.button, { backgroundColor: theme.colors.primary }]}
                         onPress={handleAddTenSeconds}
                     >
                         <Text style={[styles.text, { color: theme.colors.white }]}> +10s </Text>
                     </RectButton>
+                }
                     <RectButton 
                         style={styles.button}
                         onPress={handleNext}
@@ -64,6 +68,7 @@ export function RestExercise(){
                         <Text style={styles.text}> Pular </Text>
                     </RectButton>
                 </View>
+
             </View>
             
             <View style={styles.footer}>

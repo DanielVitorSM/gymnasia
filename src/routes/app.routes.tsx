@@ -8,8 +8,7 @@ import { PersonalData } from '../screens/PersonalData';
 import { ExerciseModal } from '../screens/ExerciseModal';
 import { ExercisesType } from '../screens/Exercises';
 import { TrainModal } from '../screens/TrainModal';
-import { TrainExercises } from '../screens/TrainExercises';
-import { TrainFinish } from '../screens/TrainFinish';
+import { Reminder } from '../screens/Reminder';
 import { ITrain } from '../screens/Trains';
 import { TrainRoutes } from './train.routes';
 
@@ -23,7 +22,10 @@ export type RootStackParamsList = {
     Main: undefined;
     ExerciseModal: { data: ExercisesType };
     TrainModal: { data: ITrain };
-    TrainRoutes: { data: ITrain };
+    TrainRoutes: { 
+        data: ITrain;
+        startedAt: number; 
+    };
 }
 
 export function AppRoutes(){
@@ -93,7 +95,7 @@ export function DrawerRoutes(){
                 component={MainRoutes}
             />
             <Drawer.Screen name="Dados Pessoais" component={PersonalData} />
-            <Drawer.Screen name="Lembrete" component={MainRoutes} />
+            <Drawer.Screen name="Lembrete" component={Reminder} />
             <Drawer.Screen name="Sobre" component={MainRoutes} />
         </Drawer.Navigator>
     )

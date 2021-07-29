@@ -9,6 +9,7 @@ export interface ISignupData{
     height: number;
     birth_date: Date;
     sex: string;
+    reminder: Date;
 }
 
 interface ISignupContextData {

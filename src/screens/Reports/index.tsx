@@ -36,13 +36,13 @@ export function Reports() {
                 }
 
                 <SectionHeader 
-                    title={`IMC (kg/m²): ${imc.toFixed(2)}`}
+                    title={`IMC: ${imc.toFixed(2)}`}
                     onPress={handleNavigateToPersonalData}
                 />
                 <ChartIMC imc={imc}/>
 
                 <SectionHeader 
-                    title="% de gordura (aprox.):" 
+                    title="Percentual de gordura (aprox.):" 
                     onPress={handleNavigateToPersonalData}
                 />
                 <ChartFat {...user}/>

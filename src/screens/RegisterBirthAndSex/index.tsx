@@ -35,7 +35,7 @@ export function RegisterBirthAndSex() {
             birth_date: date,
             sex
         });
-        Navigation.navigate("RegisterSuccess");
+        Navigation.navigate("RegisterReminder");
     }
 
     return (

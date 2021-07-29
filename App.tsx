@@ -5,6 +5,7 @@ import { enableScreens } from 'react-native-screens';
 import { StatusBar } from 'expo-status-bar';
 import { Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from '@expo-google-fonts/roboto';
 import "reflect-metadata";
+import * as Notifications from 'expo-notifications';
 
 import { DatabaseConnectionProvider, createDatabaseConnectionSync } from './src/storage/connection';
 import { AuthProvider, loadSession } from './src/hooks/auth-context';
@@ -12,6 +13,14 @@ import { AuthProvider, loadSession } from './src/hooks/auth-context';
 import { Routes } from './src/routes';
 
 enableScreens();
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
+  }),
+});
 
 export default function App() {
   const [fontsLoaded] = useFonts({

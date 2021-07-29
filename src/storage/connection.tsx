@@ -1,10 +1,8 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
-import { Connection, createConnection, getConnection, AlreadyHasActiveConnectionError } from "typeorm";
-import AppLoading from 'expo-app-loading';
+import { Connection, createConnection, getConnection } from "typeorm";
 
 import { ExerciseModel, ExerciseRepository } from "./ExercisesRepository";
 import { UserModel, UserRepository } from './UserRepository';
-import { SplashScreen } from '../screens/SplashScreen';
 import { ActivityIndicator, View } from "react-native";
 
 interface DatabaseConnectionContextData{
@@ -73,7 +71,7 @@ export const DatabaseConnectionProvider: React.FC = ({ children }) => {
 
     if(!connection)
         return (
-            <View>
+            <View style={{ justifyContent: "center", alignItems: "center", flex: 1}}>
                 <ActivityIndicator/>
             </View>
         )
@@ -82,7 +80,7 @@ export const DatabaseConnectionProvider: React.FC = ({ children }) => {
         <DatabaseConnectionContext.Provider
             value={{
                 exercisesRepository: new ExerciseRepository(connection),
-                usersRepository: new UserRepository(connection)
+                usersRepository: new UserRepository(connection),
             }}
         >
             { children }
