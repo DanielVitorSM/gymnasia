@@ -5,6 +5,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 
 import { RootStackParamsList } from '../../routes/app.routes';
 import SadPng from '../../assets/sad.png';
+import Teste from '../../assets/exercises/agachamento.jpg'
 
 interface ITextWithBold {
     title: string;
@@ -19,24 +20,12 @@ export function ExerciseModal({ route }: StackScreenProps<RootStackParamsList, "
             <ScrollView>
                 <Image 
                     style={styles.image} 
-                    source={data.gif ? { uri: data.gif } : SadPng}
+                    source={data.image}
                 />
                 <Text style={styles.title}>{ data.name }</Text>
-
-                {
-                    data.muscles &&
-                    <TextWithBold title="Principais Músculos: " data={ data.muscles }/>
-                }
-
-                {
-                    data.capacity &&
-                    <TextWithBold title="Capacidades Físicas: " data={ data.capacity }/>
-                }
-
-                {
-                    data.howTo &&
-                    <TextWithBold title="Como Fazer: " data={ data.howTo }/>
-                }
+                <TextWithBold title="Trabalha Principalmente: " data={ data.muscles }/>
+                <TextWithBold title="Capacidade Física Principal: " data={ data.capacity }/>
+                <TextWithBold title="Como Fazer: " data={ data.howTo }/>
             </ScrollView>
         </View>
     )

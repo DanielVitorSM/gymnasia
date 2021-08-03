@@ -45,5 +45,8 @@ export const styles = StyleSheet.create({
     },
     stop_text: {
         color: theme.colors.white
+    },
+    inactive: {
+        opacity: .5
     }
 });

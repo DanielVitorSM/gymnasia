@@ -96,7 +96,6 @@ export function DrawerRoutes(){
             />
             <Drawer.Screen name="Dados Pessoais" component={PersonalData} />
             <Drawer.Screen name="Lembrete" component={Reminder} />
-            <Drawer.Screen name="Sobre" component={MainRoutes} />
         </Drawer.Navigator>
     )
 }

@@ -9,8 +9,8 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 10
     },
     image: {
-        width: 200,
-        height: 200,
+        width: 300,
+        height: 300,
         alignSelf: "center",
         marginVertical: 30
     },

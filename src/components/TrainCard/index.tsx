@@ -15,9 +15,9 @@ export function TrainCard({ data, ...rest }: Props) {
     return (
         <RectButton style={styles.container} { ...rest } rippleColor="white">
             <ImageBackground
-                source={{ uri: data.uri }}
+                source={data.image}
                 style={styles.image}
-                imageStyle={{opacity: 0.4}}
+                imageStyle={{opacity: 0.7}}
             >
                 <Text style={styles.title}>
                     {data.title}

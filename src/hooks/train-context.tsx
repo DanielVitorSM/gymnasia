@@ -9,6 +9,7 @@ export interface ITrainContextData {
     setFinishedAt: Dispatch<SetStateAction<number>>;
     exerciseActive: IExerciseTrain;
     nextExercise: () => boolean;
+    previousExercise: () => boolean;
 }
 
 interface ITrainProviderProps {
@@ -36,6 +37,17 @@ export function TrainContextProvider({ children, train, startedAt }: ITrainProvi
         return true;
     }
 
+    function previousExercise(){
+        if(exerciseActive.order == 1)
+            return false;
+
+        let result = getExerciseByOrder(train.exercises, exerciseActive.order - 1);
+        setExerciseActive(result);
+        if(result.uuid === undefined)
+            return false;
+        return true;
+    }
+
     return(
         <TrainContext.Provider
             value={{
@@ -43,6 +55,7 @@ export function TrainContextProvider({ children, train, startedAt }: ITrainProvi
                 startedAt,
                 exerciseActive,
                 nextExercise,
+                previousExercise,
                 finishedAt,
                 setFinishedAt
             }}

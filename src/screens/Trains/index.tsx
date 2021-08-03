@@ -6,7 +6,7 @@ import { TrainCard } from '../../components/TrainCard';
 import { Header } from '../../components/Header';
 import { Load } from '../../components/Load';
 import { styles } from './styles';
-import Data from '../../utils/train.json';
+import { trains } from '../../utils/train';
 
 export interface ITrain {
     title: string,
@@ -14,13 +14,13 @@ export interface ITrain {
     duration: string,
     description: string,
     interval: number,
-    uri: string,
+    image: any,
     exercises: IExerciseTrain[];
 }
 export interface IExerciseTrain {
     order: number,
     name: string,
-    gif: string,
+    image: any,
     uuid: string,
     time: number,
 }
@@ -38,7 +38,7 @@ export function Trains() {
                 <Load />
                 :
                 <SectionList 
-                    sections={Data}
+                    sections={trains}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item }) => (
                         <TrainCard data={item} onPress={() => Navigation.navigate("TrainModal", { data: item })}/>

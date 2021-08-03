@@ -1,4 +1,4 @@
-import React, { useState, useEffect, SetStateAction, Dispatch, useCallback } from 'react'
+import React, { useEffect, SetStateAction, Dispatch } from 'react'
 import { View, Text } from 'react-native'
 import { ProgressCircle } from 'react-native-svg-charts'
 

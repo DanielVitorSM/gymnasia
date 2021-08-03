@@ -2,7 +2,7 @@
   "expo": {
     "name": "gymnasia",
     "slug": "gymnasia",
-    "version": "1.0.1",
+    "version": "1.0.7",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -24,7 +24,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#1C1C1C"
       },
-      "package": "com.danielvitorsm.gymnasia"
+      "package": "com.danielvitorsm.gymnasia",
     },
     "web": {
       "favicon": "./assets/favicon.png"

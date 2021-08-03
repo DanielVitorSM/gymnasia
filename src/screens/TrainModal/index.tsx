@@ -21,7 +21,7 @@ export function TrainModal({ route }: StackScreenProps<RootStackParamsList, "Tra
         <SafeAreaView  style={styles.container} >
             <ImageBackground 
                 style={styles.image} 
-                source={{ uri: data.uri }}
+                source={data.image}
                 resizeMode="cover"
             >
                 <LinearGradient

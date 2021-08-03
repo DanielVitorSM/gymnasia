@@ -75,7 +75,7 @@ export function RestExercise(){
                 <ProgressBar progress={(exerciseActive.order - 1)/train.exercises.length}/>
 
                 <ImageBackground
-                    source={{ uri: exerciseActive.gif }}
+                    source={exerciseActive.image}
                     style={styles.image}
                 >
                     <View style={styles.row}>

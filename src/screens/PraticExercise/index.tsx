@@ -13,7 +13,7 @@ import { IExerciseTrain } from '../Trains';
 
 export function PraticExercise(){
     const Navigation = useNavigation();
-    const { exerciseActive, nextExercise, setFinishedAt } = useTrainContext();
+    const { exerciseActive, nextExercise, setFinishedAt, previousExercise } = useTrainContext();
     const [paused, setPaused] = useState(false);
     const [exercise, setExercise] = useState({} as IExerciseTrain);
 
@@ -31,12 +31,18 @@ export function PraticExercise(){
         }))
     }
 
+    function handlePrevious(){
+        let previous = previousExercise();
+        if(previous)
+            return Navigation.navigate("RestExercise");
+    }
+
     useFocusEffect(() => setExercise(exerciseActive));
 
     return(
         <SafeAreaView style={styles.container}>
             <Image 
-                source={{ uri: exercise.gif }}
+                source={exerciseActive.image}
                 style={styles.image}
             />
 
@@ -47,8 +53,10 @@ export function PraticExercise(){
 
                 <View  style={styles.control}>
                     <BorderlessButton
-                        style={styles.button}
+                        style={[styles.button, (exerciseActive.order == 1) && styles.inactive]}
                         rippleColor='white'
+                        enabled={exerciseActive.order == 1 ? false : true}
+                        onPress={handlePrevious}
                     >
                         <AntDesign name="caretleft" size={24} color="white" />
                     </BorderlessButton>

@@ -4,7 +4,7 @@ interface IExercise {
     id?: number;
     uuid: string;
     name: string;
-    gif?: string;
+    uri?: string;
     capacity?: string;
     muscles?: string;
     hot_to?: string;
@@ -22,7 +22,7 @@ export class ExerciseModel {
     name: string;
 
     @Column({ nullable: true })
-    gif: string;
+    uri: string;
 
     @Column({ nullable: true })
     muscles: string;
@@ -31,7 +31,7 @@ export class ExerciseModel {
     capacity: string;
 
     @Column({ type: "text", nullable: true })
-    how_to: string;
+    howTo: string;
 }
 
 export class ExerciseRepository {
