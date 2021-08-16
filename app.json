@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "gymnasia",
+    "name": "Gymnasia",
     "slug": "gymnasia",
     "version": "1.0.7",
     "orientation": "portrait",
@@ -24,7 +24,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#1C1C1C"
+        "backgroundColor": "#0EFF00"
       },
       "package": "com.danielvitorsm.gymnasia",
       "versionCode": 1
@@ -53,7 +53,7 @@
         "expo-notifications",
         {
           "icon": "./assets/adaptive-icon.png",
-          "color": "#F00000",
+          "color": "#0EFF00",
           "mode": "development"
         }
       ]
