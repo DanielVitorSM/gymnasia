@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, SafeAreaView, ImageBackground, FlatList, Alert } from 'react-native'
+import { View, Text, SafeAreaView, ImageBackground, FlatList } from 'react-native'
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
 import { StackScreenProps } from '@react-navigation/stack';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -9,7 +9,6 @@ import { useNavigation } from '@react-navigation/native';
 import { RootStackParamsList } from '../../routes/app.routes';
 import { styles } from './styles'
 import { theme } from '../../global/styles/theme';
-import { ITrain } from '../Trains';
 
 
 export function TrainModal({ route }: StackScreenProps<RootStackParamsList, "TrainModal">) {

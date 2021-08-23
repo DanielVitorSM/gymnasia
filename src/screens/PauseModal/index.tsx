@@ -1,6 +1,5 @@
 import React from 'react';
-import { Modal, ModalProps, View, Text, TouchableOpacity, Alert } from 'react-native';
-import { RectButton } from 'react-native-gesture-handler';
+import { Modal, ModalProps, View, Text, TouchableOpacity } from 'react-native';
 import { theme } from '../../global/styles/theme';
 
 import { styles } from './styles';

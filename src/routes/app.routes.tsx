@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Alert, StyleSheet } from 'react-native';
+import { View, Alert, StyleSheet } from 'react-native';
 import { createDrawerNavigator, DrawerContentComponentProps, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 

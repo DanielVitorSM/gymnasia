@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react';
-import { Text, SafeAreaView, ScrollView, KeyboardType, ToastAndroid, Platform, StyleSheet, ViewStyle } from 'react-native';
+import React, { useState } from 'react';
+import { Text, SafeAreaView, ScrollView, KeyboardType, ToastAndroid, Platform } from 'react-native';
 import { differenceInYears, format } from 'date-fns';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Picker } from '@react-native-picker/picker';
@@ -14,7 +14,7 @@ import { styles } from './styles';
 type ModalType = "text-input" | "date" | "sex";
 
 export function PersonalData() {
-    const { user, setUser, updateUser } = useAuth()
+    const { user, updateUser } = useAuth()
     const [modalType, setModalType] = useState<ModalType>("text-input");
     const [showModal, setShowModal] = useState(false);
     const [keyboardModalType, setKeyboardModalType] = useState<KeyboardType>("default")

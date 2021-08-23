@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDatabaseConnection } from '../storage/connection';
 import { UserModel, IUser } from '../storage/UserRepository';
 import { ISignupData } from './signup-context';
+import { GYMNASIA_SESSION } from '../global/constants/asyncStorage';
 
 export interface IUserSession {
     uuid: string;
@@ -46,7 +47,7 @@ export function AuthProvider({ children, hasSession }: IAuthProviderProps){
                 createdAt: new Date()
             } as IUserSession;
 
-            await AsyncStorage.setItem("@gymnasia:session", JSON.stringify(newUserSession));
+            await AsyncStorage.setItem(GYMNASIA_SESSION, JSON.stringify(newUserSession));
 
             setUser(userCreated);
             setSession(newUserSession);
@@ -112,7 +113,7 @@ export function useAuth(): IAuthContextData{
 }
 
 export async function loadStorageSession(): Promise<IUserSession> {
-    let rawData = await AsyncStorage.getItem("@gymnasia:session");
+    let rawData = await AsyncStorage.getItem(GYMNASIA_SESSION);
     if(rawData)
         return JSON.parse(rawData) as IUserSession;
 
@@ -130,7 +131,7 @@ export function  loadSession(): [boolean, IUserSession] {
 
     useEffect(() => {
         (async() => {
-            let rawData = await AsyncStorage.getItem("@gymnasia:session");
+            let rawData = await AsyncStorage.getItem(GYMNASIA_SESSION);
             if(rawData)
                 setSession(JSON.parse(rawData) as IUserSession);
             setLoaded(true);

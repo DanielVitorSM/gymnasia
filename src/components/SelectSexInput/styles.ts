@@ -14,12 +14,8 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     },
-    image: {
-        height: 80,
-        width: 80
-    },
     text: {
-        color: theme.colors.black,
+        color: theme.colors.white,
         fontFamily: theme.fonts.text400,
         marginTop: 5
     },

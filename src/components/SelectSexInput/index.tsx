@@ -1,9 +1,9 @@
-import React, { Dispatch, SetStateAction, useState } from 'react'
-import { View, Text, Image } from 'react-native'
+import React, { Dispatch, SetStateAction } from 'react'
+import { View, Text } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler';
 
-import ManPng from '../../assets/man.png'
-import WomanPng from '../../assets/woman.png'
+import ManSvg from '../../assets/man.svg'
+import WomanSvg from '../../assets/woman.svg'
 import { styles } from './styles'
 
 type Props = {
@@ -12,22 +12,14 @@ type Props = {
 }
 
 export function SelectSexInput({ value, onChangeSex }: Props) {
-    const [selected, setSelected] = useState("M");
-
     return (
         <View style={styles.container}>
             <RectButton onPress={() => onChangeSex("M")} style={[styles.card, value === "M" && styles.active]}>
-                <Image 
-                    source={ManPng} 
-                    style={styles.image}
-                />
+                <ManSvg height={80} width={80}/>
                 <Text style={styles.text}>Masculino</Text>
             </RectButton>
             <RectButton onPress={() => onChangeSex("F")} style={[styles.card, value === "F" && styles.active]}>
-                <Image 
-                    source={WomanPng} 
-                    style={styles.image}
-                />
+                <WomanSvg height={80} width={80}/>
                 <Text style={styles.text}>Feminino</Text>
             </RectButton>
         </View>

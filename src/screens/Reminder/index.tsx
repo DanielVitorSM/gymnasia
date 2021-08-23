@@ -32,7 +32,6 @@ export function Reminder() {
     }
 
     async function handleDelete(notification: NotificationData){
-        await deleteNotification(notification)
         let newData = await deleteHistoryNotification(notification);
         if(newData)
             setData(newData);

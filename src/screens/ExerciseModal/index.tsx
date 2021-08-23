@@ -4,8 +4,6 @@ import { styles } from './styles'
 import { StackScreenProps } from '@react-navigation/stack';
 
 import { RootStackParamsList } from '../../routes/app.routes';
-import SadPng from '../../assets/sad.png';
-import Teste from '../../assets/exercises/agachamento.jpg'
 
 interface ITextWithBold {
     title: string;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { Grid, LineChart, XAxis, YAxis } from 'react-native-svg-charts'
 
 import { styles } from './styles';

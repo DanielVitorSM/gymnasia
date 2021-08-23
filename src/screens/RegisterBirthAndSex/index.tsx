@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { View, Text, SafeAreaView, Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import { differenceInYears } from 'date-fns';
@@ -27,7 +27,7 @@ export function RegisterBirthAndSex() {
         if(age < 12)
             return Alert.alert("Você é muito novo", "Que tal ir brincar com seus amigos?");
         if(age > 120)
-            return Alert.alert("Tem certeza?", "Com essa idade você corre sérios riscos de se machucar!");
+            return Alert.alert("Tem certeza?", "Com essa idade você corre sérios riscos de se acidentar!");
         if(sex !== "M" && sex !== "F")
             return Alert.alert("Informe seu sexo", "Seu sexo é necessário para alguns cálculos, informe por favor");
         setState({

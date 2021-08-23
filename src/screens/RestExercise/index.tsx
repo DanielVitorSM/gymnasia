@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Modal, Animated, View, Text, TouchableOpacity, ImageBackground } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, ImageBackground } from 'react-native';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';

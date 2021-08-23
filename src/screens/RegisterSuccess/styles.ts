@@ -21,9 +21,5 @@ export const styles = StyleSheet.create({
         marginBottom: 30,
         marginTop: 30,
         textAlign: 'center'
-    },
-    image: {
-        height: 100,
-        width: 100
     }
 });

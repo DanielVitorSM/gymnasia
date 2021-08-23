@@ -10,7 +10,6 @@ import { SectionHeader } from '../../components/SectionHeader';
 import { WeightPodium } from '../../components/WeightPodium';
 
 import { styles } from './styles';
-import { theme } from '../../global/styles/theme';
 import { useAuth } from '../../hooks/auth-context';
 
 export function Reports() {
@@ -36,7 +35,7 @@ export function Reports() {
                 }
 
                 <SectionHeader 
-                    title={`IMC: ${imc.toFixed(2)}`}
+                    title={`Indice de Massa Corporal: ${imc.toFixed(2)}`}
                     onPress={handleNavigateToPersonalData}
                 />
                 <ChartIMC imc={imc}/>

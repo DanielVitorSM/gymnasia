@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, SafeAreaView, Text, Image, Animated, Alert } from 'react-native';
+import { View, SafeAreaView, Text, Image } from 'react-native';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 import { useNavigation, useFocusEffect, CommonActions } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons'; 
