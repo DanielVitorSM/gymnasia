@@ -33,7 +33,7 @@ export function PersonalData() {
             throw new Error("Nome muito grande");
         if(value.length < 5)
             throw new Error("Nome muito pequeno");
-        updateUser({ name: value });
+        updateUser({ ...user, name: value });
     }
 
     function handleHeightUpdate(value: string){
@@ -42,48 +42,48 @@ export function PersonalData() {
             throw new Error("Insira uma altura real");
         if(!Number.isInteger(h))
             throw new Error("Insira a altura em centímetros");
-        updateUser({ height: h });
+        updateUser({ ...user, height: h });
     }
 
     function handleWeightUpdate(value: string){
         const w = Number(value);
         if(w > 600 || w < 20)
             throw new Error("Insira um peso válido");
-        updateUser({ weight: w });
+        updateUser({ ...user, weight: w });
     }
 
     function handleBirthUpdate(event: any, selectedDate: Date | undefined){
         setShowModal(false)
         if(selectedDate && differenceInYears(new Date(), selectedDate) >= 12)
-            return updateUser({ birth_date: selectedDate });
+            return updateUser({ ...user, birth_date: selectedDate });
 
         if(Platform.OS === "android")
             ToastAndroid.show("Insira uma data válida", 2);
     }
 
     function handleSexUpdate(value: string){
-        updateUser({ sex: value });
+        updateUser({ ...user, sex: value });
     }
 
     function handleNeckUpdate(value: string){
         const n = Number(value);
         if(n > 100 || n < 15)
             throw new Error("Insira uma medida válida");
-        updateUser({ neck: n });
+        updateUser({ ...user, neck: n });
     }
 
     function handleHipUpdate(value: string){
         const h = Number(value);
         if(h > 260 || h < 40)
             throw new Error("Insira uma medida válida");
-        updateUser({ hip: h });
+        updateUser({ ...user, hip: h });
     }
 
     function handleWaistUpdate(value: string){
         const w = Number(value);
         if(w > 300 || w < 30)
             throw new Error("Insira uma medida válida");
-        updateUser({ waist: w });
+        updateUser({ ...user, waist: w });
     }
 
     return (

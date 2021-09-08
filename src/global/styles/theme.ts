@@ -15,6 +15,11 @@ export const theme = {
         white_transparent: '#FFFFFF66',
         transparent: "#00000000",
 
+        facebook: "#4267B2",
+        google: "#DB4437",
+        email: "#FF7A00",
+        guest: "#333333",
+
         primary: "#0EFF00",
         tertiary: "#4B999E"
     },

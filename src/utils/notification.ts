@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
 import { NotificationContentInput } from 'expo-notifications';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uidv4 } from 'uuid';
 
 import { NotificationData } from '../components/ReminderCard';
 import { GYMNASIA_NOTIFICATIONS } from '../global/constants/asyncStorage';
@@ -71,7 +71,7 @@ export async function createNotifications(time: Date, days: number[] | null) {
 
         let newNotifications: NotificationData[] = [ ...oldNotifications, {
             active: true,
-            uuid: uuidv4(),
+            uid: uidv4(),
             days: days ? days : allDays,
             hour,
             minute,

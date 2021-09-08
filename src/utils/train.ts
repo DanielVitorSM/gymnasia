@@ -15,49 +15,49 @@ export const trains = [
                         "order": 1,
                         "name":"Agachamento",
                         "image": require("../assets/exercises/agachamento.jpg"),
-                        "uuid": "dae302aa-36d9-4c08-bd92-69be6c47d877",
+                        "uid": "dae302aa-36d9-4c08-bd92-69be6c47d877",
                         "time": 20
                     },
                     {
                         "order": 2,
                         "name":"Polichinelo",
                         "image": require("../assets/exercises/polichinelo.jpg"),
-                        "uuid": "258008ba-d567-403c-af10-b19e41791f4b",
+                        "uid": "258008ba-d567-403c-af10-b19e41791f4b",
                         "time": 30
                     },
                     {
                         "order": 3,
                         "name":"Prancha",
                         "image": require("../assets/exercises/prancha-ventral.jpg"),
-                        "uuid": "475918d8-9ca5-4992-a886-a33b08633613",
+                        "uid": "475918d8-9ca5-4992-a886-a33b08633613",
                         "time": 20
                     },
                     {
                         "order": 4,
                         "name":"Agachamento",
                         "image": require("../assets/exercises/agachamento.jpg"),
-                        "uuid": "dae302aa-36d9-4c08-bd92-69be6c47d877",
+                        "uid": "dae302aa-36d9-4c08-bd92-69be6c47d877",
                         "time": 20
                     },
                     {
                         "order": 5,
                         "name":"Polichinelo",
                         "image": require("../assets/exercises/polichinelo.jpg"),
-                        "uuid": "258008ba-d567-403c-af10-b19e41791f4b",
+                        "uid": "258008ba-d567-403c-af10-b19e41791f4b",
                         "time": 40
                     },
                     {
                         "order": 6,
                         "name":"Abdominal Supra no Solo",
                         "image": require("../assets/exercises/abdominal-supra-no-solo.jpg"),
-                        "uuid": "d70894a5-527e-493a-9ff5-6c74b6fc8445",
+                        "uid": "d70894a5-527e-493a-9ff5-6c74b6fc8445",
                         "time": 30
                     },
                     {
                         "order": 7,
                         "name":"Subir e Descer da Cadeira",
                         "image": require("../assets/exercises/subir-e-descer-da-cadeira.jpg"),
-                        "uuid": "e73cb9a1-7cff-43a9-8c85-366d36989d38",
+                        "uid": "e73cb9a1-7cff-43a9-8c85-366d36989d38",
                         "time": 20
                     }
             

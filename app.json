@@ -3,6 +3,7 @@
     "name": "Gymnasia",
     "slug": "gymnasia",
     "version": "1.1.2",
+    "scheme": "gymnasia",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -18,7 +19,7 @@
     ],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.danielvitorsm.gymnasia",
+      "bundleIdentifier": "host.exp.exponent",
       "buildNumber": "1.0.7"
     },
     "android": {
@@ -26,7 +27,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0EFF00"
       },
-      "package": "com.danielvitorsm.gymnasia",
+      "package": "host.exp.exponent",
       "versionCode": 1
     },
     "web": {
@@ -54,9 +55,20 @@
         {
           "icon": "./assets/adaptive-icon.png",
           "color": "#0EFF00",
-          "mode": "development"
+          "mode": "production"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "API_KEY": "",
+      "AUTH_DOMAIN": "",
+      "PROJECT_ID": "",
+      "STORAGE_BUCKET": "",
+      "MESSAGE_SENDER_ID": "",
+      "APP_ID": "",
+      "MEASUREMENT_ID": "",
+      "IOS_KEY_DEVELOPMENT": "",
+      "ANDROID_KEY_DEVELOPMENT": ""
+    }
   }
 }

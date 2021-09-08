@@ -12,6 +12,7 @@ web-build/
 .vscode
 yarn.lock
 yarn-error.log
+app.json.env
 
 # macOS
 .DS_Store

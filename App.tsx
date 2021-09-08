@@ -1,18 +1,22 @@
 import React from 'react';
-import AppLoading from 'expo-app-loading';
-import { useFonts } from 'expo-font';
-import { enableScreens } from 'react-native-screens';
 import { Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from '@expo-google-fonts/roboto';
-import "reflect-metadata";
+import { enableScreens } from 'react-native-screens';
+import { LogBox, StatusBar } from 'react-native';
+import { useFonts } from 'expo-font';
 import * as Notifications from 'expo-notifications';
-import { StatusBar } from 'react-native';
+import AppLoading from 'expo-app-loading';
 
-import { DatabaseConnectionProvider, createDatabaseConnectionSync } from './src/storage/connection';
-import { AuthProvider, loadSession } from './src/hooks/auth-context';
+import './src/config/firebase';
+import { AuthProvider } from './src/hooks/auth-context';
 
 import { Routes } from './src/routes';
 
 enableScreens();
+
+LogBox.ignoreLogs([
+  'Setting a timer', 
+  "ReactNativeFiberHostComponent: Calling getNode() on the ref of an Animated component is no longer necessary. You can now directly use the ref instead. This method will be removed in a future release."
+]);
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -28,22 +32,19 @@ export default function App() {
     Roboto_500Medium,
     Roboto_700Bold
   });
-  const [sessionLoaded, session] = loadSession();
-  const [connectionCreated] = createDatabaseConnectionSync();
 
-  if(!fontsLoaded || !sessionLoaded || !connectionCreated)
+  if(!fontsLoaded)
     return <AppLoading />
 
   return (
-    <DatabaseConnectionProvider>
+    <AuthProvider>
       <StatusBar 
         animated
         translucent
+        backgroundColor="transparent"
         barStyle="light-content"
       />
-      <AuthProvider hasSession={session}>
-        <Routes />
-      </AuthProvider>
-    </DatabaseConnectionProvider>
+      <Routes />
+    </AuthProvider>
   );
 }

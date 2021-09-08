@@ -4,9 +4,9 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
 
-import { Exercises } from '../screens/Exercises';
-import { Trains } from '../screens/Trains';
-import { Reports } from '../screens/Reports';
+import { Exercises } from '../screens/MainScreens/Exercises';
+import { Trains } from '../screens/MainScreens/Trains';
+import { Reports } from '../screens/MainScreens/Reports';
 
 import { theme } from '../global/styles/theme';
 
@@ -15,7 +15,7 @@ const Tabs = createBottomTabNavigator();
 export function MainRoutes() {
     return (
         <Tabs.Navigator
-            initialRouteName="Exercises"
+            initialRouteName="Treinos"
             tabBarOptions={{
                 activeTintColor: theme.colors.primary,
                 inactiveTintColor: theme.colors.secondary_100,

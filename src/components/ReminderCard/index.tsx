@@ -7,7 +7,7 @@ import { Feather } from '@expo/vector-icons';
 import { styles } from './styles';
 
 export type NotificationData = {
-    uuid: string;
+    uid: string;
     ids: Array<string>;
     hour: number;
     minute: number;

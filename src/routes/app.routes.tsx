@@ -1,19 +1,23 @@
 import React from 'react';
-import { View, Alert, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { createDrawerNavigator, DrawerContentComponentProps, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 
 import { MainRoutes } from './main.routes';
 import { PersonalData } from '../screens/PersonalData';
 import { ExerciseModal } from '../screens/ExerciseModal';
-import { ExercisesType } from '../screens/Exercises';
+import { ExercisesType } from '../screens/MainScreens/Exercises';
 import { TrainModal } from '../screens/TrainModal';
 import { Reminder } from '../screens/Reminder';
-import { ITrain } from '../screens/Trains';
+import { ITrain } from '../screens/MainScreens/Trains';
 import { TrainRoutes } from './train.routes';
+import { PersonalRoutes } from './personal.routes';
 
 import { theme } from '../global/styles/theme';
 import LogoSvg from '../assets/logo.svg';
+import { useAuth } from '../hooks/auth-context';
+import { errorAlert } from '../utils/alerts';
+import { AddTrain } from '../screens/AddTrain';
 
 const Drawer = createDrawerNavigator();
 const RootStack = createStackNavigator();
@@ -71,6 +75,13 @@ export function AppRoutes(){
                     headerTransparent: true
                 }}
             />
+            <RootStack.Screen 
+                name="AddTrain"
+                component={AddTrain}
+                options={{
+                    headerTransparent: true
+                }}
+            />
         </RootStack.Navigator>
     )
 }
@@ -95,12 +106,15 @@ export function DrawerRoutes(){
                 component={MainRoutes}
             />
             <Drawer.Screen name="Dados Pessoais" component={PersonalData} />
+            <Drawer.Screen name="Personal" component={PersonalRoutes} />
             <Drawer.Screen name="Lembrete" component={Reminder} />
         </Drawer.Navigator>
     )
 }
 
 function CustomDrawerContent(props: DrawerContentComponentProps){
+    const { signOut, user } = useAuth();
+
     return (
         <DrawerContentScrollView style={styles.container} {...props}>
             <View style={styles.content}>
@@ -111,7 +125,13 @@ function CustomDrawerContent(props: DrawerContentComponentProps){
                     label="Sair" 
                     inactiveTintColor="red" 
                     labelStyle={styles.label}  
-                    onPress={() => Alert.alert("Recurso em Desenvolvimento", "Aguardo algumas atualizações para usar este recurso")}
+                    onPress={async () => {
+                        try{
+                            await signOut();
+                        }catch({ message }){
+                            errorAlert(message, () => {});
+                        }
+                    }}
                 />
             </View>
         </DrawerContentScrollView>

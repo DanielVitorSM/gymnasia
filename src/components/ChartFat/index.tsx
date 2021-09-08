@@ -24,7 +24,7 @@ export function ChartFat({ height, weight, birth_date = new Date(), sex, hip, ne
     const age = differenceInYears(new Date(), birth_date);
     var percent: number = 0;
 
-    if(neck && waist)
+    if((sex === "M" && neck && waist) || (sex === "F" && neck && waist && hip))
         percent = CalcFatHard(height, waist, neck, sex, hip);
     else
         percent = CalcFatMiddle(height, weight, age, sex);

@@ -1,102 +1,173 @@
-import React, { createContext, useState, ReactNode, SetStateAction, Dispatch, useContext, useEffect } from 'react';
+import React, { createContext, useState, ReactNode, useContext, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Google from 'expo-google-app-auth';
+import Constants from 'expo-constants';
+import firebase from 'firebase';
+import { v4 as uidv4 } from 'uuid';
+import "firebase/firestore";
 
-import { useDatabaseConnection } from '../storage/connection';
-import { UserModel, IUser } from '../storage/UserRepository';
 import { ISignupData } from './signup-context';
-import { GYMNASIA_SESSION } from '../global/constants/asyncStorage';
+import { GYMNASIA_SESSION, GYMNASIA_USER } from '../global/constants/asyncStorage';
+import { createNotifications } from '../utils/notification';
 
-export interface IUserSession {
-    uuid: string;
-    token: string;
-    createdAt: Date;
+export interface ISession {
+    uid: string;
+    isAnonymous: boolean;
+    email: string;
+}
+
+export interface IUser {
+    uid: string;
+    name?: string;
+    weight: number;
+    height: number;
+    birth_date: Date;
+    sex: string;
+    neck?: number;
+    hip?: number;
+    waist?: number;
 }
 
 interface IAuthContextData {
-    user: IUser | UserModel;
-    setUser: Dispatch<SetStateAction<IUser>>;
-    newUser: (userData: ISignupData) => Promise<void>;
-    updateUser: (newData: IUser | Object) => Promise<void>;
+    session: ISession;
+    user: IUser;
+    newUser: (userData: ISignupData) => void;
+    updateUser: (newData: IUser) => Promise<void>;
     signIn?: () => Promise<void>;
-    signOut?: () => Promise<void>;
-    loading: boolean;
-    session: IUserSession;
+    signOut: () => Promise<void>;
+    signInGoogle: () => Promise<void>;
+    loading: ILoading;
+}
+
+interface ILoading {
+    type: "change" | "google" | "start" | "email" | "guest";
+    loaded: boolean;
 }
 
 interface IAuthProviderProps {
-    children: ReactNode,
-    hasSession?: IUserSession
+    children: ReactNode;
 }
 
 const AuthContext = createContext<IAuthContextData>({} as IAuthContextData);
 
-export function AuthProvider({ children, hasSession }: IAuthProviderProps){
-    const { usersRepository } = useDatabaseConnection();
-    const [user, setUser] = useState<IUser>({} as IUser);
-    const [loading, setLoading] = useState(true);
-    const [session, setSession] = useState(hasSession || {} as IUserSession)
-
-    async function newUser(userData: ISignupData){
-        try{
-            setLoading(true);
-
-            let userCreated = await usersRepository.create(userData);
-
-            let newUserSession = {
-                uuid: userCreated.uuid,
-                createdAt: new Date()
-            } as IUserSession;
-
-            await AsyncStorage.setItem(GYMNASIA_SESSION, JSON.stringify(newUserSession));
-
-            setUser(userCreated);
-            setSession(newUserSession);
-        }catch(err){
-            throw new Error(err);
-        }finally{
-            setLoading(false);
-        }
-    }
-
-    async function updateUser(newData: IUser | Object): Promise<void>{
-        let newUser = Object.assign(user, newData);
-
-        const result = await usersRepository.update(newUser);
-        
-        setUser(result);
-    }
-
-    async function loadStorageData(): Promise<any> {
-        if(session.uuid){
-            let userData = await usersRepository.getData(session.uuid);
-    
-            if(userData){
-                userData.birth_date = new Date(userData.birth_date);
-                setUser(userData);
-            }
-        }
-
-        setLoading(false);
-    }
-
-    async function prepare(): Promise<void>{
-        if(!session.uuid)
-            setSession(await loadStorageSession());
-        await loadStorageData();
-    }
+export function AuthProvider({ children }: IAuthProviderProps){
+    const [user, setUser] = useState({} as IUser);
+    const [session, setSession] = useState({} as ISession);
+    const [loading, setLoading] = useState({ type: "start", loaded: false } as ILoading);
 
     useEffect(() => {
-        prepare();
-    }, [])
+        firebase.auth().onAuthStateChanged(async user => {
+            let newSession = {} as ISession;
+            let newUser = {} as IUser;
+            if(user){
+                newSession = {
+                    email: user.email || "",
+                    uid: user.uid,
+                    isAnonymous: user.isAnonymous
+                };
+                newUser = await getFirebaseUserData();
+            }
+            setUser(newUser);
+            setSession(newSession);
+            setLoading({ ...loading, loaded: true});
+        })
+      }, []);
+
+    async function signInGoogle(): Promise<void>{
+        setLoading({ type: "google", loaded: false } as ILoading);
+        try {
+            const result = await Google.logInAsync({
+                iosClientId: Constants.manifest?.extra?.IOS_KEY_DEVELOPMENT,
+                androidClientId: Constants.manifest?.extra?.ANDROID_KEY_DEVELOPMENT,
+                scopes: ['profile', 'email'],
+            });
+
+            if(result.type === "success"){
+                const credential = firebase.auth.GoogleAuthProvider.credential(
+                    result.idToken,
+                    result.accessToken
+                );
+
+                firebase
+                .auth()
+                .signInWithCredential(credential)
+                .catch(error => {
+                    throw error;
+                })
+            }else{
+                throw new Error("Houve um erro ao contatar o servidor do google, verifique sua conexão com internet.");
+            }
+        }catch(error){
+            throw new Error("Não foi possível realizar o login com Google, tente novamente mais tarde.");
+        }
+    }
+
+    function newUser(userData: ISignupData){
+        try {
+            const { displayName, uid } = firebase.auth().currentUser as firebase.User;
+            const newUserData = {
+                uid: uid || uidv4(),
+                name: displayName || "",
+                birth_date: userData.birth_date,
+                weight: userData.weight,
+                height: userData.height,
+                sex: userData.sex,
+            } as IUser;
+            firebase
+            .firestore()
+            .collection("users")
+            .doc(uid)
+            .set(newUserData)
+            .catch(({message}) => {
+                console.log(message);
+            })
+            .finally(async () => {
+                await AsyncStorage.setItem(GYMNASIA_USER, JSON.stringify(newUserData));
+                await createNotifications(userData.reminder, null);
+                setUser(newUserData);
+            })
+        }catch(error){
+            throw new Error("Houve um erro ao salvar os dados, tente novamente.");
+        }
+    }
+
+    async function signOut(){
+        try {
+            setSession({} as ISession);
+            setUser({} as IUser);
+            await firebase.auth().signOut();
+            await AsyncStorage.removeItem(GYMNASIA_USER);
+            await AsyncStorage.removeItem(GYMNASIA_SESSION);
+        } catch (error) {
+            throw new Error("Houve um erro ao encerrar a sessão, tente novamente.");
+        }
+    }
+
+    async function updateUser(newData: IUser): Promise<void>{
+        try{
+            if(!session.isAnonymous){
+                await firebase
+                .firestore()
+                .collection("users")
+                .doc(user.uid)
+                .set(newData)
+            }
+            await AsyncStorage.setItem(GYMNASIA_USER, JSON.stringify(newData));
+            setUser(newData);
+        }catch{
+            console.log("Erro bonito")
+        }
+    }
 
     return(
         <AuthContext.Provider value={{
-                user,
-                setUser,
-                loading,
-                newUser,
-                updateUser,
-                session
+            session,
+            user,
+            loading,
+            newUser,
+            signOut,
+            updateUser,
+            signInGoogle
         }}>
             { children }
         </AuthContext.Provider>
@@ -112,31 +183,34 @@ export function useAuth(): IAuthContextData{
     return context;
 }
 
-export async function loadStorageSession(): Promise<IUserSession> {
-    let rawData = await AsyncStorage.getItem(GYMNASIA_SESSION);
-    if(rawData)
-        return JSON.parse(rawData) as IUserSession;
-
-    return {} as IUserSession;
+type DataType = {
+    uid: string;
+    name?: string;
+    weight: number;
+    height: number;
+    birth_date: firebase.firestore.Timestamp;
+    sex: string;
 }
 
-/**
- * Verifica se há uma sessão no dispositivo e retorna ela ou um objeto vazio
- * @returns [sessionLoaded: boolean, session: IUserSession] 
- */
-
-export function  loadSession(): [boolean, IUserSession] {
-    let [loaded, setLoaded] = useState(false);
-    let [session, setSession] = useState({} as IUserSession);
-
-    useEffect(() => {
-        (async() => {
-            let rawData = await AsyncStorage.getItem(GYMNASIA_SESSION);
-            if(rawData)
-                setSession(JSON.parse(rawData) as IUserSession);
-            setLoaded(true);
-        })()
-    }, [])
-
-    return [loaded, session];
-};
+export async function getFirebaseUserData(){
+    const { uid } = firebase.auth().currentUser as firebase.User;
+    let userData = {} as IUser;
+    try {
+        const snapshot = await firebase.firestore().collection("users").doc(uid).get();
+        const data = snapshot.data() as DataType;
+        if(data){
+            userData = {
+                ...data,
+                birth_date: data.birth_date.toDate()
+            }
+        }else{
+            const userRaw = await AsyncStorage.getItem(GYMNASIA_USER);
+            if(userRaw)
+                userData = JSON.parse(userRaw) as IUser;
+        }
+    }catch(error){
+        console.log(error);
+    }finally{
+        return userData;
+    }
+}

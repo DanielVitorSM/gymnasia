@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { styles } from './styles';
 import { theme } from '../../global/styles/theme'; 
-import { ITrain } from '../../screens/Trains';
+import { ITrain } from '../../screens/MainScreens/Trains';
 
 type Props = RectButtonProps & {
     data: ITrain;

@@ -2,7 +2,6 @@ import React from 'react'
 import { View, Text, SafeAreaView, ImageBackground, FlatList } from 'react-native'
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
 import { StackScreenProps } from '@react-navigation/stack';
-import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons'; 
 import { useNavigation } from '@react-navigation/native';
  
@@ -23,39 +22,34 @@ export function TrainModal({ route }: StackScreenProps<RootStackParamsList, "Tra
                 source={data.image}
                 resizeMode="cover"
             >
-                <LinearGradient
-                    style={styles.gradient}
-                    colors={[transparent, black_transparent]}
-                >
-                    <Text style={styles.title}>{ data.title }</Text>
-                    <View style={styles.header}>
-                        <View style={styles.icons}>
-                            <TextIcon 
-                                icon="speedometer"
-                                text={ data.difficulty }
-                            />
-                            <TextIcon 
-                                icon="time"
-                                text={ data.duration }
-                            />
-                            <TextIcon 
-                                icon="hourglass"
-                                text={`${data.interval} seg`}
-                            />
-                        </View>
-                        <BorderlessButton
-                            enabled
-                            borderless
-                            rippleColor="white"
-                        >
-                            <MaterialIcons 
-                                name="edit" 
-                                size={30} 
-                                color={theme.colors.secondary_100}
-                            />
-                        </BorderlessButton>
+                <Text style={styles.title}>{ data.title }</Text>
+                <View style={styles.header}>
+                    <View style={styles.icons}>
+                        <TextIcon 
+                            icon="speedometer"
+                            text={ data.difficulty }
+                        />
+                        <TextIcon 
+                            icon="time"
+                            text={ data.duration }
+                        />
+                        <TextIcon 
+                            icon="hourglass"
+                            text={`${data.interval} seg`}
+                        />
                     </View>
-                </LinearGradient>
+                    <BorderlessButton
+                        enabled
+                        borderless
+                        rippleColor="white"
+                    >
+                        <MaterialIcons 
+                            name="edit" 
+                            size={30} 
+                            color={theme.colors.secondary_100}
+                        />
+                    </BorderlessButton>
+                </View>
             </ImageBackground>
             <View style={styles.content}>
                 <Text style={styles.description}>

@@ -1,24 +1,37 @@
 import React from 'react'
-import { NavigationContainer } from '@react-navigation/native';
+import { DarkTheme, NavigationContainer } from '@react-navigation/native';
 
 import { SignupContextProvider } from '../hooks/signup-context';
 import { AuthRoutes } from './auth.routes';
+import { AuthDataRoutes } from './auth-data.routes';
 import { AppRoutes } from './app.routes';
 import { useAuth } from '../hooks/auth-context';
+import { LoadScreen } from '../screens/LoadScreen';
 
 export function Routes() {
-    const { session } = useAuth();
+    const { session, user, loading } = useAuth();
+    
+    if(loading.type === "start" && !loading.loaded)
+        return <LoadScreen />;
 
     return (
-        <NavigationContainer>
+        <NavigationContainer
+            theme={DarkTheme}
+        >
             { 
-                session.uuid
+                user.uid !== undefined
                 ?
                 <AppRoutes />
                 :
-                <SignupContextProvider>
+                (
+                    session.uid === undefined
+                    ?
                     <AuthRoutes />
-                </SignupContextProvider>
+                    :
+                    <SignupContextProvider>
+                        <AuthDataRoutes />
+                    </SignupContextProvider>
+                )
             }
         </NavigationContainer>
     )

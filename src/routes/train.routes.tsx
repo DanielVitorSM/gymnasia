@@ -1,13 +1,13 @@
 import React from 'react';
 import { CardStyleInterpolators, createStackNavigator, StackScreenProps } from '@react-navigation/stack';
 
-import { TrainFinish } from '../screens/TrainFinish';
+import { TrainFinish } from '../screens/TrainScreens/TrainFinish';
 
 import { theme } from '../global/styles/theme';
 import { RootStackParamsList } from './app.routes';
 import { TrainContextProvider } from '../hooks/train-context';
-import { PraticExercise } from '../screens/PraticExercise';
-import { RestExercise } from '../screens/RestExercise';
+import { PraticExercise } from '../screens/TrainScreens/PraticExercise';
+import { RestExercise } from '../screens/TrainScreens/RestExercise';
 
 const Stack = createStackNavigator();
 

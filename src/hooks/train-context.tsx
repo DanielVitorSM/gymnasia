@@ -1,6 +1,6 @@
 import React, { createContext, useState, ReactNode, SetStateAction, Dispatch, useContext, useEffect } from 'react';
 
-import { ITrain, IExerciseTrain } from '../screens/Trains';
+import { ITrain, IExerciseTrain } from '../screens/MainScreens/Trains';
 
 export interface ITrainContextData {
     train: ITrain;
@@ -32,7 +32,7 @@ export function TrainContextProvider({ children, train, startedAt }: ITrainProvi
     function nextExercise(){
         let result = getExerciseByOrder(train.exercises, exerciseActive.order + 1);
         setExerciseActive(result);
-        if(result.uuid === undefined)
+        if(result.uid === undefined)
             return false;
         return true;
     }
@@ -43,7 +43,7 @@ export function TrainContextProvider({ children, train, startedAt }: ITrainProvi
 
         let result = getExerciseByOrder(train.exercises, exerciseActive.order - 1);
         setExerciseActive(result);
-        if(result.uuid === undefined)
+        if(result.uid === undefined)
             return false;
         return true;
     }
