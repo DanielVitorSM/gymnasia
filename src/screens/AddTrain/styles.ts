@@ -1,5 +1,5 @@
 import Constants from 'expo-constants';
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { theme } from "../../global/styles/theme";
 
 export const styles = StyleSheet.create({
@@ -61,6 +61,12 @@ export const styles = StyleSheet.create({
         height: 50,
         width: '100%',
     },
+    menu: {
+        marginRight: -20, 
+        paddingHorizontal: 20, 
+        height: 50,
+        justifyContent: "center"
+    },
     add: {
         justifyContent: "center",
         borderWidth: 1,
@@ -77,5 +83,83 @@ export const styles = StyleSheet.create({
         marginBottom: 20,
         borderRadius: 10,
         alignItems: "center",
+    },
+
+    //Modal Exercise Menu Edit
+    overlay: {
+        margin: 0, 
+        justifyContent: 'flex-end'
+    },
+    modal: {
+        backgroundColor: theme.colors.secondary_50,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        elevation: 4,
+        alignItems: "center"
+    },
+    touchable: {
+        paddingHorizontal: 20,
+        paddingVertical: 15,
+        width: '100%'
+    },
+    line: {
+        backgroundColor: theme.colors.secondary_60,
+        marginVertical: 15,
+        height: 5,
+        width: '40%',
+        borderRadius: 50
+    },
+
+
+    //Modal Exercise Select
+    select: {
+        flex: 4/5,
+        width: Dimensions.get("screen").width,
+    },
+    exercise: {
+        flexDirection: 'row',
+        alignItems: "center",
+        width: '100%',
+        justifyContent: 'space-between',
+        paddingHorizontal: 20,
+        paddingVertical: 5
+    },
+    thumb: {
+        width: 80,
+        height: 80,
+    },
+    info: {
+        flex: 1,
+        marginHorizontal: 15,
+        alignItems: "flex-start",
+        paddingTop: 12,
+        paddingBottom: 15
+    },
+
+    //Modal Dialog Interval
+    dialog: {
+        backgroundColor: theme.colors.white_smoke,
+        borderRadius: 15,
+        padding: 20,
+        paddingTop: 30,
+        alignItems: "center"
+    },
+    press: {
+        height: 50,
+        width: '100%',
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 15,
+        backgroundColor: theme.colors.tertiary
+    },
+    input: {
+        width: '100%',
+        borderColor: theme.colors.secondary_100,
+        borderWidth: 1,
+        borderRadius: 5,
+        fontSize: 16,
+        padding: 10,
+        marginTop: 10,
+        marginBottom: 30
     }
 });

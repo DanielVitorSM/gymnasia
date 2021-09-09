@@ -1,38 +1,48 @@
 import { DatabaseConnection } from './../connection';
 
-const table = "weights";
+const table = "trains";
 const db = DatabaseConnection.getConnection();
 
-export class Weight {
+export class Train {
     public id?: number;
-    public weight?: number;
-    public date?: Date;
+    public name?: string;
+    public difficulty?: string;
+    public interval?: number;
+    public exercises?: string;
+    public isPublic?: boolean;
+    public exercisesArray: Array<string>;
 
-    constructor(id?: number, date?: Date, weight?: number){
+    constructor(id?: number, name?: string, difficulty?: string, interval?: number, exercises?: string,isPublic?: boolean){
         this.id = id;
-        this.date = date;
-        this.weight = weight;
+        this.name = name;
+        this.difficulty = difficulty;
+        this.interval = interval;
+        this.exercises = exercises;
+        this.isPublic = isPublic;
+
+        if(exercises)
+            this.exercisesArray = JSON.parse(exercises);
     }
 }
 
-export class WeightService{
-    static addData(param: Weight): Promise<number>{
-        return new Promise((resolve, reject) => db.transaction(
-            tx => {
-                tx.executeSql(
-                    `INSERT INTO ${table}(date, weight) VALUES(?, ?)`,
-                    [param.date, param.weight],
-                    (_, { insertId, rows }) => {
-                        console.log("ID Insert: ", insertId);
-                        resolve(insertId);
-                    },
-                )
-            },
-            sqlError => {
-                console.log(sqlError);
-            }
-        ));
-    }
+export class TrainService{
+    // static addData(param: Train): Promise<number>{
+    //     return new Promise((resolve, reject) => db.transaction(
+    //         tx => {
+    //             tx.executeSql(
+    //                 `INSERT INTO ${table}(date, weight) VALUES(?, ?)`,
+    //                 [param.date, param.weight],
+    //                 (_, { insertId, rows }) => {
+    //                     console.log("ID Insert: ", insertId);
+    //                     resolve(insertId);
+    //                 },
+    //             )
+    //         },
+    //         sqlError => {
+    //             console.log(sqlError);
+    //         }
+    //     ));
+    // }
 
     static deleteById(id: number){
         db.transaction(

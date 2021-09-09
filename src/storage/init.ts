@@ -15,6 +15,14 @@ export default class DatabaseInit {
                 weight FLOAT,
                 date DATE
             );`,
+            `CREATE TABLE IF NOT EXISTS trains(
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name VARCHAR(255),
+                difficulty VARCHAR(255),
+                interval INTEGER,
+                isPublic BOOLEAN,
+                exercises TEXT
+            );`,
         ];
 
         db.transaction(
