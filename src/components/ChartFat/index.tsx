@@ -4,6 +4,7 @@ import { Svg, SvgProps, Defs, Path, ClipPath, G, Rect } from 'react-native-svg';
 import { differenceInYears } from 'date-fns';
 
 import { styles } from './style';
+import { typography } from '../../global/styles/typography';
 
 type BodyProps = {
     sex: string;
@@ -14,37 +15,36 @@ type ChartProps = {
     height: number;
     weight: number;
     sex: string;
-    birth_date?: Date;
+    birth_date: Date;
     hip?: number;
     neck?: number;
     waist?: number;
 }
 
-export function ChartFat({ height, weight, birth_date = new Date(), sex, hip, neck, waist }: ChartProps) {
+export function ChartFat({ height, weight, birth_date, sex, hip=0, neck=0, waist=0 }: ChartProps) {
     const age = differenceInYears(new Date(), birth_date);
     var percent: number = 0;
 
-    if((sex === "M" && neck && waist) || (sex === "F" && neck && waist && hip))
+    if((sex === "M" && neck > 0 && waist > 0 && waist > neck) || (sex === "F" && neck > 0 && waist > 0 && hip > 0 && (waist + hip > neck)))
         percent = CalcFatHard(height, waist, neck, sex, hip);
     else
+        percent = CalcFatMiddle(height, weight, age, sex);
+    
+    if(percent < 5)
         percent = CalcFatMiddle(height, weight, age, sex);
 
     return (
         <View style={styles.container}>
-            <BodyChart sex={sex} percent={percent * 100}/>
+            <View style={styles.chart}>
+                <BodyChart sex={sex} percent={percent * 100}/>
+            </View>
             <View>
-                <View>
-                    <Text style={styles.label}>Porcentagem</Text>
-                    <Text style={styles.number}>{(percent * 100).toFixed(2)}%</Text>
-                </View>
-                <View>
-                    <Text style={styles.label}>Massa Gorda</Text>
-                    <Text style={styles.number}>{(weight * percent).toFixed(2)} kg</Text>
-                </View>
-                <View>
-                    <Text style={styles.label}>Massa Magra</Text>
-                    <Text style={styles.number}>{(weight * (1 - percent)).toFixed(2)} kg</Text>
-                </View>
+                <Text style={typography.small300}>Percentual de Gordura:</Text>
+                <Text style={typography.value700}>{(percent * 100).toFixed(2)}%</Text>
+                <Text style={[typography.small300, { marginTop: 5 }]}>Massa Gorda:</Text>
+                <Text style={typography.value700}>{(weight * percent).toFixed(2)} kg</Text>
+                <Text style={[typography.small300, { marginTop: 5 }]}>Massa Magra:</Text>
+                <Text style={typography.value700}>{(weight * (1 - percent)).toFixed(2)} kg</Text>
             </View>
         </View>
     )

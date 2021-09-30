@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from '@expo-google-fonts/roboto';
+import { Ubuntu_300Light, Ubuntu_400Regular, Ubuntu_500Medium, Ubuntu_700Bold } from '@expo-google-fonts/ubuntu'
 import { enableScreens } from 'react-native-screens';
 import { LogBox, StatusBar } from 'react-native';
 import { useFonts } from 'expo-font';
@@ -7,9 +8,10 @@ import * as Notifications from 'expo-notifications';
 import AppLoading from 'expo-app-loading';
 
 import './src/config/firebase';
-import { AuthProvider } from './src/hooks/auth-context';
+import { AuthProvider } from './src/hooks/authentication';
 
 import { Routes } from './src/routes';
+import DatabaseInit from './src/storage/init';
 
 enableScreens();
 
@@ -27,23 +29,26 @@ Notifications.setNotificationHandler({
 });
 
 export default function App() {
+  const dbInit = new DatabaseInit();
+
   const [fontsLoaded] = useFonts({
+    Ubuntu_300Light,
+    Ubuntu_400Regular,
+    Ubuntu_500Medium,
+    Ubuntu_700Bold,
     Roboto_400Regular,
     Roboto_500Medium,
-    Roboto_700Bold
+    Roboto_700Bold,
+    
   });
 
   if(!fontsLoaded)
     return <AppLoading />
 
+  dbInit.InitDb();
+
   return (
     <AuthProvider>
-      <StatusBar 
-        animated
-        translucent
-        backgroundColor="transparent"
-        barStyle="light-content"
-      />
       <Routes />
     </AuthProvider>
   );

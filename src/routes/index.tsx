@@ -1,38 +1,39 @@
 import React from 'react'
-import { DarkTheme, NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 
-import { SignupContextProvider } from '../hooks/signup-context';
-import { AuthRoutes } from './auth.routes';
-import { AuthDataRoutes } from './auth-data.routes';
-import { AppRoutes } from './app.routes';
-import { useAuth } from '../hooks/auth-context';
+import { useAuth } from '../hooks/authentication';
 import { LoadScreen } from '../screens/LoadScreen';
+import { StyleSheet, View } from 'react-native';
+import { theme } from '../global/styles/theme';
+
+import { AuthenticatedRoutes } from './authenticated.routes';
+import { AuthenticationRoutes } from './authentication.routes';
+
 
 export function Routes() {
-    const { session, user, loading } = useAuth();
-    
-    if(loading.type === "start" && !loading.loaded)
-        return <LoadScreen />;
+    const { session, loading } = useAuth();
+
+    if(loading)
+        return <LoadScreen />
 
     return (
-        <NavigationContainer
-            theme={DarkTheme}
-        >
-            { 
-                user.uid !== undefined
-                ?
-                <AppRoutes />
-                :
-                (
-                    session.uid === undefined
+        <View style={styles.container}>
+            <NavigationContainer>
+                {
+                    session.isDataColected
                     ?
-                    <AuthRoutes />
+                    <AuthenticatedRoutes />
                     :
-                    <SignupContextProvider>
-                        <AuthDataRoutes />
-                    </SignupContextProvider>
-                )
-            }
-        </NavigationContainer>
+                    <AuthenticationRoutes />
+                }
+            </NavigationContainer>
+        </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: theme.colors.white
+    }
+});

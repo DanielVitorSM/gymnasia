@@ -1,21 +1,26 @@
-import React, { createContext, useState, ReactNode, SetStateAction, Dispatch, useContext, useEffect } from 'react';
+import React, { createContext, useState, ReactNode, SetStateAction, Dispatch, useContext } from 'react';
 
-import { ITrain, IExerciseTrain } from '../screens/MainScreens/Trains';
+import { ITrainExerciseItem, ITrainFull } from '../storage/models/Trains';
+import { exercises as exercisesListData } from '../utils/exercises';
 
 export interface ITrainContextData {
-    train: ITrain;
+    train: ITrainFull;
     startedAt: number;
     finishedAt: number;
     setFinishedAt: Dispatch<SetStateAction<number>>;
-    exerciseActive: IExerciseTrain;
+    exerciseActive: IPraticExerciseActive;
     nextExercise: () => boolean;
     previousExercise: () => boolean;
 }
 
 interface ITrainProviderProps {
     children: ReactNode;
-    train: ITrain;
+    train: ITrainFull;
     startedAt: number;
+}
+
+interface IPraticExerciseActive extends ITrainExerciseItem {
+    image: any
 }
 
 const TrainContext = createContext<ITrainContextData>({} as ITrainContextData);
@@ -24,9 +29,16 @@ export function TrainContextProvider({ children, train, startedAt }: ITrainProvi
     const [exerciseActive, setExerciseActive] = useState(getExerciseByOrder(train.exercises, 1));
     const [finishedAt, setFinishedAt] = useState(0);
 
-    function getExerciseByOrder(exercises: IExerciseTrain[], order: number): IExerciseTrain{
+    function getExerciseByOrder(exercises: ITrainExerciseItem[], order: number): IPraticExerciseActive{
         let result = exercises.find((value) => value.order === order);
-        return result || {} as IExerciseTrain;
+        if(result){
+            let exerciseCompleteData = exercisesListData.find(value => value.uid == result?.uid);
+            return {
+                ...result,
+                image: exerciseCompleteData?.image
+            } as IPraticExerciseActive;
+        }
+        return {} as IPraticExerciseActive;
     }
 
     function nextExercise(){

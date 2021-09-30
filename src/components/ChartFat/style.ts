@@ -6,8 +6,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         width: '100%',
         alignItems: "center",
-        justifyContent: "space-evenly",
-        paddingBottom: 20
+        justifyContent: "space-around",
     },
     label: {
         color: theme.colors.secondary_100,
@@ -20,4 +19,7 @@ export const styles = StyleSheet.create({
         fontFamily: theme.fonts.text700,
         fontSize: 24
     },
+    chart: {
+        width: 120
+    }
 });

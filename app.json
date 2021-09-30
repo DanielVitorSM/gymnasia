@@ -2,14 +2,14 @@
   "expo": {
     "name": "Gymnasia",
     "slug": "gymnasia",
-    "version": "1.1.2",
+    "version": "1.2.1",
     "scheme": "gymnasia",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover",
-      "backgroundColor": "#0E0E0E"
+      "backgroundColor": "#0C8571"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

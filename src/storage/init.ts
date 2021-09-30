@@ -8,7 +8,7 @@ export default class DatabaseInit {
         db = DatabaseConnection.getConnection();
     }
 
-    private InitDb() {
+    public InitDb() {
         var sql: string[] = [
             `CREATE TABLE IF NOT EXISTS weights(
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -16,8 +16,9 @@ export default class DatabaseInit {
                 date DATE
             );`,
             `CREATE TABLE IF NOT EXISTS trains(
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                id VARCHAR(255) PRIMARY KEY,
                 name VARCHAR(255),
+                duration VARCHAR(255),
                 difficulty VARCHAR(255),
                 interval INTEGER,
                 isPublic BOOLEAN,

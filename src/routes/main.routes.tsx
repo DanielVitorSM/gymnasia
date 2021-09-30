@@ -1,63 +1,78 @@
 import React from 'react';
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { FontAwesome5 } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-import { MaterialIcons } from '@expo/vector-icons'; 
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Exercises } from '../screens/MainScreens/Exercises';
-import { Trains } from '../screens/MainScreens/Trains';
-import { Reports } from '../screens/MainScreens/Reports';
+import ExerciseIconSVG from '../assets/icons/exercise-alt';
+import DumbbellIconSVG from '../assets/icons/dumbbell-alt';
+import UserIconSVG from '../assets/icons/user-alt';
+import ReportIconSVG from '../assets/icons/report-alt';
 
 import { theme } from '../global/styles/theme';
+
+import { Exercises } from '../screens/AppScreens/Exercises';
+import { Trainings } from '../screens/AppScreens/Trainings';
+import { Reports } from '../screens/AppScreens/Reports';
+import { User } from '../screens/AppScreens/User';
 
 const Tabs = createBottomTabNavigator();
 
 export function MainRoutes() {
     return (
         <Tabs.Navigator
+            backBehavior="history"
+            detachInactiveScreens
+            lazy
             initialRouteName="Treinos"
-            tabBarOptions={{
-                activeTintColor: theme.colors.primary,
-                inactiveTintColor: theme.colors.secondary_100,
-                iconStyle: {
-                    marginBottom: -10
-                },
-                style: {
-                    borderTopWidth: 0,
-                    backgroundColor: theme.colors.secondary_10,
-                    paddingHorizontal: 20
-                },
-                
-            }}
             sceneContainerStyle={{
-                backgroundColor: theme.colors.secondary_20
+                backgroundColor: theme.colors.white
             }}
-            detachInactiveScreens={true}
+            tabBarOptions={{
+                showLabel: false,
+                keyboardHidesTabBar: true,
+                style: {
+                    borderWidth: 0,
+                    height: 50,
+                    elevation: 0,
+                    paddingHorizontal: 20,
+                    backgroundColor: theme.colors.white
+                },
+                activeTintColor: theme.colors.primary_light,
+                inactiveTintColor: theme.colors.gray_dark,
+            }}
         >
             <Tabs.Screen 
                 name="Exercícios"
                 component={Exercises}
                 options={{
-                    tabBarIcon: ({color}) => (
-                        <MaterialIcons name="fitness-center" size={24} color={color} />
+                    tabBarIcon: ({ focused, color, size }) => (
+                        <DumbbellIconSVG fill={color} width={size} height={size}/>
                     )
                 }}
             />
             <Tabs.Screen 
                 name="Treinos"
-                component={Trains}
+                component={Trainings}
                 options={{
-                    tabBarIcon: ({color}) => (
-                        <MaterialCommunityIcons name="human-handsup" size={24} color={color}/>
+                    tabBarIcon: ({ focused, color, size }) => (
+                        <ExerciseIconSVG fill={color} width={size} height={size}/>
                     )
                 }}
+                
             />
             <Tabs.Screen 
                 name="Relatórios"
                 component={Reports}
                 options={{
-                    tabBarIcon: ({color}) => (
-                        <FontAwesome5 name="chart-pie" size={24} color={color} />
+                    tabBarIcon: ({ focused, color, size }) => (
+                        <ReportIconSVG fill={color} width={size} height={size}/>
+                    )
+                }}
+            />
+            <Tabs.Screen 
+                name="Informações Pessoais"
+                component={User}
+                options={{
+                    tabBarIcon: ({ focused, color, size }) => (
+                        <UserIconSVG fill={color} width={size} height={size}/>
                     )
                 }}
             />

@@ -2,7 +2,7 @@ import React from 'react'
 import { ActivityIndicator, ImageBackground, SafeAreaView, StatusBar, View } from 'react-native'
 
 import BackgroundJPG from '../../assets/background.jpg';
-import LogoSVG from '../../assets/logo.svg';
+import { theme } from '../../global/styles/theme';
 import { styles } from './styles';
 
 export function LoadScreen() {
@@ -15,8 +15,7 @@ export function LoadScreen() {
                 style={styles.content}
             >   
                 <StatusBar hidden/>
-                <LogoSVG style={styles.logo}/>
-                <ActivityIndicator color="red" size={30} style={styles.load}/>
+                <ActivityIndicator color={theme.colors.pink_cardinal} size={30} style={styles.load}/>
             </ImageBackground>
         </SafeAreaView>
     )
