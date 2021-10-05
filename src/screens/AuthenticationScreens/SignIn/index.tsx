@@ -35,11 +35,11 @@ export function SignIn() {
             keyboardDidShowListener.remove();
         };
     }, []);
-     
+
     function handleSubmit(){
         if(isLogin)
-            return signInEmailAndPassword(email, password)
-        signUpEmailAndPassword(email, password)
+            return signInEmailAndPassword(email, password);
+        signUpEmailAndPassword(email, password);
     }
 
     function handleChangeSignMethod(){

@@ -38,6 +38,11 @@ export const typography = StyleSheet.create({
         fontFamily: theme.fonts.light,
         color: theme.colors.black
     },
+    sub400: {
+        fontSize: 14,
+        fontFamily: theme.fonts.regular,
+        color: theme.colors.black
+    },
     sub500: {
         fontSize: 14,
         fontFamily: theme.fonts.medium,

@@ -21,5 +21,8 @@ export const styles = StyleSheet.create({
     load: {
         position: 'absolute',
         bottom: "15%"
+    },
+    badges: {
+        flexDirection: 'row'
     }
 });

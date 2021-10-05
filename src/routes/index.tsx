@@ -20,7 +20,7 @@ export function Routes() {
         <View style={styles.container}>
             <NavigationContainer>
                 {
-                    session.isDataColected
+                    (session.isDataColected && session.isLogged)
                     ?
                     <AuthenticatedRoutes />
                     :

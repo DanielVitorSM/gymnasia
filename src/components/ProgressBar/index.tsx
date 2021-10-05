@@ -34,7 +34,7 @@ export function ProgressBar({ progress }: Props) {
                     y="0"
                     width={`${progress * 100}%`}
                     height={"100%"}
-                    fill={theme.colors.primary}
+                    fill={theme.colors.yellow_sun}
                 />
             </Svg>
         </View>

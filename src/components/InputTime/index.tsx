@@ -9,11 +9,11 @@ import { typography } from '../../global/styles/typography';
 
 type Props = {
     minutesAndSeconds?: boolean;
-    value: Date;
-    onChangeValue: (date: Date) => void;
+    value?: Date;
+    onChangeValue?: (date: Date) => void;
 }
 
-export function InputTime({ value = new Date(0), onChangeValue, minutesAndSeconds = false }: Props) {
+export function InputTime({ value = new Date(0), onChangeValue = () => {}, minutesAndSeconds = false }: Props) {
     const [num1, setNum1] = useState(minutesAndSeconds ? value.getMinutes() : value.getUTCHours() - 3);
     const [num2, setNum2] = useState(minutesAndSeconds ? value.getSeconds() : value.getMinutes());
     

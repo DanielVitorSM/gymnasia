@@ -14,7 +14,8 @@ export function AuthenticationRoutes() {
             <StatusBar 
                 translucent
                 animated
-                barStyle="dark-content"
+                backgroundColor="transparent"
+                barStyle="light-content"
             />
             {
                 session.isLogged

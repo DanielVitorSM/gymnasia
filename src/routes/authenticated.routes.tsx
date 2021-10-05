@@ -1,19 +1,67 @@
 import React from 'react'
 
-import { createStackNavigator } from '@react-navigation/stack';
-import { MainRoutes } from './main.routes';
+import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
+import { ExerciseInfo } from '../screens/ModalScreens/ExerciseInfo';
+import { DrawerRoutes } from './drawer.routes';
+import { TrainingInfo } from '../screens/ModalScreens/TrainingInfo';
+import { ITrainingObject, trainings } from '../data/trainings';
+import { TrainingRoutes } from './training.routes';
+import { MyTrainingsAdd } from '../screens/ModalScreens/MyTrainingsAdd';
 
-const Stack = createStackNavigator();
+export type RootStackScreenParams = {
+    Main: undefined;
+    ExerciseInfoModal: { 
+        exerciseUid: string;
+    };
+    TrainingInfoModal: {
+        data: ITrainingObject;
+    };
+    TrainingRoutes: {
+        data: ITrainingObject;
+    };
+    MyTrainingsAdd : undefined;
+}
+
+const RootStack = createStackNavigator<RootStackScreenParams>();
 
 export function AuthenticatedRoutes() {
     return(
-        <Stack.Navigator
+        <RootStack.Navigator
             headerMode="none"
+            initialRouteName="Main"
+            mode="modal"
+            screenOptions={{
+                cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
+                animationEnabled: true,
+                animationTypeForReplace: "push",
+            }}
+            detachInactiveScreens={true}
         >
-            <Stack.Screen 
-                name="Home"
-                component={MainRoutes}
+            <RootStack.Screen 
+                name="Main"
+                component={DrawerRoutes}
             />
-        </Stack.Navigator>
+            <RootStack.Screen 
+                name="ExerciseInfoModal"
+                component={ExerciseInfo}
+                initialParams={{ exerciseUid: "258008ba-d567-403c-af10-b19e41791f4b" }}
+            />
+            <RootStack.Screen 
+                name="TrainingInfoModal"
+                component={TrainingInfo}
+                initialParams={{ data: trainings[0] }}
+            />
+            <RootStack.Screen 
+                name="TrainingRoutes"
+                component={TrainingRoutes}
+                options={{
+                    cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid
+                }}
+            />
+            <RootStack.Screen 
+                name="MyTrainingsAdd"
+                component={MyTrainingsAdd}
+            />
+        </RootStack.Navigator>
     )
 }

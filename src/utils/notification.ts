@@ -3,8 +3,15 @@ import * as Notifications from 'expo-notifications';
 import { NotificationContentInput } from 'expo-notifications';
 import { v4 as uidv4 } from 'uuid';
 
-import { NotificationData } from '../components/ReminderCard';
 import { GYMNASIA_NOTIFICATIONS } from '../global/constants/asyncStorage';
+
+export interface INotificationData {
+    uid: string,
+    days: number[],
+    hour: number,
+    minute: number,
+    ids: string[]
+}
 
 const content: NotificationContentInput = {
     title: "Hora de se Exercitar!",
@@ -18,14 +25,10 @@ const allDays: number[] = [1, 2, 3, 4, 5, 6, 7]
  * @returns An NotificationData array contains all notifications
  */
 
-export async function getNotificationsHistory(): Promise<NotificationData[] | []>{
+export async function getNotificationsHistory(): Promise<INotificationData[]>{
     try{
         let rawNotifications = await AsyncStorage.getItem(GYMNASIA_NOTIFICATIONS);
-        if(!rawNotifications)
-            return [];
-
-        let notifications = JSON.parse(rawNotifications);
-        return notifications;
+        return rawNotifications ? JSON.parse(rawNotifications) : [];
     }catch(error){
         return [];
     }
@@ -38,21 +41,20 @@ export async function getNotificationsHistory(): Promise<NotificationData[] | []
  * @returns Returns new NotificationData array saved in AsyncStorage.
  */
 
-export async function createNotifications(time: Date, days: number[] | null) {
+export async function createNotifications(time: Date, days: number[] = allDays) {
     try{
-        let hour = time.getHours();
-        let minute = time.getMinutes();
-        let rawData = await AsyncStorage.getItem(GYMNASIA_NOTIFICATIONS);
-        let oldNotifications: NotificationData[] = JSON.parse(rawData || "[]");
-        let trigger = {
+        const hour = time.getHours();
+        const minute = time.getMinutes();
+        const rawData = await AsyncStorage.getItem(GYMNASIA_NOTIFICATIONS);
+        const oldNotifications = JSON.parse(rawData || "[]") as INotificationData[];
+        const trigger = {
             hour,
             minute,
             repeats: true
-        }
+        };
+        let ids: string[] = [];
 
-        const ids: string[] = []
-
-        if(days){
+        if(days.length !== 7){
             await Promise.all(days.map(async value => {
                 ids.push(await Notifications.scheduleNotificationAsync({
                     content,
@@ -69,10 +71,9 @@ export async function createNotifications(time: Date, days: number[] | null) {
             }));
         }
 
-        let newNotifications: NotificationData[] = [ ...oldNotifications, {
-            active: true,
+        let newNotifications: INotificationData[] = [ ...oldNotifications, {
             uid: uidv4(),
-            days: days ? days : allDays,
+            days,
             hour,
             minute,
             ids
@@ -91,22 +92,34 @@ export async function createNotifications(time: Date, days: number[] | null) {
  * @param notification Notification data to recreate on device
  */
 
-export async function recreateNotification(notification: NotificationData){
+export async function recreateNotification(notification: INotificationData){
     try{
         await Promise.all(notification.ids.map(async (value, index) => {
-            await Notifications.scheduleNotificationAsync({
-                identifier: value,
-                content,
-                trigger: {
-                    weekday: notification.days[index],
-                    hour: notification.hour,
-                    minute: notification.minute,
-                    repeats: true
-                }
-            })
+            if(notification.days.length === 7){
+                await Notifications.scheduleNotificationAsync({
+                    identifier: value,
+                    content,
+                    trigger: {
+                        hour: notification.hour,
+                        minute: notification.minute,
+                        repeats: true
+                    }
+                })
+            }else{
+                await Notifications.scheduleNotificationAsync({
+                    identifier: value,
+                    content,
+                    trigger: {
+                        weekday: notification.days[index],
+                        hour: notification.hour,
+                        minute: notification.minute,
+                        repeats: true
+                    }
+                })
+            }
         }))
     }catch(error){
-        console.warn("Erro ao recrear notificação", error)
+        throw new Error("Erro ao ativar a notificação: " + error.message);
     }
 }
 
@@ -115,13 +128,13 @@ export async function recreateNotification(notification: NotificationData){
  * @param notification An NotificationData contains the notification
  */
 
-export async function deleteNotification(notification: NotificationData){
+export async function deleteNotification(notification: INotificationData){
     try{
         await Promise.all(notification.ids.map(async value => {
             await Notifications.cancelScheduledNotificationAsync(value);
         }))
     }catch(error){
-        console.warn("Erro ao deletar notificação", error)
+        throw new Error("Erro ao desativar a notificação: " + error.message);
     }
 }
 
@@ -130,18 +143,29 @@ export async function deleteNotification(notification: NotificationData){
  * @param notification An NotificationData contains the notification
  */
 
-export async function deleteHistoryNotification(notification: NotificationData){
+export async function deleteHistoryNotification(notification: INotificationData){
     try{
         await deleteNotification(notification);
         let rawData = await AsyncStorage.getItem(GYMNASIA_NOTIFICATIONS);
-        let data: NotificationData[] = JSON.parse(rawData || "[]");
-        let index = data.indexOf(notification)
-        if(index)
-            data.splice(index, 1);
+        let data = JSON.parse(rawData || "[]") as INotificationData[];
+        let newData = data.filter(value => value.uid !== notification.uid)
+        await AsyncStorage.setItem(GYMNASIA_NOTIFICATIONS, JSON.stringify(newData));
         
-        await AsyncStorage.setItem(GYMNASIA_NOTIFICATIONS, JSON.stringify(data));
-        return data;
+        return newData;
     }catch(error){
-        console.warn("Erro ao deletar notificação", error)
+        throw new Error("Erro ao deletar a notificação: " + error.message);
+    }
+}
+
+/**
+ * Delete all notification from device and from AsyncStorage
+ */
+
+export async function deleteAllNotifications(){
+    try{
+        await Notifications.cancelAllScheduledNotificationsAsync();
+        await AsyncStorage.removeItem(GYMNASIA_NOTIFICATIONS);
+    }catch(error){
+        throw new Error("Erro ao deletar todas as notificações: " + error.message);
     }
 }

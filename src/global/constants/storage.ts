@@ -1,1 +1,1 @@
-export const DATABASE_URI = "gymnasia.database_teste2";
+export const DATABASE_URI = "gymnasia.database";

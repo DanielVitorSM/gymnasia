@@ -5,6 +5,8 @@ export default function DumbbellIconSVG(props: SvgProps) {
   return (
     <Svg
         viewBox="0 0 24 24"
+        width={24}
+        height={24}
         {...props}
     >
         <Path

@@ -10,6 +10,12 @@ import { theme } from '../../global/styles/theme';
 import { typography } from '../../global/styles/typography';
 import { styles } from './styles';
 
+type TextProps = TextInputProps & {
+    onChangeText?: (text: string) => void;
+    minLength?: number;
+    showError?: boolean;
+}
+
 type EmailProps = TextInputProps & {
     onChangeText: (text: string) => void;
     showError?: boolean;
@@ -121,6 +127,46 @@ export function InputTextPassword({
                         </TouchableOpacity>
                     }
                 </View>
+            </View>
+            {
+                error !== ""
+                &&
+                (
+                    <Text style={[typography.small300, styles.error, { marginTop: 5 }]}>
+                        { error }
+                    </Text>
+                )
+            }
+        </View>
+    )
+}
+
+export function InputText({ onChangeText = () => {}, showError = true, minLength = 5, ...rest }: TextProps) {
+    const [error, setError] = useState("");
+
+    function handleValidateField(text: string){
+        if(text.length < minLength && showError){
+            setError("Muito curto");
+        }else{
+            setError("");
+        }
+        onChangeText(text);
+    }
+
+    return (
+        <View style={styles.container}>
+            <View style={[styles.content, { paddingHorizontal: 15 } ,error !== "" && styles.error]}>
+                <TextInput 
+                    style={[
+                        typography.text300, 
+                        styles.input,
+                        error !== "" && styles.error
+                    ]}
+                    placeholder="Texto"
+                    keyboardType="default"
+                    onChangeText={handleValidateField}
+                    { ...rest }
+                />
             </View>
             {
                 error !== ""

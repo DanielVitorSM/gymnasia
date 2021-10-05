@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
-import { Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from '@expo-google-fonts/roboto';
+import React from 'react';
 import { Ubuntu_300Light, Ubuntu_400Regular, Ubuntu_500Medium, Ubuntu_700Bold } from '@expo-google-fonts/ubuntu'
 import { enableScreens } from 'react-native-screens';
-import { LogBox, StatusBar } from 'react-native';
+import { LogBox } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as Notifications from 'expo-notifications';
 import AppLoading from 'expo-app-loading';
@@ -36,10 +35,6 @@ export default function App() {
     Ubuntu_400Regular,
     Ubuntu_500Medium,
     Ubuntu_700Bold,
-    Roboto_400Regular,
-    Roboto_500Medium,
-    Roboto_700Bold,
-    
   });
 
   if(!fontsLoaded)

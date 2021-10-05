@@ -3,8 +3,9 @@ import React from 'react';
 import { View, Text, TextInput, Pressable, StatusBar } from 'react-native';
 
 import MenuIconSVG from '../../assets/icons/menu-bar-alt.svg';
+import BackIconSVG from '../../assets/icons/arrow-left-alt.svg';
 import SearchIconSVG from '../../assets/icons/search-alt.svg';
-import ConfigIconSVG from '../../assets/icons/settings-alt.svg';
+import SettingsIconSVG from '../../assets/icons/settings-alt';
 import { theme } from '../../global/styles/theme';
 import { typography } from '../../global/styles/typography';
 
@@ -13,15 +14,15 @@ import { styles } from './styles';
 type Props = {
     title: string;
     extra?: "search" | "config" | "none";
-    searchValue?: string;
+    leftBack?: boolean;
     onSeachChange?: (text: string) => void;
     onRightButtonClick?: () => void;
 }
 
 export function TopHeader({ 
     title, 
-    extra="none", 
-    searchValue="", 
+    extra="none",
+    leftBack = false,
     onSeachChange=() => {}, 
     onRightButtonClick=() => {} 
 }: Props) {
@@ -38,9 +39,15 @@ export function TopHeader({
                 <Pressable 
                     style={styles.button}
                     hitSlop={50}
-                    onPress={() => Navigation.dispatch(DrawerActions.openDrawer())}
+                    onPress={() => leftBack ? Navigation.goBack() : Navigation.dispatch(DrawerActions.openDrawer())}
                 >
-                    <MenuIconSVG />
+                    {
+                        leftBack
+                        ?
+                        <BackIconSVG />
+                        :
+                        <MenuIconSVG />
+                    }
                 </Pressable>
 
                 {
@@ -48,7 +55,6 @@ export function TopHeader({
                     &&
                     <TextInput
                         style={[typography.small300, styles.input]}
-                        value={searchValue}
                         onChangeText={onSeachChange}
                         placeholder="Pesquisar..."
                     />
@@ -57,13 +63,13 @@ export function TopHeader({
                 <Pressable 
                     style={styles.button}
                     hitSlop={50}
-                    onPress={onRightButtonClick}
+                    onPress={() => extra === "config" ? Navigation.navigate("Configurações") : onRightButtonClick}
                     disabled={extra === "none"}
                 >
                     {
                         extra === "config"
                         &&
-                        <ConfigIconSVG />
+                        <SettingsIconSVG width={32} height={32} fill={theme.colors.primary_light}  />
                     }
                     {
                         extra === "search"

@@ -14,7 +14,7 @@ export interface IExerciseObject {
  */
 
 export function getExerciseByUid(uid: string){
-    return exercises.find((value, index) => value.uid === uid);
+    return exercises.find((value) => value.uid === uid);
 }
 
 export const exercises: IExerciseObject[] = [
@@ -57,5 +57,5 @@ export const exercises: IExerciseObject[] = [
         capacity: "Resistência",
         muscles: "Quadríceps, Glúteo, Estabilizadores da Coluna",
         howTo: "O nome já entrega: basta repetir esse gesto, revezando as pernas. Contudo, certifique-se de que o móvel aguenta o tranco e está firmado no chão. Quanto mais alto o banco, maior a dificuldade."
-    }
+    },
 ];

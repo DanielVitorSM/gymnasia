@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Keyboard, KeyboardAvoidingView, SafeAreaView, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { Alert, Keyboard, KeyboardAvoidingView, SafeAreaView, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { differenceInYears } from 'date-fns';
 
 import BannerSVG from '../../../assets/banner.svg';
 import { theme } from '../../../global/styles/theme';
@@ -13,6 +14,7 @@ import { InputDate } from '../../../components/InputDate';
 import { InputSex } from '../../../components/InputSex';
 import { ModalTime } from '../../../components/ModalTime';
 import { InputTime } from '../../../components/InputTime';
+import { createNotifications } from '../../../utils/notification';
 
 export function Info() {
     const [weight, setWeight] = useState(70);
@@ -40,9 +42,17 @@ export function Info() {
             keyboardDidShowListener.remove();
         };
     }, []);
+
+    function handleContinue(){
+        let age = differenceInYears(Date.now(), birth);
+        if(age < 12 || age > 120)
+            return Alert.alert("Data de nascimento inválida", "Insira uma data de nascimento válida!");
+        setShowReminder(true)
+    }
      
-    function handleSubmit(){
-        updateUserData({
+    async function handleSubmit(){
+        await createNotifications(reminder);
+        await updateUserData({
             weight,
             height,
             sex,
@@ -114,7 +124,7 @@ export function Info() {
                             <PrimaryButton
                                 text={"Continuar"}
                                 enabled={true}
-                                onPress={() => setShowReminder(true)}
+                                onPress={handleContinue}
                             />
                         </View>
 

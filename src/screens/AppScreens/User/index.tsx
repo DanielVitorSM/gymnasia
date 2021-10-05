@@ -11,8 +11,8 @@ import { useAuth } from '../../../hooks/authentication';
 import { styles } from './styles';
 
 export function User() {
-    const { userData, updateUserData } = useAuth();
-    console.log(userData)
+    const { userData, updateUserData, user } = useAuth();
+    console.log(user)
 
     const [basic, setBasic] = useState({
         height: userData.height,

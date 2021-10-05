@@ -1,12 +1,14 @@
-import React, { createContext, ReactNode, useCallback, useContext, useEffect, useState } from 'react'
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firebase from 'firebase';
 import Constants from 'expo-constants';
 import * as Google from 'expo-google-app-auth';
-import { v4 as uidv4 } from 'uuid';
 import "firebase/firestore";
 
-import { GYMNASIA_SESSION, GYMNASIA_USER } from '../global/constants/asyncStorage';
+import { GYMNASIA_USER } from '../global/constants/asyncStorage';
+import { deleteAllNotifications } from '../utils/notification';
+import { Alert } from 'react-native';
+import DatabaseInit from '../storage/init';
 
 export interface IUserObject{
     uid: string;
@@ -33,12 +35,14 @@ export interface ISessionObject{
 interface IAuthContextData {
     loading: boolean;
     userData: IUserDataObject;
+    user: IUserObject;
     session: ISessionObject;
     updateUserData: (change: Object) => Promise<void>;
     signInGoogle: () => Promise<void>;
     signInAnonymous: () => void;
     signInEmailAndPassword: (email: string, password: string) => Promise<void>;
     signUpEmailAndPassword: (email: string, password: string) => Promise<void>;
+    signOut: () => void;
 }
 
 interface IAuthProviderProps {
@@ -51,7 +55,7 @@ export function AuthProvider({ children }: IAuthProviderProps){
     const [user, setUser] = useState({} as IUserObject);
     const [session, setSession] = useState({ isLogged: false, isDataColected: false } as ISessionObject);
     const [loading, setLoading] = useState(true);
-
+    
     useEffect(() => {
         firebase
         .auth()
@@ -68,7 +72,7 @@ export function AuthProvider({ children }: IAuthProviderProps){
             }
             setUser(state => userIn);
             setSession({
-                isDataColected: userIn !== undefined ,
+                isDataColected: userIn.data !== undefined ,
                 isLogged: userIn.uid !== undefined
             });
             setLoading(false);
@@ -79,8 +83,15 @@ export function AuthProvider({ children }: IAuthProviderProps){
         firebase
         .auth()
         .signInAnonymously()
-        .catch(res => {
-            throw new Error("Entrar anonimamente não está disponível no momento");
+        .catch(error => {
+            switch (error.code) {
+                case "operation-not-allowed":
+                    Alert.alert("Método não permitido", "Esse método de login está desabilitado no momento.");
+                    break;
+                default:
+                    Alert.alert("Houve um problema", "Não foi possível entrar anonimamente, tente novamente em instantes.");
+                    break;
+            }
         })
     }
 
@@ -101,11 +112,22 @@ export function AuthProvider({ children }: IAuthProviderProps){
                 firebase
                 .auth()
                 .signInWithCredential(credential)
-                .catch(res => { throw res });
+                .catch(error => {
+                    switch(error.code) {
+                        case "auth/invalid-credential":
+                            Alert.alert("Credenciais inválidas", "As credenciais recebidas são inválidas e não permitem o login.");
+                            break;
+                        case "auth/account-exists-with-different-credential":
+                            Alert.alert("Conta já existe", "Essa conta já existe em outro método, tente entrar usando o método correto.");
+                            break;
+                        default:
+                            Alert.alert("Houve um problema", "Não foi possível realizar login, verifique a conexão com a internet e tente novamente.");
+                    }
+                });
             }else
-                throw new Error("Houve um erro ao contatar o servidor do google, verifique sua conexão com internet.");
+                Alert.alert("Houve um problema", "Houve um erro ao contatar o servidor do google, verifique sua conexão com internet.");
         }catch(error){
-            throw new Error("Não foi possível realizar o login com Google, tente novamente mais tarde.");
+            Alert.alert("Houve um problema", "Não foi possível realizar o login com Google, tente novamente mais tarde.");
         }
     }
 
@@ -115,7 +137,19 @@ export function AuthProvider({ children }: IAuthProviderProps){
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .catch(error => {
-            throw error;
+            switch(error.code) {
+                case "auth/email-already-in-use":
+                    Alert.alert("Email em uso", "Esse email já está sendo usado, tente entrar com outro ou logue.");
+                    break;
+                case "auth/invalid-email":
+                    Alert.alert("Email inválido", "Insira um email válido.");
+                    break;
+                case "auth/weak-password":
+                    Alert.alert("Senha fraca", "Insira uma senha fraca, com mais do que 6 caracteres.");
+                    break;
+                default:
+                    Alert.alert("Houve um problema", "Não foi possível criar uma nova conta, verifique a conexão com a internet e tente novamente.");
+            }
         })
     }
 
@@ -124,8 +158,42 @@ export function AuthProvider({ children }: IAuthProviderProps){
         .auth()
         .signInWithEmailAndPassword(email, password)
         .catch(error => {
-            throw error;
+            switch(error.code) {
+                case "auth/auth/user-disabled":
+                    Alert.alert("Desabilitado", "Esse email foi desabilitado.");
+                    break;
+                case "auth/invalid-email":
+                    Alert.alert("Email inválido", "Insira um email válido.");
+                    break;
+                case "auth/user-not-found":
+                    Alert.alert("Email ou senha inválidos", "Os dados de login não coincidem, insira dados válidos.");
+                    break;
+                case "auth/wrong-password":
+                    Alert.alert("Email ou senha inválidos", "Os dados de login não coincidem, insira dados válidos.");
+                    break;
+                default:
+                    Alert.alert("Houve um problema", "Não foi possível realizar login, verifique a conexão com a internet e tente novamente.");
+            }
         })
+    }
+
+    async function uploadBackup(){
+        if(user.data !== undefined){
+            await firebase
+            .firestore()
+            .collection("users")
+            .doc(user.uid)
+            .set(user.data)
+            .catch(error => console.log(error))
+        }
+    }
+    
+    async function signOut(){
+        await uploadBackup()
+        await deleteLocalData();
+        firebase
+        .auth()
+        .signOut()
     }
 
     async function updateUserData(change: Object){
@@ -150,12 +218,14 @@ export function AuthProvider({ children }: IAuthProviderProps){
         <AuthContext.Provider value={{
             session,
             loading,
+            user,
             userData: user.data || {} as IUserDataObject,
             updateUserData,
             signInAnonymous,
             signInGoogle,
             signInEmailAndPassword,
-            signUpEmailAndPassword
+            signUpEmailAndPassword,
+            signOut
         }}>
             { children }
         </AuthContext.Provider>
@@ -192,6 +262,17 @@ export async function getUserData(){
                 return JSON.parse(userRaw) as IUserDataObject;
         }
         return undefined;
+    }catch(error){
+        console.log(error);
+        return undefined;
+    }
+}
+
+async function deleteLocalData(){
+    try {
+        await deleteAllNotifications();
+        await AsyncStorage.removeItem(GYMNASIA_USER);
+        DatabaseInit.DropTables()
     }catch(error){
         console.log(error);
         return undefined;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, PressableProps, StyleProp, ViewStyle, Pressable, View, ActivityIndicator } from 'react-native';
+import { Text, PressableProps, StyleProp, ViewStyle, Pressable, View, ActivityIndicator, TextStyle } from 'react-native';
 import { theme } from '../../global/styles/theme';
 import { typography } from '../../global/styles/typography';
 
@@ -9,10 +9,11 @@ type Props = PressableProps & {
     text?: string;
     enabled?: boolean;
     style?: StyleProp<ViewStyle>;
+    textStyle?: StyleProp<TextStyle>;
     loading?: boolean;
 }
 
-export function PrimaryButton({ text = "Continuar", enabled = true, loading = false, style, ...rest }: Props) {
+export function PrimaryButton({ text = "Continuar", enabled = true, loading = false, style, textStyle, ...rest }: Props) {
     return (
         <View style={[styles.container, style]}>
             <Pressable
@@ -31,7 +32,7 @@ export function PrimaryButton({ text = "Continuar", enabled = true, loading = fa
                         size={24} 
                     />
                     :
-                    <Text style={[typography.text500, styles.text]}>
+                    <Text style={[typography.text500, styles.text, textStyle]}>
                         { text }
                     </Text>
                 }
