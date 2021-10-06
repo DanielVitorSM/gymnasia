@@ -1,11 +1,15 @@
 {
   "expo": {
     "name": "Gymnasia",
+    "description": "O seu app de exercícios, feito para aqueles que procuram manter a forma sem precisar sair de casa.",
+    "githubUrl": "https://github.com/danielvitorsm/gymnasia",
     "slug": "gymnasia",
     "version": "2.4.2",
     "scheme": "gymnasia",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "backgroundColor": "#D9D7CE",
+    "primaryColor": "#0EFF00",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover",
@@ -19,16 +23,19 @@
     ],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "host.exp.exponent",
-      "buildNumber": "1.0.7"
+      "bundleIdentifier": "com.daniel.gymnasia",
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": ""
+        }
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0EFF00"
       },
-      "package": "host.exp.exponent",
-      "versionCode": 1
+      "package": "com.daniel.gymnasia"
     },
     "web": {
       "favicon": "./assets/favicon.png"

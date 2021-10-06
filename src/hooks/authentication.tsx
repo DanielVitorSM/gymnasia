@@ -100,6 +100,8 @@ export function AuthProvider({ children }: IAuthProviderProps){
             const result = await Google.logInAsync({
                 iosClientId: Constants.manifest?.extra?.IOS_KEY_DEVELOPMENT,
                 androidClientId: Constants.manifest?.extra?.ANDROID_KEY_DEVELOPMENT,
+                androidStandaloneAppClientId: Constants.manifest?.extra?.ANDROID_KEY_DEVELOPMENT,
+                iosStandaloneAppClientId: Constants.manifest?.extra?.IOS_KEY_DEVELOPMENT,
                 scopes: ['profile', 'email'],
             });
 
