@@ -4,10 +4,6 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1
     },
-    logo: {
-        width: 177,
-        height: 37,
-    },
     content: {
         flex: 1,
         position: 'absolute',
@@ -22,7 +18,4 @@ export const styles = StyleSheet.create({
         position: 'absolute',
         bottom: "15%"
     },
-    badges: {
-        flexDirection: 'row'
-    }
 });

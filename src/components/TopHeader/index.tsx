@@ -1,6 +1,6 @@
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, Text, TextInput, Pressable, StatusBar } from 'react-native';
+import { View, Text, TextInput, Pressable } from 'react-native';
 
 import MenuIconSVG from '../../assets/icons/menu-bar-alt.svg';
 import BackIconSVG from '../../assets/icons/arrow-left-alt.svg';
@@ -30,11 +30,6 @@ export function TopHeader({
 
     return (
         <View style={styles.container}>
-            <StatusBar 
-                barStyle="light-content"
-                backgroundColor={theme.colors.primary_dark}
-                translucent={false}
-            /> 
             <View style={styles.menu}>
                 <Pressable 
                     style={styles.button}

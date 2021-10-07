@@ -17,15 +17,15 @@ import { InputTime } from '../../../components/InputTime';
 import { createNotifications } from '../../../utils/notification';
 
 export function Info() {
-    const [weight, setWeight] = useState(70);
-    const [height, setHeight] = useState(170);
-    const [birth, setBirth] = useState(new Date());
+    const [weight, setWeight] = useState(54);
+    const [height, setHeight] = useState(156);
+    const [birth, setBirth] = useState(new Date("07/10/2004"));
     const [sex, setSex] = useState("F");
     const [reminder, setReminder] = useState(new Date(15 * 60 * 60 * 1000))
     const [isKeyboardVisible, setKeyboardVisible] = useState(false);
     const [showReminder, setShowReminder] = useState(false);
 
-    const { updateUserData } = useAuth();
+    const { updateUserData, signOut } = useAuth();
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
@@ -61,7 +61,7 @@ export function Info() {
     }
 
     function handleSignBack(){
-
+        signOut();
     }
 
     return (

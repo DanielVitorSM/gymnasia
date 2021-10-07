@@ -1,7 +1,6 @@
 import React from 'react'
 import { View, Text, SafeAreaView, Alert } from 'react-native'
 import { PrimaryButton } from '../../../components/PrimaryButton'
-import firebase from 'firebase';
 
 import { TopHeader } from '../../../components/TopHeader'
 import { theme } from '../../../global/styles/theme'
@@ -10,7 +9,7 @@ import { useAuth } from '../../../hooks/authentication'
 import { styles } from './styles'
 
 export function Settings() {
-    const { userData, user, session, signOut } = useAuth();
+    const { user, signOut } = useAuth();
 
     console.log(user)
 

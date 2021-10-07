@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TouchableHighlight, Image, TouchableHighlightProps, Pressable, PressableProps, Alert } from 'react-native'
+import { View, Text, Image, Pressable, PressableProps, Alert } from 'react-native'
 
 import DragIconSVG from '../../assets/icons/drag-alt.svg';
 import CloseIconSVG from '../../assets/icons/close-alt';

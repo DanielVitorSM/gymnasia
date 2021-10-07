@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, TextProps } from 'react-native'
+import { Text, TextProps } from 'react-native'
 import { format } from 'date-fns';
 
 import { styles } from './styles';

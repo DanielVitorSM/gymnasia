@@ -23,12 +23,7 @@
     ],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.daniel.gymnasia",
-      "config": {
-        "googleSignIn": {
-          "reservedClientId": ""
-        }
-      }
+      "bundleIdentifier": "com.daniel.gymnasia"
     },
     "android": {
       "adaptiveIcon": {

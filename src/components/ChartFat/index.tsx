@@ -21,6 +21,10 @@ type ChartProps = {
     waist?: number;
 }
 
+/**
+ * Render a Chart of Fat, an humanoid showing in yellow the fat percent
+ */
+
 export function ChartFat({ height, weight, birth_date, sex, hip=0, neck=0, waist=0 }: ChartProps) {
     const age = differenceInYears(new Date(), birth_date);
     var percent: number = 0;
@@ -50,18 +54,25 @@ export function ChartFat({ height, weight, birth_date, sex, hip=0, neck=0, waist
     )
 }
 
+/**
+ * Calculate Body Mass Index using height and weight
+ * @param height Height in centimeter
+ * @param weight Weight in kilogram
+ * @returns Return the BMI in kilogram per square meter
+ */
+
 export function CalcIMC(height: number, weight: number): number {
-    let imc: number = weight / Math.pow(height / 100, 2);
-    return imc;
+    return weight / Math.pow(height / 100, 2);
 }
 
-function CalcFatSimple(height: number, weight: number, sex: string): number{
-    if(sex === "F")
-        return 1 - (0.3281 * weight + 0.33929 * height - 29.5336) / weight
-    if(sex === "M")
-        return 1 - (0.29569 * weight + 0.41813 * height - 43.2933) / weight
-    return 0;
-}
+/**
+ * Calculate Fat percent with little information 
+ * @param height Height in centimeter
+ * @param weight Weight in kilogram
+ * @param age Age in years
+ * @param sex "F" or "M"
+ * @returns Far percent in decimal
+ */
 
 function CalcFatMiddle(height:number, weight: number, age: number, sex: string): number{
     const imc: number = CalcIMC(height, weight);
@@ -70,6 +81,16 @@ function CalcFatMiddle(height:number, weight: number, age: number, sex: string):
     return ((1.20 * imc) + (0.23 * age) - (10.8 * s) - 5.4) / 100;
 }
 
+/**
+ * Calculate Fat percent with more information
+ * @param height Height in centimeter
+ * @param neck Neck in centimeter
+ * @param hip Hip in centimeter
+ * @param waist Waits in centimeter
+ * @param sex "F" or "M"
+ * @returns Far percent in decimal
+ */
+
 function CalcFatHard(height: number, waist: number, neck: number, sex: string, hip: number | undefined): number{
     if(sex == "M")
         return (495 / ( 1.033 - 0.191 * Math.log10(waist - neck) + 0.155 * Math.log10(height)) - 450) / 100;
@@ -77,6 +98,12 @@ function CalcFatHard(height: number, waist: number, neck: number, sex: string, h
         return (495 / ( 1.296 - 0.350 * Math.log10(hip + waist - neck) + 0.221 * Math.log10(height)) - 450) / 100;
     return 0;
 }
+
+/**
+ * Render the illustration chart of body fat
+ * @param sex "F" or "M"
+ * @percent Fat percent
+ */
 
 function BodyChart({ sex, percent }: BodyProps){
     return (
@@ -113,6 +140,10 @@ function BodyChart({ sex, percent }: BodyProps){
     )
 }
 
+/**
+ * Male Chart Illustration
+ */
+
 function MaleBody(props: SvgProps) {
   return (
     <G  scale="1">
@@ -123,6 +154,10 @@ function MaleBody(props: SvgProps) {
     </G>
   )
 }
+
+/**
+ * Female Chart Illustration
+ */
 
 function FemaleBody(props: SvgProps) {
     return (

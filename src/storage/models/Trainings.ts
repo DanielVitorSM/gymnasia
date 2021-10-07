@@ -1,8 +1,6 @@
 import { ITrainingExerciseItem, ITrainingObject } from './../../data/trainings';
 import { DatabaseConnection } from '../connection';
 import { v4 as uidv4 } from 'uuid';
-import firebase from 'firebase';
-import "firebase/firestore";
 
 const table = "trainings";
 const db = DatabaseConnection.getConnection();

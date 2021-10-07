@@ -1,7 +1,6 @@
 import { StackScreenProps } from '@react-navigation/stack'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { View, Text, SafeAreaView, ImageBackground, Pressable } from 'react-native'
-import { Modalize } from 'react-native-modalize';
 import DraggableFlatList, { RenderItemParams } from 'react-native-draggable-flatlist';
 
 import PlusIconSVG from '../../../assets/icons/plus-alt.svg';

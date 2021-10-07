@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { View, Text, TextInput, TextInputProps, Pressable } from 'react-native'
-import { BorderlessButton, RectButton, TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Text, TextInput, TextInputProps } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import EmailIconSVG from '../../assets/icons/email-alt.svg';
 import SecureIconSVG from '../../assets/icons/secure-alt.svg';

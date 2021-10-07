@@ -1,5 +1,5 @@
 import React from 'react'
-import { ActivityIndicator, ImageBackground, SafeAreaView, StatusBar, View } from 'react-native'
+import { ActivityIndicator, ImageBackground, SafeAreaView, StatusBar } from 'react-native'
 
 import BackgroundJPG from '../../assets/background.jpg';
 import { theme } from '../../global/styles/theme';

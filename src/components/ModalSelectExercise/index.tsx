@@ -1,5 +1,5 @@
-import React, { useRef, Ref, RefObject, createRef, useImperativeHandle, forwardRef, useEffect, useState } from 'react'
-import { View, Text, Modal, Alert } from 'react-native'
+import React, { useRef, useEffect, useState } from 'react'
+import { Text } from 'react-native'
 import { styles } from './styles'
 import { Modalize, ModalizeProps } from 'react-native-modalize';
 import { typography } from '../../global/styles/typography';
@@ -59,7 +59,7 @@ export function ModalSelectExercise({
                 )}
                 flatListProps={{
                     data: exercises,
-                    keyExtractor: (item, index) => `flatlist-exercise-${item.uid}`,
+                    keyExtractor: (item, index) => `flatlist-exercise-${item.uid}-${index}`,
                     renderItem: ({ item }) => <ItemExercise data={item} onPress={() => {
                         setExercise(item.uid);
                         setShowTimeModal(true);

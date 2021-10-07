@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, TouchableOpacity, TextInput, TextInputProps, Alert, Pressable } from 'react-native'
+import { View, TouchableOpacity, TextInput, TextInputProps, Alert } from 'react-native'
 
 import PlusIconSVG from '../../assets/icons/plus-alt.svg';
 import SubIconSVG from '../../assets/icons/sub-alt.svg';

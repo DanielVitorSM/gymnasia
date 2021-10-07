@@ -1,5 +1,5 @@
-import React, { ReactNode, useRef } from 'react';
-import { View, Text, Modal, ModalProps, Pressable } from 'react-native';
+import React, { ReactNode } from 'react';
+import { View, Text, Modal, ModalProps } from 'react-native';
 import { theme } from '../../global/styles/theme';
 import { typography } from '../../global/styles/typography';
 

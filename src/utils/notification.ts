@@ -8,8 +8,7 @@ import { GYMNASIA_NOTIFICATIONS } from '../global/constants/asyncStorage';
 export interface INotificationData {
     uid: string,
     days: number[],
-    hour: number,
-    minute: number,
+    time: Date;
     ids: string[]
 }
 
@@ -74,8 +73,7 @@ export async function createNotifications(time: Date, days: number[] = allDays) 
         let newNotifications: INotificationData[] = [ ...oldNotifications, {
             uid: uidv4(),
             days,
-            hour,
-            minute,
+            time,
             ids
         }]
 
@@ -100,8 +98,8 @@ export async function recreateNotification(notification: INotificationData){
                     identifier: value,
                     content,
                     trigger: {
-                        hour: notification.hour,
-                        minute: notification.minute,
+                        hour: notification.time.getHours(),
+                        minute: notification.time.getHours(),
                         repeats: true
                     }
                 })
@@ -111,14 +109,14 @@ export async function recreateNotification(notification: INotificationData){
                     content,
                     trigger: {
                         weekday: notification.days[index],
-                        hour: notification.hour,
-                        minute: notification.minute,
+                        hour: notification.time.getHours(),
+                        minute: notification.time.getHours(),
                         repeats: true
                     }
                 })
             }
         }))
-    }catch(error){
+    }catch(error: any){
         throw new Error("Erro ao ativar a notificação: " + error.message);
     }
 }
@@ -133,7 +131,7 @@ export async function deleteNotification(notification: INotificationData){
         await Promise.all(notification.ids.map(async value => {
             await Notifications.cancelScheduledNotificationAsync(value);
         }))
-    }catch(error){
+    }catch(error: any){
         throw new Error("Erro ao desativar a notificação: " + error.message);
     }
 }
@@ -152,7 +150,7 @@ export async function deleteHistoryNotification(notification: INotificationData)
         await AsyncStorage.setItem(GYMNASIA_NOTIFICATIONS, JSON.stringify(newData));
         
         return newData;
-    }catch(error){
+    }catch(error: any){
         throw new Error("Erro ao deletar a notificação: " + error.message);
     }
 }
@@ -165,7 +163,7 @@ export async function deleteAllNotifications(){
     try{
         await Notifications.cancelAllScheduledNotificationsAsync();
         await AsyncStorage.removeItem(GYMNASIA_NOTIFICATIONS);
-    }catch(error){
+    }catch(error: any){
         throw new Error("Erro ao deletar todas as notificações: " + error.message);
     }
 }

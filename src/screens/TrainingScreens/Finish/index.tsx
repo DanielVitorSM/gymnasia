@@ -1,6 +1,7 @@
-import { format } from 'date-fns'
 import React, { useCallback } from 'react'
 import { View, Text, SafeAreaView } from 'react-native'
+import { StackScreenProps } from '@react-navigation/stack';
+import { format } from 'date-fns'
 
 import AwardImageSVG from '../../../assets/award.svg';
 import FlashIconSVG from '../../../assets/icons/flash-alt.svg';
@@ -12,7 +13,6 @@ import { theme } from '../../../global/styles/theme'
 import { typography } from '../../../global/styles/typography'
 import { styles } from './styles'
 import { useTrainingContext } from '../../../hooks/training';
-import { StackScreenProps } from '@react-navigation/stack';
 import { TrainingScreenParams } from '../../../routes/training.routes';
 import { useAuth } from '../../../hooks/authentication';
 

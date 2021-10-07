@@ -1,7 +1,6 @@
 import { StackScreenProps } from '@react-navigation/stack';
-import { format } from 'date-fns/esm';
 import React, { useCallback, useRef, useState } from 'react';
-import { View, Text, Pressable, SafeAreaView, Modal, Alert } from 'react-native';
+import { View, Text, Pressable, SafeAreaView, Alert } from 'react-native';
 import DraggableFlatList, { RenderItemParams } from 'react-native-draggable-flatlist';
 import { Modalize } from 'react-native-modalize';
 
@@ -11,7 +10,7 @@ import { InputText } from '../../../components/InputText';
 import { ItemExerciseDraggable } from '../../../components/ItemExerciseDraggable';
 import { ModalSelectExercise } from '../../../components/ModalSelectExercise';
 import { PrimaryButton } from '../../../components/PrimaryButton';
-import { ITrainingExerciseItem, trainings } from '../../../data/trainings';
+import { ITrainingExerciseItem } from '../../../data/trainings';
 import { theme } from '../../../global/styles/theme';
 import { typography } from '../../../global/styles/typography';
 import { RootStackScreenParams } from '../../../routes/authenticated.routes';

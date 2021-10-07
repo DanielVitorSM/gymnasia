@@ -10,7 +10,7 @@ import { useAuth } from '../../../hooks/authentication'
 
 export function Reports() {
     const { userData: { height, weight, birth, sex, waist, hip, neck } } = useAuth();
-    const imc = weight / (height/100) ** 2;
+    const imc = weight / (height / 100) ** 2;
 
     return (
         <SafeAreaView>
@@ -41,7 +41,15 @@ export function Reports() {
 
                 <Text style={[typography.sub500, { marginBottom: 15 }]}>ÍNDICE DE GORDURA CORPORAL (ESTIMADO)</Text>
                 <View style={styles.row}>
-                    <ChartFat birth_date={new Date(birth)} height={height} weight={weight} sex={sex}  hip={80} waist={80} neck={40}/>
+                    <ChartFat 
+                        birth_date={new Date(birth)} 
+                        height={height} 
+                        weight={weight} 
+                        sex={sex}  
+                        hip={hip} 
+                        waist={waist} 
+                        neck={neck}
+                    />
                 </View>
 
                 <View style={styles.space}>

@@ -55,7 +55,8 @@ export function TrainingContextProvider({ children, training }: ITrainProviderPr
 };
 
 /**
- * Cria um novo contexto de treino para controlar os estados durante o treino
+ * Get the training context
+ * @returns An Training Context
  */
 
 export function useTrainingContext(){

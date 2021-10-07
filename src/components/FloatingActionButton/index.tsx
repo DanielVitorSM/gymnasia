@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Pressable, PressableProps } from 'react-native';
+import { View, Pressable, PressableProps } from 'react-native';
 
 import PlusIconSVG from '../../assets/icons/plus-alt.svg';
 import { theme } from '../../global/styles/theme';

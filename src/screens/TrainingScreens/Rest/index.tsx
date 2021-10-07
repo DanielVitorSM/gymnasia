@@ -11,7 +11,6 @@ import { useTrainingContext } from '../../../hooks/training'
 import { styles } from './styles';
 import { theme } from '../../../global/styles/theme';
 import { TrainingScreenParams } from '../../../routes/training.routes';
-import { useFocusEffect } from '@react-navigation/native';
 
 export function Rest({ navigation }: StackScreenProps<TrainingScreenParams, "Rest">) {
     const { activeExercise, training } = useTrainingContext();

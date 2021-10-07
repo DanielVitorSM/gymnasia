@@ -1,13 +1,13 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react'
+import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firebase from 'firebase';
+import "firebase/firestore";
 import Constants from 'expo-constants';
 import * as Google from 'expo-google-app-auth';
-import "firebase/firestore";
 
 import { GYMNASIA_USER } from '../global/constants/asyncStorage';
 import { deleteAllNotifications } from '../utils/notification';
-import { Alert } from 'react-native';
 import DatabaseInit from '../storage/init';
 
 export interface IUserObject{
@@ -235,7 +235,8 @@ export function AuthProvider({ children }: IAuthProviderProps){
 }
 
 /**
- * Retorna um novo contexto de autenticação
+ * Get the auth context
+ * @returns An Auth Context
  */
 
 export function useAuth(): IAuthContextData{
@@ -249,6 +250,11 @@ type FirebaseUserDataType = IUserDataObject & {
         seconds: number;
     }
 }
+
+/**
+ * Get the User data saved on local or online
+ * @returns The armazened data or undefined
+ */
 
 export async function getUserData(){
     const { uid } = firebase.auth().currentUser as firebase.User;
@@ -270,6 +276,10 @@ export async function getUserData(){
     }
 }
 
+/**
+ * Delete local data from AsyncStorage and Database
+ */
+
 async function deleteLocalData(){
     try {
         await deleteAllNotifications();
@@ -277,6 +287,5 @@ async function deleteLocalData(){
         DatabaseInit.DropTables()
     }catch(error){
         console.log(error);
-        return undefined;
     }
 }

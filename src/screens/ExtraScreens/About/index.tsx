@@ -26,7 +26,7 @@ export function About() {
         <SafeAreaView style={{ flex: 1, paddingBottom: 15 }}>
             <TopHeader title="Sobre" />
             <View style={[styles.container, { flex: 1 }]}>
-                <Text style={[typography.text300, { color: theme.colors.gray_light, marginBottom: 10 }]}>v{ version || "1.2.3" }</Text>
+                <Text style={[typography.text300, { color: theme.colors.gray_light, marginBottom: 10 }]}>v{ version || "2.4.3" }</Text>
                 <Text style={typography.text300}>Gymnasia é uma solução para o desenvolvimento físico e o incentivo a prática de exercícios idealizado com base no tema de Trabalho de Conclusão de Curso em Desenvolvimento de Sistemas. Desenvolvido depois de muita pesquisa e auxílio de profissionais do ramo, esta é uma versão de testes e não é usada comerciamente.</Text>
 
                 <Text style={[typography.info700, styles.section]}>Atribuições</Text>

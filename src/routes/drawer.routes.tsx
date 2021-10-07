@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { createDrawerNavigator, DrawerContentComponentProps, DrawerContentOptions, DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerContentComponentProps, DrawerContentOptions, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 
 import HomeIconSVG from '../assets/icons/home-alt';
 import DumbbellIconSVG from '../assets/icons/dumbbell-alt';

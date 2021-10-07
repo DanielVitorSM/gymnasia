@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableWithoutFeedback, SafeAreaView, ScrollView, Keyboard } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, SafeAreaView, ScrollView, Keyboard } from 'react-native';
 import { InputDate } from '../../../components/InputDate';
 import { InputNumber } from '../../../components/InputNumber';
 import { InputSex } from '../../../components/InputSex';
@@ -12,8 +12,6 @@ import { styles } from './styles';
 
 export function User() {
     const { userData, updateUserData, user } = useAuth();
-    console.log(user)
-
     const [basic, setBasic] = useState({
         height: userData.height,
         weight: userData.weight,

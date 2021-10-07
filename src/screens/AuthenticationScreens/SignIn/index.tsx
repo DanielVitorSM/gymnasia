@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Keyboard, KeyboardAvoidingView, Pressable, SafeAreaView, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { styles } from './styles';
 
 import BannerSVG from '../../../assets/banner.svg';
 import GoogleIconSVG from '../../../assets/icons/google-alt.svg';
@@ -9,7 +8,7 @@ import WifiOffIconSVG from '../../../assets/icons/wifi-off-alt.svg';
 import { typography } from '../../../global/styles/typography';
 import { InputTextEmail, InputTextPassword } from '../../../components/InputText';
 import { PrimaryButton } from '../../../components/PrimaryButton';
-import { useEffect } from 'react';
+import { styles } from './styles';
 import { theme } from '../../../global/styles/theme';
 import { useAuth } from '../../../hooks/authentication';
 

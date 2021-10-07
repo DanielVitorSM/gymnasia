@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { View, Text, SafeAreaView, ListRenderItemInfo, FlatList, Pressable, ActivityIndicator, Alert } from 'react-native';
+import React, { useCallback, useState } from 'react';
+import { View, Text, SafeAreaView, ListRenderItemInfo, FlatList, Pressable, Alert } from 'react-native';
 
 import TimeIconSVG from '../../../assets/icons/timer-alt.svg';
 import LevelIconSVG from '../../../assets/icons/level-alt.svg';
 import TrashIconSVG from '../../../assets/icons/trash-alt.svg';
 
 import { TopHeader } from '../../../components/TopHeader';
-import { ITrainingObject, trainings } from '../../../data/trainings';
+import { ITrainingObject } from '../../../data/trainings';
 import { styles } from './styles';
 import { theme } from '../../../global/styles/theme';
 import { typography } from '../../../global/styles/typography';

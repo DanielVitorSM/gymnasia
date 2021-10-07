@@ -10,7 +10,7 @@ type Props = {
 }
 
 /**
- * Retorna um elemento uma Progressbar
+ * Render Horizontal Progress Bar
  * @param progress 0 - 1;
  */
 
