@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     },
     image: {
         height: 80,
-        width: 80,
+        width: 64,
         borderRadius: 10
     },
     group: {

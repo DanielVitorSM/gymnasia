@@ -6,6 +6,7 @@ import RightIconSVG from '../../assets/icons/right-alt.svg';
 import { styles } from './styles';
 import { typography } from '../../global/styles/typography';
 import { theme } from '../../global/styles/theme';
+import { ExerciseVideo } from '../ExerciseVideo';
 
 type Props = TouchableHighlightProps & {
     data: IExerciseObject;
@@ -21,9 +22,8 @@ export function ItemExercise({ data, ...rest }: Props){
                 { ...rest }
             >
                 <>
-                <Image 
+                <ExerciseVideo 
                     source={data.image}
-                    resizeMode="cover"
                     style={styles.image}
                 />
                 <View style={styles.group}>

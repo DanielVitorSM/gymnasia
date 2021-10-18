@@ -11,6 +11,7 @@ import { useTrainingContext } from '../../../hooks/training'
 import { styles } from './styles';
 import { theme } from '../../../global/styles/theme';
 import { TrainingScreenParams } from '../../../routes/training.routes';
+import { ExerciseVideo } from '../../../components/ExerciseVideo';
 
 export function Rest({ navigation }: StackScreenProps<TrainingScreenParams, "Rest">) {
     const { activeExercise, training } = useTrainingContext();
@@ -51,20 +52,32 @@ export function Rest({ navigation }: StackScreenProps<TrainingScreenParams, "Res
                     </Pressable>
                 </View>
             </View>
-            <ImageBackground 
+            <View 
                 style={styles.image} 
-                source={nextExercise?.image}
-                resizeMode="cover"
-                blurRadius={1}
             >
                 <ProgressBar progress={activeExercise.order / training.exercises.length}/>
                 <View style={styles.overlay}>
                     <View style={styles.content}>
-                        <View>
+                        <ExerciseVideo 
+                            source={nextExercise?.image}
+                            style={{
+                                width: 64,
+                                height: 80,
+                                borderRadius: 10
+                            }}
+                            resizeMode="cover"
+                        />
+                        <View style={{
+                            flex: 1,
+                            paddingHorizontal: 10,
+                        }}>
                             <Text style={[typography.text300, styles.text]}>
                                 PRÓXIMO { activeExercise.order}/{ training.exercises.length }
                             </Text>
-                            <Text style={[typography.text700, styles.text, { textTransform: 'uppercase' }]}>
+                            <Text 
+                                numberOfLines={2} 
+                                style={[typography.text700, styles.text, { textTransform: 'uppercase' }]}
+                            >
                                 { nextExercise?.name }
                             </Text>
                         </View>
@@ -73,7 +86,7 @@ export function Rest({ navigation }: StackScreenProps<TrainingScreenParams, "Res
                         </Text>
                     </View>
                 </View>
-            </ImageBackground>
+            </View>
         </SafeAreaView>
     )
 }

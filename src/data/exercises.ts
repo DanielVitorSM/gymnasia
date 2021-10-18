@@ -19,43 +19,67 @@ export function getExerciseByUid(uid: string){
 
 export const exercises: IExerciseObject[] = [
     {
-        name:"Agachamento",
-        image: require("../assets/exercises/agachamento.jpg"),
-        uid: "dae302aa-36d9-4c08-bd92-69be6c47d877",
+        name:"Abdominal",
+        image: require("../assets/exercises/abdominal.mp4"),
+        uid: "0e16518c-720c-471a-91c5-915704375202",
         capacity: "Força",
-        muscles: "Quadríceps, Glúteos, Estabilizadores da Coluna",
-        howTo: "Comece com os pés na linha dos ombros. O passo seguinte é jogar as nádegas para trás, sem tirar o calcanhar do solo. Agache até o joelho formar um ângulo de 90 graus e deixe o corpo ereto de novo."
+        muscles: "Transverso Abdominal, Reto Abdominal, Oblíquo Interno, Oblíquo Externo",
+        howTo: "1- Deite-se no solo, com a barriga voltada para cima, joelhos flexionados apontados para o teto e pés firmes no chão alinhados com seu quadril;\n2 - Incline o tronco para frente como se fosse encostar o peito nos joelhos;"
+    },
+    {
+        name:"Agachamento",
+        image: require("../assets/exercises/agachamento.mp4"),
+        uid: "9f1574a0-d94c-43c6-90c6-19a889d71199",
+        capacity: "Força",
+        muscles: "Quadríceps, Glúteos, Isquiotibiais, Panturrilha, Quadril, Lombar, Abdômen",
+        howTo: "1- Manter os pés ligeiramente afastados e sempre bem apoiados no chão;\n2 - Esticar os braços à frente do corpo;\n3 - Manter as costas retas e evitar compensar com o quadril, como é comum acontecer;\n4 - Inspirar antes de iniciar o agachamento e soltar o ar enquanto desce;\n5 - Descer o suficiente para manter as coxas paralelas ao chão;"
+    },
+    {
+        name:"Agachamento Explosivo",
+        image: require("../assets/exercises/agachamento-explosivo.mp4"),
+        uid: "4cba3657-233e-4d6a-825d-165fe380f00d",
+        capacity: "Força",
+        muscles: "Quadríceps, Glúteos, Isquiotibiais, Panturrilha, Quadril, Lombar, Abdômen",
+        howTo: "1- Manter os pés ligeiramente afastados e sempre bem apoiados no chão;\n2 - Esticar os braços à frente do corpo;\n3 - Manter as costas retas e evitar compensar com o quadril, como é comum acontecer;\n4 - Inspirar antes de iniciar o agachamento e soltar o ar enquanto desce;\n5 - Descer o suficiente para manter as coxas paralelas ao chão;\n6 - Subir rapidamente executando um salto;"
+    },
+    {
+        name:"Corda Imaginária",
+        image: require("../assets/exercises/corda-imaginaria.mp4"),
+        uid: "94c9a43a-ee71-4eae-86c6-35ba714ae0af",
+        capacity: "Resistência",
+        muscles: "Glúteos, Isquiotibiais, Panturrilha, Quadril, Braços",
+        howTo: "1 - Fique em pé com os pés abaixo dos quadris;\n2 - Estenda os braços ao longo do corpo e finja segurar uma alça de corda de pular em cada mão;\n3 - Dê um salto levantando os dois pés do chão ao mesmo tempo. Pouse e salte novamente;"
+    },
+    {
+        name:"Corrida Estacionária",
+        image: require("../assets/exercises/corrida-estacionaria.mp4"),
+        uid: "90a5952d-dd54-4cf7-b020-787e5187d20d",
+        capacity: "Resistência",
+        muscles: "Quadríceps Femoral, Bíceps Femoral, Glúteos, Musculatura dos Quadris, Panturrilha, Musculatura da Coluna Lombar, Dorsal, Ombros",
+        howTo: "1 - Com as pernas paralelas, sem sair do lugar, levante o braço direito e o pé esquerdo ao mesmo tempo;\n2 - Os joelhos devem ir até os quadris, as pernas se flexionam até o calcanhar chegar perto do bumbum e os braços flexionados ao lado do corpo;\n3 - O movimento deve variar para o pé e braço oposto;"
+    },
+    {
+        name:"Flexão do Tronco",
+        image: require("../assets/exercises/flexao-de-tronco.mp4"),
+        uid: "66b23842-e5e2-4c3d-affb-464d09ec8d78",
+        capacity: "Flexibilidade",
+        muscles: "Dorsal, Músculos Abdominais, Romboide",
+        howTo: "1 - Mantenha os pés à largura dos ombros e as pernas endireitadas nos joelhos durante a execução;\n2 - Faça uma flexão para a perna esquerda, 2 para a perna direita e na terceira o corpo deverá voltar à posição inicial;\n3 - Em seguida, junte as pernas e tente tocar a testa nos joelhos;"
+    },
+    {
+        name:"Flexão do Tronco com Rotação",
+        image: require("../assets/exercises/flexao-rotativa.mp4"),
+        uid: "c15632b3-2b2f-4973-a55d-edc8172401a2",
+        capacity: "Flexibilidade",
+        muscles: "Trapézio, Dorsal, Músculos Abdominais, Romboide",
+        howTo: "1 - Mantenha-se com o corpo direito sobre as pernas retas, pés à largura dos ombros, tronco dobrado sobre as pernas num ângulo de 90 graus e as mãos endireitada para os lados;\n2 - Efetue movimentos largos para a esquerda e para a direita com o olhar na direção da mão que sobe;"
     },
     {
         name:"Polichinelo",
-        image: require("../assets/exercises/polichinelo.jpg"),
-        uid: "258008ba-d567-403c-af10-b19e41791f4b",
+        image: require("../assets/exercises/polichinelo.mp4"),
+        uid: "152c9700-e42a-42f7-a96d-2308c69baaa7",
         capacity: "Resistência",
-        muscles: "Capacidade Cardiorrespiratória, Coordenação",
-        howTo: "Fique de pé, com a coluna reta. Abra as pernas e jogue os braços para o alto, encostando as mãos. Logo na sequência, feche as pernas, enquanto coloca os braços colados no corpo."
-    },
-    {
-        name:"Prancha",
-        image: require("../assets/exercises/prancha-ventral.jpg"),
-        uid: "475918d8-9ca5-4992-a886-a33b08633613",
-        capacity: "Resistência",
-        muscles: "Musculatura da região central do corpo",
-        howTo: "Deitado, sustente o corpo com os antebraços e os pés, sem dobrar a coluna ou as pernas."
-    },
-    {
-        name:"Abdominal Supra no Solo",
-        image: require("../assets/exercises/abdominal-supra-no-solo.jpg"),
-        uid: "d70894a5-527e-493a-9ff5-6c74b6fc8445",
-        capacity: "Força",
-        muscles: "Músculos do Abdomen",
-        howTo: "Deite de barriga para cima com os joelhos flexionados e os pés no chão. Contraia o abdômen enquanto ergue um pouco o tronco e a cabeça. Atenção: não entorte demais o pescoço."
-    },
-    {
-        name:"Subir e Descer da Cadeira",
-        image: require("../assets/exercises/subir-e-descer-da-cadeira.jpg"),
-        uid: "e73cb9a1-7cff-43a9-8c85-366d36989d38",
-        capacity: "Resistência",
-        muscles: "Quadríceps, Glúteo, Estabilizadores da Coluna",
-        howTo: "O nome já entrega: basta repetir esse gesto, revezando as pernas. Contudo, certifique-se de que o móvel aguenta o tranco e está firmado no chão. Quanto mais alto o banco, maior a dificuldade."
+        muscles: "Panturrilha, Quadríceps, Glúteos, Flexores do quadril, Isquiotibiais, Músculos das Costas, Deltóides, Abdômen",
+        howTo: "1 - Para iniciar, mantenha-se numa posição ereta, com as pernas juntas e as mãos estendidas ao longo do corpo;\n2 - Depois, salte do mesmo lugar onde você está, de modo que os braços acompanhem o movimento, elevando-os acima da cabeça onde as palmas devem se encostar uma na outra;\n3 - Logo após, quando as pernas voltam a se encontrar depois de um pequeno salto, os braços também devem voltar à posição inicial. O movimento pode ser feito de maneira rápida, porém, os braços e pernas devem estar sincronizados;\n4 - Lembre-se de estar com os pés posicionados corretamente e flexionar bem os joelhos durante o exercício;\n"
     },
 ];

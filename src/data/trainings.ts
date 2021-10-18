@@ -22,55 +22,39 @@ export interface ITrainingExerciseItem {
  */
 
  export function getTrainingByUid(uid: string){
-    return trainings.find((value, index) => value.uid === uid);
+    return trainings.find(value => value.uid === uid);
 }
 
 export const trainings: ITrainingObject[] = [
     {
-        "uid": "sefesfesiy7h897hy3rfd",
-        "name": "Corpo todo em 5 minutos",
-        "extra": "Corpo Todo",
+        "uid": "9cada27a-dff0-4514-b99a-c684ef336e63",
+        "name": "Aquecimento em 3 minutos",
+        "extra": "Aquecimento",
         "difficulty": "Iniciante",
-        "duration": "4 mins",
+        "duration": "3 mins",
         "interval": 10,
-        "image": require("../assets/trains/all-body.jpg"),
+        "image": require("../assets/trains/aquecimento-3-mins.jpg"),
         "exercises": [
             {
                 "order": 1,
-                "uid": "dae302aa-36d9-4c08-bd92-69be6c47d877",
-                "time": 20
+                "uid": "152c9700-e42a-42f7-a96d-2308c69baaa7",
+                "time": 30
             },
             {
                 "order": 2,
-                "uid": "258008ba-d567-403c-af10-b19e41791f4b",
-                "time": 30
-            },
-            {
-                "order": 3,
-                "uid": "475918d8-9ca5-4992-a886-a33b08633613",
-                "time": 20
-            },
-            {
-                "order": 4,
-                "uid": "dae302aa-36d9-4c08-bd92-69be6c47d877",
-                "time": 20
-            },
-            {
-                "order": 5,
-                "uid": "258008ba-d567-403c-af10-b19e41791f4b",
+                "uid": "c15632b3-2b2f-4973-a55d-edc8172401a2",
                 "time": 40
             },
             {
-                "order": 6,
-                "uid": "d70894a5-527e-493a-9ff5-6c74b6fc8445",
+                "order": 3,
+                "uid": "94c9a43a-ee71-4eae-86c6-35ba714ae0af",
                 "time": 30
             },
             {
-                "order": 7,
-                "uid": "e73cb9a1-7cff-43a9-8c85-366d36989d38",
-                "time": 20
-            }
-    
+                "order": 4,
+                "uid": "66b23842-e5e2-4c3d-affb-464d09ec8d78",
+                "time": 40
+            },
         ]
     },
 ]

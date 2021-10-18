@@ -68,7 +68,7 @@ export function Reminder() {
     const renderNotificationItem = useCallback(({ item }: ListRenderItemInfo<INotificationData>) => (
         <View style={styles.item}>
             <View>
-                <Text style={[typography.heading400, { marginBottom: 5 }]}>{ format(item.time, "mm:ss") }</Text>
+                <Text style={[typography.heading400, { marginBottom: 5 }]}>{ format(new Date(item.time), "HH:mm") }</Text>
                 <Text style={typography.small300}>Repetir</Text>
                 <Text style={typography.sub400}>{ item.days.map(value => weekDaysMin[value - 1]).join(", ") }</Text>
             </View>

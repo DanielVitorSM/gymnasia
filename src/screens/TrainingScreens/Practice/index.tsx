@@ -15,6 +15,7 @@ import { typography } from '../../../global/styles/typography';
 import { useTrainingContext } from '../../../hooks/training';
 import { TrainingScreenParams } from '../../../routes/training.routes';
 import { styles } from './styles';
+import { ExerciseVideo } from '../../../components/ExerciseVideo';
 
 export function Practice({ navigation }: StackScreenProps<TrainingScreenParams, "Practic">) {
     const { activeExercise, training, nextExercise } = useTrainingContext();
@@ -59,10 +60,11 @@ export function Practice({ navigation }: StackScreenProps<TrainingScreenParams, 
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <ImageBackground 
-                source={exercise?.image}
-                style={styles.image}
-            >
+            <View style={styles.image}>
+                <ExerciseVideo 
+                    source={exercise?.image}
+                    style={styles.video}
+                />
                 <View style={styles.info}>
                     <Pressable
                         android_ripple={{
@@ -79,7 +81,7 @@ export function Practice({ navigation }: StackScreenProps<TrainingScreenParams, 
                         <Text style={[typography.info700, { color: theme.colors.yellow_sun }]}>Mais Informações</Text>
                     </Pressable>
                 </View>
-            </ImageBackground>
+            </View>
             <View style={styles.container}>
                 <Text numberOfLines={3} style={[typography.text300, styles.text]}>{ exercise?.name }</Text>
                 <CountdownTimer

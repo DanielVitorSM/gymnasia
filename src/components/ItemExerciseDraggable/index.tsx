@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Image, Pressable, PressableProps, Alert } from 'react-native'
+import { View, Text, Pressable, PressableProps, Alert } from 'react-native'
 
 import DragIconSVG from '../../assets/icons/drag-alt.svg';
 import CloseIconSVG from '../../assets/icons/close-alt';
@@ -8,6 +8,7 @@ import { typography } from '../../global/styles/typography';
 import { ITrainingExerciseItem } from '../../data/trainings';
 import { getExerciseByUid } from '../../data/exercises';
 import { format } from 'date-fns';
+import { ExerciseVideo } from '../ExerciseVideo';
 
 type Props = PressableProps & {
     data: ITrainingExerciseItem;
@@ -23,9 +24,8 @@ export function ItemExerciseDraggable({
 
     return(
         <View style={styles.container}>
-            <Image 
+            <ExerciseVideo 
                 source={exercise?.image}
-                resizeMode="cover"
                 style={styles.image}
             />
             <View style={styles.group}>

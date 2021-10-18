@@ -48,7 +48,7 @@ export function InputDate({
                 <DateTimePicker
                     value={date}
                     mode="date"
-                    display="calendar"
+                    display="spinner"
                     minimumDate={minimumDate}
                     maximumDate={maximumDate}
                     onChange={handleChangeDate}

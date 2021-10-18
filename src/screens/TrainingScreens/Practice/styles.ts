@@ -15,8 +15,14 @@ export const styles = StyleSheet.create({
     },
     image: {
         width: width,
-        height: width,
-        justifyContent: 'flex-end'
+        height: width * 1.20,
+    },
+    video: {
+        position: 'absolute',
+        top: 0,
+        zIndex: -10,
+        width: '100%',
+        aspectRatio: 4/5
     },
     text: {
         color: theme.colors.white,
@@ -57,11 +63,11 @@ export const styles = StyleSheet.create({
     },
     info: {
         backgroundColor: theme.colors.overlay,
-        alignSelf: 'flex-start',
-        marginBottom: 40,
-        marginLeft: 20,
         borderRadius: 20,
-        overflow: 'hidden'
+        overflow: 'hidden',
+        position: 'absolute',
+        bottom: 40,
+        left: 20
     },
     info_button: {
         flexDirection: 'row',

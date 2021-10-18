@@ -1,6 +1,7 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import React, { useCallback } from 'react'
 import { Text, SafeAreaView, ScrollView, Image, View } from 'react-native'
+import { ExerciseVideo } from '../../../components/ExerciseVideo';
 
 import { TopHeader } from '../../../components/TopHeader';
 import { exercises } from '../../../data/exercises';
@@ -24,10 +25,7 @@ export function ExerciseInfo({ route }: StackScreenProps<RootStackScreenParams, 
         <SafeAreaView style={{ flex: 1 }}>
             <TopHeader leftBack title={name}/>
             <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-                <Image 
-                    source={image} 
-                    style={styles.image}
-                />
+                <ExerciseVideo source={image}/>
 
                 <Text style={[typography.sub500, styles.text]}>Principal Capacidade Física:</Text>
                 <View style={{ alignSelf: 'flex-start' }}>
@@ -40,7 +38,7 @@ export function ExerciseInfo({ route }: StackScreenProps<RootStackScreenParams, 
                 </View>
 
                 <Text style={[typography.sub500, styles.text]}>Como Executar:</Text>
-                <Text style={[typography.sub300, { marginBottom: 20 }]}>{ howTo }</Text>
+                <Text  style={[typography.sub300, { marginBottom: 20 }]}>{ howTo }</Text>
             </ScrollView>
         </SafeAreaView>
     )

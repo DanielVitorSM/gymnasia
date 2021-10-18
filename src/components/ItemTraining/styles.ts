@@ -12,7 +12,8 @@ export const styles = StyleSheet.create({
         padding: 30,
         alignItems: 'flex-start',
         justifyContent: 'space-between',
-        flex: 1
+        flex: 1,
+        backgroundColor: theme.colors.overlay
     },
     title: { 
         color: theme.colors.white, 
