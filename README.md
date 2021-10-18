@@ -33,6 +33,10 @@ $ expo start
 Daniel Vitor Silva Moreira  
 contato.danielsmoreira@gmail.com 
 
+#### LICENÇAS
+MIT (Veja LICENCE.md)
+Software de Código Aberto
+
 #### LINKS
 https://instagram.com/danielvitorsm  
 https://www.linkedin.com/in/danielvitorsm  
