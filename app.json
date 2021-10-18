@@ -4,7 +4,7 @@
     "description": "O seu app de exercícios, feito para aqueles que procuram manter a forma sem precisar sair de casa.",
     "githubUrl": "https://github.com/danielvitorsm/gymnasia",
     "slug": "gymnasia",
-    "version": "2.4.2",
+    "version": "2.4.3",
     "scheme": "gymnasia",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
