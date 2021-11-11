@@ -62,15 +62,15 @@
       ]
     ],
     "extra": {
-      "API_KEY": "",
-      "AUTH_DOMAIN": "",
-      "PROJECT_ID": "",
-      "STORAGE_BUCKET": "",
-      "MESSAGE_SENDER_ID": "",
-      "APP_ID": "",
-      "MEASUREMENT_ID": "",
-      "IOS_KEY_DEVELOPMENT": "",
-      "ANDROID_KEY_DEVELOPMENT": ""
+      "FIREBASE_API_KEY": "",
+      "FIREBASE_AUTH_DOMAIN": "",
+      "FIREBASE_PROJECT_ID": "",
+      "FIREBASE_STORAGE_BUCKET": "",
+      "FIREBASE_MESSAGE_SENDER_ID": "",
+      "FIREBASE_APP_ID": "",
+      "FIREBASE_MEASUREMENT_ID": "",
+      "GOOGLE_ANDROID_CLIENT_ID_PRODUCTION": "",
+      "GOOGLE_ANDROID_CLIENT_ID_DEVELOPMENT": ""
     }
   }
 }
