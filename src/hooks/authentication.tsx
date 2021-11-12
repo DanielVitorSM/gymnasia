@@ -7,7 +7,7 @@ import Constants from 'expo-constants';
 import { v4 as uuidv4 } from 'uuid';
 import * as Google from 'expo-google-app-auth';
 
-import { GYMNASIA_NOTIFICATIONS, GYMNASIA_SESSION, GYMNASIA_USER } from '../global/constants/asyncStorage';
+import { GYMNASIA_SESSION, GYMNASIA_USER } from '../global/constants/asyncStorage';
 import { deleteAllNotifications } from '../utils/notification';
 import DatabaseInit from '../storage/init';
 
@@ -186,8 +186,7 @@ export function AuthProvider({ children }: IAuthProviderProps){
             }
         })
     }
-
-
+    
     function signUpEmailAndPassword(email: string, password: string){
         return new Promise<boolean>(resolve => {
             firebase
