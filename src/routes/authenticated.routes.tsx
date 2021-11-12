@@ -64,7 +64,7 @@ export function AuthenticatedRoutes() {
                     name="TrainingRoutes"
                     component={TrainingRoutes}
                     options={{
-                        cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid
+                        cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS
                     }}
                 />
                 <RootStack.Screen 

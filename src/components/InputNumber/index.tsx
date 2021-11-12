@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { View, TouchableOpacity, TextInput, TextInputProps, Alert } from 'react-native'
+import { View, TextInput, TextInputProps, Alert } from 'react-native'
+import { TouchableOpacity} from 'react-native-gesture-handler';
 
 import PlusIconSVG from '../../assets/icons/plus-alt.svg';
 import SubIconSVG from '../../assets/icons/sub-alt.svg';
@@ -28,7 +29,6 @@ export function InputNumber({
     ...rest 
 }: Props) {
     const [value, setValue] = useState(rightText !== "" ? numberValue.toString() + " " + rightText : numberValue.toString());
-    const [isPressed, setIsPressed] = useState(false);
 
     function handleChangeValue(){
         var cleaned = getNumber();

@@ -4,15 +4,25 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import firebase from 'firebase';
 import "firebase/firestore";
 import Constants from 'expo-constants';
+import { v4 as uuidv4 } from 'uuid';
 import * as Google from 'expo-google-app-auth';
 
-import { GYMNASIA_USER } from '../global/constants/asyncStorage';
+import { GYMNASIA_NOTIFICATIONS, GYMNASIA_SESSION, GYMNASIA_USER } from '../global/constants/asyncStorage';
 import { deleteAllNotifications } from '../utils/notification';
 import DatabaseInit from '../storage/init';
 
+const GoogleConfigOptions: Google.GoogleLogInConfig = {
+    iosClientId: Constants.manifest?.extra?.GOOGLE_IOS_CLIENT_ID_DEVELOPMENT,
+    iosStandaloneAppClientId: Constants.manifest?.extra?.GOOGLE_IOS_CLIENT_ID_PRODUCTION,
+    androidClientId: Constants.manifest?.extra?.GOOGLE_ANDROID_CLIENT_ID_DEVELOPMENT,
+    androidStandaloneAppClientId: Constants.manifest?.extra?.GOOGLE_ANDROID_CLIENT_ID_PRODUCTION,
+    language: "pt-BR",
+    scopes: ['profile', 'email'],
+}
+
 export interface IUserObject{
     uid: string;
-    isAnonymous: boolean;
+    isOffline: boolean;
     email: string | null;
     data?: IUserDataObject;
 }
@@ -37,11 +47,11 @@ interface IAuthContextData {
     userData: IUserDataObject;
     user: IUserObject;
     session: ISessionObject;
-    updateUserData: (change: Object) => Promise<void>;
-    signInGoogle: () => Promise<void>;
-    signInAnonymous: () => void;
-    signInEmailAndPassword: (email: string, password: string) => Promise<void>;
-    signUpEmailAndPassword: (email: string, password: string) => Promise<void>;
+    updateUserData: (change: Object) => Promise<boolean>;
+    signInGoogle: () => Promise<boolean>;
+    signInAnonymous: () => Promise<boolean>;
+    signInEmailAndPassword: (email: string, password: string) => Promise<boolean>;
+    signUpEmailAndPassword: (email: string, password: string) => Promise<boolean>;
     signOut: () => void;
 }
 
@@ -56,127 +66,179 @@ export function AuthProvider({ children }: IAuthProviderProps){
     const [session, setSession] = useState({ isLogged: false, isDataColected: false } as ISessionObject);
     const [loading, setLoading] = useState(true);
     
+    /**
+     * Verify if have an offline session and get it or set firebase onAuthStateChanged
+     */
     useEffect(() => {
-        firebase
-        .auth()
-        .onAuthStateChanged(async user => {
+        async function verifyOfflineSession(){
             setLoading(true);
-            let userIn = {} as IUserObject;
-            if(user){
-                userIn = {
-                    uid: user.uid,
-                    email: user.email,
-                    isAnonymous: user.isAnonymous,
-                    data: await getUserData()
-                }
+            const sessionSaved = await getItemStorage(GYMNASIA_SESSION);
+            
+            if(sessionSaved === null){
+                return firebase
+                .auth()
+                .onAuthStateChanged(async user => {
+                    setLoading(true);
+                    let userIn = {} as IUserObject;
+                    if(user){
+                        userIn = {
+                            uid: user.uid,
+                            email: user.email,
+                            isOffline: false,
+                            data: await getUserData()
+                        }
+                    }
+                    setUser(state => userIn);
+                    setSession({
+                        isDataColected: userIn.data !== undefined ,
+                        isLogged: userIn.uid !== undefined
+                    });
+                    setLoading(false);
+                })
             }
-            setUser(state => userIn);
+
+            const userData = await getItemStorage(GYMNASIA_USER);
+
+            if(userData === null){
+                setSession({
+                    isLogged: true,
+                    isDataColected: false
+                })
+                setUser(_ => sessionSaved as IUserObject);
+                return setLoading(false);
+            }
+
+            setUser(_ => {
+                return {
+                    ...sessionSaved,
+                    data: userData
+                } as IUserObject
+            })
             setSession({
-                isDataColected: userIn.data !== undefined ,
-                isLogged: userIn.uid !== undefined
-            });
+                isLogged: true,
+                isDataColected: true
+            })
             setLoading(false);
-        })
+        }
+
+        verifyOfflineSession();
     }, []);
 
     function signInAnonymous(){
-        firebase
-        .auth()
-        .signInAnonymously()
-        .catch(error => {
-            switch (error.code) {
-                case "operation-not-allowed":
-                    Alert.alert("Método não permitido", "Esse método de login está desabilitado no momento.");
-                    break;
-                default:
-                    Alert.alert("Houve um problema", "Não foi possível entrar anonimamente, tente novamente em instantes.");
-                    break;
+        return new Promise<boolean>(async resolve => {
+            try{
+                const newOffilineUser: IUserObject = {
+                    email: null,
+                    uid: uuidv4(),
+                    isOffline: true
+                }
+        
+                firebase.auth().onAuthStateChanged(() => {});
+                await AsyncStorage.setItem(GYMNASIA_SESSION, JSON.stringify(newOffilineUser));
+                setUser(_ => newOffilineUser);
+                setSession(_ => {
+                    return {
+                        isDataColected: false,
+                        isLogged: true
+                    };
+                })
+                resolve(true)
+            }catch(error){
+                Alert.alert("Houve um erro", "Erro encontrado ao entrar offline, tente novamente.");
+                resolve(false)
             }
         })
     }
 
-    async function signInGoogle(){
-        try{
-            const result = await Google.logInAsync({
-                androidClientId: Constants.manifest?.extra?.GOOGLE_ANDROID_KEY_DEVELOPMENT,
-                androidStandaloneAppClientId: Constants.manifest?.extra?.GOOGLE_ANDROID_KEY_PRODUCTION,
-                behavior: "system",
-                language: "pt-BR",
-                scopes: ['profile', 'email'],
-            });
-
-            if(result.type === "success"){
-                const credential = firebase.auth.GoogleAuthProvider.credential(
-                    result.idToken,
-                    result.accessToken
-                );
-
-                firebase
-                .auth()
-                .signInWithCredential(credential)
-                .catch(error => {
-                    switch(error.code) {
-                        case "auth/invalid-credential":
-                            Alert.alert("Credenciais inválidas", "As credenciais recebidas são inválidas e não permitem o login.");
-                            break;
-                        case "auth/account-exists-with-different-credential":
-                            Alert.alert("Conta já existe", "Essa conta já existe em outro método, tente entrar usando o método correto.");
-                            break;
-                        default:
-                            Alert.alert("Houve um problema", "Não foi possível realizar login, verifique a conexão com a internet e tente novamente.");
-                    }
-                });
-            }else
-                Alert.alert("Houve um problema", "Houve um erro ao contatar o servidor do google, verifique sua conexão com internet.");
-        }catch(error){
-            Alert.alert("Houve um problema", "Não foi possível realizar o login com Google, tente novamente mais tarde.");
-        }
-    }
-
-
-    async function signUpEmailAndPassword(email: string, password: string){
-        firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .catch(error => {
-            switch(error.code) {
-                case "auth/email-already-in-use":
-                    Alert.alert("Email em uso", "Esse email já está sendo usado, tente entrar com outro ou logue.");
-                    break;
-                case "auth/invalid-email":
-                    Alert.alert("Email inválido", "Insira um email válido.");
-                    break;
-                case "auth/weak-password":
-                    Alert.alert("Senha fraca", "Insira uma senha fraca, com mais do que 6 caracteres.");
-                    break;
-                default:
-                    Alert.alert("Houve um problema", "Não foi possível criar uma nova conta, verifique a conexão com a internet e tente novamente.");
+    function signInGoogle(){
+        return new Promise<boolean>(async resolve => {
+            try{
+                const result = await Google.logInAsync(GoogleConfigOptions);
+    
+                if(result.type === "success"){
+                    const credential = firebase.auth.GoogleAuthProvider.credential(
+                        result.idToken
+                    );
+    
+                    firebase
+                    .auth()
+                    .signInWithCredential(credential)
+                    .then(() => resolve(true))
+                    .catch(error => {
+                        switch(error.code) {
+                            case "auth/invalid-credential":
+                                Alert.alert("Credenciais inválidas", "As credenciais recebidas são inválidas e não permitem o login.");
+                                break;
+                            case "auth/account-exists-with-different-credential":
+                                Alert.alert("Conta já existe", "Essa conta já existe em outro método, tente entrar usando o método correto.");
+                                break;
+                            default:
+                                Alert.alert("Houve um problema", "Não foi possível realizar login, verifique a conexão com a internet e tente novamente.");
+                        }
+                        resolve(false)
+                    });
+                }else
+                    Alert.alert("Houve um problema", "Houve um erro ao contatar o servidor do google, verifique sua conexão com internet.");
+                    resolve(false)
+            }catch(error){
+                Alert.alert("Houve um problema", "Não foi possível realizar o login com Google, tente novamente mais tarde.");
+                resolve(false)
             }
         })
     }
 
-    async function signInEmailAndPassword(email: string, password: string){
-        firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .catch(error => {
-            switch(error.code) {
-                case "auth/auth/user-disabled":
-                    Alert.alert("Desabilitado", "Esse email foi desabilitado.");
-                    break;
-                case "auth/invalid-email":
-                    Alert.alert("Email inválido", "Insira um email válido.");
-                    break;
-                case "auth/user-not-found":
-                    Alert.alert("Email ou senha inválidos", "Os dados de login não coincidem, insira dados válidos.");
-                    break;
-                case "auth/wrong-password":
-                    Alert.alert("Email ou senha inválidos", "Os dados de login não coincidem, insira dados válidos.");
-                    break;
-                default:
-                    Alert.alert("Houve um problema", "Não foi possível realizar login, verifique a conexão com a internet e tente novamente.");
-            }
+
+    function signUpEmailAndPassword(email: string, password: string){
+        return new Promise<boolean>(resolve => {
+            firebase
+            .auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then(() => resolve(true))
+            .catch(error => {
+                switch(error.code) {
+                    case "auth/email-already-in-use":
+                        Alert.alert("Email em uso", "Esse email já está sendo usado, tente entrar com outro ou logue.");
+                        break;
+                    case "auth/invalid-email":
+                        Alert.alert("Email inválido", "Insira um email válido.");
+                        break;
+                    case "auth/weak-password":
+                        Alert.alert("Senha fraca", "Insira uma senha fraca, com mais do que 6 caracteres.");
+                        break;
+                    default:
+                        Alert.alert("Houve um problema", "Não foi possível criar uma nova conta, verifique a conexão com a internet e tente novamente.");
+                }
+                resolve(false)
+            })
         })
+    }
+
+    function signInEmailAndPassword(email: string, password: string){
+        return new Promise<boolean>(resolve => {
+            firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(() => resolve(true))
+            .catch(error => {
+                switch(error.code) {
+                    case "auth/auth/user-disabled":
+                        Alert.alert("Desabilitado", "Esse email foi desabilitado.");
+                        break;
+                    case "auth/invalid-email":
+                        Alert.alert("Email inválido", "Insira um email válido.");
+                        break;
+                    case "auth/user-not-found":
+                        Alert.alert("Email ou senha inválidos", "Os dados de login não coincidem, insira dados válidos.");
+                        break;
+                    case "auth/wrong-password":
+                        Alert.alert("Email ou senha inválidos", "Os dados de login não coincidem, insira dados válidos.");
+                        break;
+                    default:
+                        Alert.alert("Houve um problema", "Não foi possível realizar login, verifique a conexão com a internet e tente novamente.");
+                }
+                resolve(false)
+            })
+        });
     }
 
     async function uploadBackup(){
@@ -191,29 +253,38 @@ export function AuthProvider({ children }: IAuthProviderProps){
     }
     
     async function signOut(){
-        await uploadBackup()
+        if(!user.isOffline){
+            await uploadBackup()
+            firebase
+            .auth()
+            .signOut()
+        }else{
+            setUser({} as IUserObject);
+            setSession({ isLogged: false, isDataColected: false });
+        }
         await deleteLocalData();
-        firebase
-        .auth()
-        .signOut()
     }
 
-    async function updateUserData(change: Object){
-        try{
-            var newData = Object.assign(user.data || {}, change) as IUserDataObject;
-            if(!user.isAnonymous){
-                await firebase
-                .firestore()
-                .collection("users")
-                .doc(user.uid)
-                .set(newData)
+    function updateUserData(change: Object){
+        return new Promise<boolean>(async resolve => {
+            try{
+                var newData = Object.assign(user.data || {}, change) as IUserDataObject;
+                if(!user.isOffline){
+                    await firebase
+                    .firestore()
+                    .collection("users")
+                    .doc(user.uid)
+                    .set(newData)
+                }
+                await AsyncStorage.setItem(GYMNASIA_USER, JSON.stringify(newData));
+                setUser(state => {return { ...state, data: newData }});
+                setSession(state => {return { ...state, isDataColected: true }});
+                resolve(true)
+            }catch(error){
+                throw error;
+                resolve(false)
             }
-            await AsyncStorage.setItem(GYMNASIA_USER, JSON.stringify(newData));
-            setUser(state => {return { ...state, data: newData }});
-            setSession(state => {return { ...state, isDataColected: true }})
-        }catch(error){
-            throw error;
-        }
+        })
     }
 
     return (
@@ -283,9 +354,23 @@ export async function getUserData(){
 async function deleteLocalData(){
     try {
         await deleteAllNotifications();
-        await AsyncStorage.removeItem(GYMNASIA_USER);
+        await AsyncStorage.multiRemove([GYMNASIA_SESSION, GYMNASIA_USER])
         DatabaseInit.DropTables()
     }catch(error){
         console.log(error);
     }
+}
+
+
+/**
+ * Returns a parsed json from AsyncStorage
+ */
+
+async function getItemStorage(key: string): Promise<any | null>{
+    const rawStorageData = await AsyncStorage.getItem(key);
+    const storageData = JSON.parse(rawStorageData || "[]");
+
+    if(storageData.length !== undefined)
+        return null;
+    return storageData;
 }

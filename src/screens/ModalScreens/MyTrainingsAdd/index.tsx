@@ -107,6 +107,7 @@ export function MyTrainingsAdd({ navigation }: StackScreenProps<RootStackScreenP
                 handlePosition="inside"
                 childrenStyle={{ padding: 20, paddingTop: 30 }}
                 adjustToContentHeight
+                closeOnOverlayTap={false}
             >
                 <Text style={[typography.info700, styles.text]}>Como quer chamar esse treino?</Text>
                 <InputText 
@@ -147,6 +148,11 @@ export function MyTrainingsAdd({ navigation }: StackScreenProps<RootStackScreenP
                     enabled={name.length >= 5}
                     text="Adicionar"
                     onPress={handleCreateNewTraining}
+                />
+                <PrimaryButton 
+                    style={{ marginTop: 10, backgroundColor: theme.colors.red }}
+                    text="Cancelar"
+                    onPress={() => modalInfoRef.current?.close()}
                 />
             </Modalize>
         </>

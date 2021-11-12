@@ -5,10 +5,6 @@ import { Alert } from 'react-native';
 import { styles } from './styles';
 
 export function ExerciseVideo(props: VideoProps) {
-    function handleError(){
-        Alert.alert("Erro ao carregar o vídeo", "Houve um erro ao carregar o vídeo do exercício, tente novamente.");
-    }
-
     return (
         <Video
             isMuted
@@ -16,7 +12,8 @@ export function ExerciseVideo(props: VideoProps) {
             resizeMode="contain"
             isLooping
             style={styles.video}
-            onError={handleError}
+            renderToHardwareTextureAndroid
+            removeClippedSubviews
             { ...props }
         />
     );

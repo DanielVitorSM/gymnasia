@@ -14,6 +14,7 @@ import { theme } from '../../../global/styles/theme'
 import { typography } from '../../../global/styles/typography'
 import { INotificationData, getNotificationsHistory, createNotifications, deleteHistoryNotification } from '../../../utils/notification'
 import { styles } from './styles'
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 
 const weekDays = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
 const weekDaysMin = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"];
@@ -25,7 +26,7 @@ export function Reminder() {
     const [showActionButton, setShowActionButton] = useState(true);
 
     const [selectedTime, setSelectedTime] = useState(new Date(21 * 3600000));
-    const [selectedDays, setSelectedDays] = useState([1, 2, 3, 4, 5, 6, 7]);
+    const [selectedDays, setSelectedDays] = useState<number[]>([]);
 
     function handleOpenModal(){
         setShowActionButton(false);
@@ -48,7 +49,7 @@ export function Reminder() {
                     key={`badge-weekday-view-${index}`} 
                     style={[styles.badge, isActive && styles.active]}
                 >
-                    <Pressable 
+                    <TouchableWithoutFeedback 
                         key={`badge-weekday-button-${index}`}
                         onPress={() => {
                             setSelectedDays(state => {
@@ -59,7 +60,7 @@ export function Reminder() {
                         }}
                     >
                         <Text key={`badge-weekday-text-${index}`} style={[typography.sub400, isActive && styles.active]}>{ value }</Text>
-                    </Pressable>
+                    </TouchableWithoutFeedback>
                 </View>
             );
         })
@@ -107,11 +108,9 @@ export function Reminder() {
                 title="Lembretes"
             />
             {
-                loading
+                loading || notifications.length < 1
                 ?
-                <View style={{ flex: 1, justifyContent: "center" }}>
-                    <ActivityIndicator style={{ alignSelf: "center" }} size={32} color={theme.colors.primary_light}/>
-                </View>
+                <Text style={[typography.text300, { textAlign: 'center' }]}>Nenhum lembrete encontrado</Text>
                 :
                 <FlatList 
                     data={notifications}

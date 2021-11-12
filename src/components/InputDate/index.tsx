@@ -46,9 +46,11 @@ export function InputDate({
                 showDatePicker
                 &&
                 <DateTimePicker
+                style={{ width: '100%', flex: 1}}
                     value={date}
                     mode="date"
                     display="spinner"
+                    placeholderText="Informe sua data de nascimento"
                     minimumDate={minimumDate}
                     maximumDate={maximumDate}
                     onChange={handleChangeDate}

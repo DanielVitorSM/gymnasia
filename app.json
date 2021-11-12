@@ -4,11 +4,11 @@
     "description": "O seu app de exercícios, feito para aqueles que procuram manter a forma sem precisar sair de casa.",
     "githubUrl": "https://github.com/danielvitorsm/gymnasia",
     "slug": "gymnasia",
-    "version": "2.4.3",
+    "version": "2.4.5",
     "scheme": "gymnasia",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "backgroundColor": "#D9D7CE",
+    "backgroundColor": "#E1E1E1",
     "primaryColor": "#0EFF00",
     "splash": {
       "image": "./assets/splash.png",
@@ -69,6 +69,8 @@
       "FIREBASE_MESSAGE_SENDER_ID": "",
       "FIREBASE_APP_ID": "",
       "FIREBASE_MEASUREMENT_ID": "",
+      "GOOGLE_IOS_CLIENT_ID_DEVELOPMENT": "",
+      "GOOGLE_IOS_CLIENT_ID_PRODUCTION": "",
       "GOOGLE_ANDROID_CLIENT_ID_PRODUCTION": "",
       "GOOGLE_ANDROID_CLIENT_ID_DEVELOPMENT": ""
     }

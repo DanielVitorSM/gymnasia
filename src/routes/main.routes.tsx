@@ -36,7 +36,7 @@ export function MainRoutes() {
                     backgroundColor: theme.colors.white
                 },
                 activeTintColor: theme.colors.primary_light,
-                inactiveTintColor: theme.colors.gray_dark,
+                inactiveTintColor: theme.colors.gray_dark
             }}
         >
             <Tabs.Screen 

@@ -18,7 +18,7 @@ export function PrimaryButton({ text = "Continuar", enabled = true, loading = fa
         <View style={[styles.container, style]}>
             <Pressable
                 style={[styles.button, !enabled && styles.disabled ]}
-                disabled={!enabled}
+                disabled={!enabled || loading}
                 android_ripple={{
                     color: theme.colors.overlay
                 }}

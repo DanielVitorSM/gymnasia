@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, SafeAreaView, ScrollView, Keyboard } from 'react-native';
+import { View, Text, SafeAreaView, ScrollView, Keyboard, Alert } from 'react-native';
 import { InputDate } from '../../../components/InputDate';
 import { InputNumber } from '../../../components/InputNumber';
 import { InputSex } from '../../../components/InputSex';
@@ -12,6 +12,7 @@ import { styles } from './styles';
 
 export function User() {
     const { userData, updateUserData, user } = useAuth();
+    const [loading, setLoading] = useState(false);
     const [basic, setBasic] = useState({
         height: userData.height,
         weight: userData.weight,
@@ -23,6 +24,14 @@ export function User() {
         neck: userData.neck || 0,
         waist: userData.waist || 0,
     })
+
+    async function handleSubmit(obj: Object){
+        setLoading(true);
+        const worked = await updateUserData(obj);
+        if(!worked)
+            Alert.alert("Dados não salvos", "Não foi possível salvar os dados, tente novamente");
+        setLoading(false);
+    }
 
     return (
         <SafeAreaView onTouchStart={() => Keyboard.dismiss()} style={styles.container}>
@@ -102,7 +111,8 @@ export function User() {
                 <PrimaryButton 
                     text="Atualizar"
                     style={styles.button}
-                    onPress={() => updateUserData(basic)}
+                    loading={loading}
+                    onPress={() => handleSubmit(basic)}
                 />
 
                 <Text style={typography.sub500}>EXTRA</Text>
@@ -167,7 +177,8 @@ export function User() {
                 <PrimaryButton 
                     text="Atualizar"
                     style={styles.button}
-                    onPress={() => updateUserData(extra)}
+                    loading={loading}
+                    onPress={() => handleSubmit(extra)}
                 />
             </ScrollView>
         </SafeAreaView>

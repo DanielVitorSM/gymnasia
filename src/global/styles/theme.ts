@@ -14,7 +14,7 @@ export const theme = {
         gray_dark: "#656565",
         gray_medium: "#969696",
         gray_light: "#C4C4C4",
-        white: "#D9D7CE",
+        white: "#",
 
         pink_cardinal: "#B6174B",
         yellow_sun: "#FCAB10",

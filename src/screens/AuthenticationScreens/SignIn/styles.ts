@@ -1,11 +1,11 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { theme } from "../../../global/styles/theme";
+const { width } = Dimensions.get('screen');
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
-        backgroundColor: theme.colors.white,
     },
     content: {
         flex: 1,
@@ -19,8 +19,8 @@ export const styles = StyleSheet.create({
         marginBottom: -12,
     },
     part: {
-        width: '100%',
-        alignItems: "center"
+        width: width - 60,
+        alignItems: "center",
     },
     row: {
         flexDirection: 'row',

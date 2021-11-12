@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Keyboard, KeyboardAvoidingView, Pressable, SafeAreaView, Text, TouchableWithoutFeedback, View } from 'react-native';
-
+import React, { useRef, useState } from 'react';
+import { Dimensions, Keyboard, KeyboardAvoidingView, Platform, Pressable, Text, Animated, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler'
 import BannerSVG from '../../../assets/banner.svg';
 import GoogleIconSVG from '../../../assets/icons/google-alt.svg';
 import WifiOffIconSVG from '../../../assets/icons/wifi-off-alt.svg';
@@ -12,118 +12,186 @@ import { styles } from './styles';
 import { theme } from '../../../global/styles/theme';
 import { useAuth } from '../../../hooks/authentication';
 
+const { height } = Dimensions.get("screen");
+
 export function SignIn() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isLogin, setIsLogin] = useState(true);
-    const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const scrollViewRef = useRef<ScrollView>(null);
+
     const { signInEmailAndPassword, signUpEmailAndPassword, signInGoogle, signInAnonymous } = useAuth();
 
-    useEffect(() => {
-        const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
-            setKeyboardVisible(true);
-        }
-        );
-        const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
-            setKeyboardVisible(false);
-        }
-        );
-
-        return () => {
-            keyboardDidHideListener.remove();
-            keyboardDidShowListener.remove();
-        };
-    }, []);
-
-    function handleSubmit(){
-        if(isLogin)
-            return signInEmailAndPassword(email, password);
-        signUpEmailAndPassword(email, password);
+    async function handleLogin(){
+        setLoading(true);
+        const worked = await signInEmailAndPassword(email, password);
+        setLoading(worked);
     }
 
-    function handleChangeSignMethod(){
-        setIsLogin(state => !state);
+    async function handleRegister(){
+        setLoading(true);
+        const worked = await signUpEmailAndPassword(email, password);
+        setLoading(worked);
     }
+
+    async function handleGoogleLogin(){
+        setLoading(true);
+        const worked = await signInGoogle();
+        setLoading(worked);
+    }
+
+    async function handleOfflineLogin(){
+        setLoading(true);
+        const worked = await signInAnonymous();
+        setLoading(worked);
+    }
+
+    function handleChangeToRegister(){
+        scrollViewRef.current?.scrollToEnd()
+    }
+
+    function handleChangeToLogin(){
+        scrollViewRef.current?.scrollTo({ x: 0 })
+    }
+
+
     return (
-        <SafeAreaView style={styles.container}>
-            <TouchableWithoutFeedback 
+        <ScrollView
+            style={{ flex: 1 }}
+            contentContainerStyle={{ minHeight: height }}
+            onTouchStart={() => Keyboard.dismiss()}
+            showsVerticalScrollIndicator={false}
+            renderToHardwareTextureAndroid
+        >
+            <KeyboardAvoidingView
+                behavior={ Platform.OS === 'ios' ? 'position' : undefined}
                 style={styles.container}
-                onPress={() => Keyboard.dismiss()}
+                contentContainerStyle={styles.container}
+                keyboardVerticalOffset={-100}
+                renderToHardwareTextureAndroid
             >
-                <KeyboardAvoidingView 
-                    behavior="position"
-                    style={styles.container}
-                    contentContainerStyle={styles.container}
-                    keyboardVerticalOffset={-100}
-                >
-                    <BannerSVG style={styles.banner}/>
-                    <View style={styles.content}>
+                <BannerSVG style={styles.banner}/>
+                <View style={styles.content}>
+                    <ScrollView
+                        ref={scrollViewRef}
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        showsVerticalScrollIndicator={false}
+                        style={{ width: '100%'}}
+                        scrollEnabled={false}
+                        alwaysBounceHorizontal
+                    >
+
                         <View style={styles.part}>
-                            <Text style={typography.heading400}>
-                                Bem-vindo ao
+                            <Text style={[typography.heading400, { textAlign: 'left', marginBottom: 15, width: '100%' }]}>
+                                Entrar{'\n'}
+                                no <Text style={typography.heading700}>Gymnasia</Text>
                             </Text>
-                            <Text style={[typography.heading700, { marginTop: -10, marginBottom: 30 }]}>
-                                Gymnasia
-                            </Text>
+
                             <InputTextEmail 
                                 value={email}
                                 onChangeText={setEmail}
-                                showError={!isLogin}
+                                showError={false}
                             />
                             <InputTextPassword
                                 value={password}
                                 onChangeText={setPassword}
-                                showError={!isLogin}
-                                withRecovery={isLogin}
+                                showError={false}
+                                withRecovery
                                 onRecoveryPress={() => alert("Função indisponível")}
                             />
                             <PrimaryButton
-                                text={isLogin ? "Entrar" : "Cadastrar"}
+                                text={"Entrar"}
                                 enabled={email !== "" && password !== ""}
-                                onPress={handleSubmit}
+                                loading={loading}
+                                onPress={handleLogin}
                             />
 
                             <View style={[styles.row, { marginTop: 15 }]}>
                                 <Text style={typography.small300}>
-                                    { isLogin ? "Novo por aqui?" : "Já é cadastrado?"}
+                                    Novo por aqui?
                                 </Text>
-                                <Text 
-                                    style={[typography.small300, { color: theme.colors.primary_light, marginLeft: 5 }]}
-                                    onPress={handleChangeSignMethod}
+                                <Pressable
+                                    onPress={handleChangeToRegister}
+                                    hitSlop={20}
                                 >
-                                    { isLogin ? "Cadastre-se" : "Entrar"}
-                                </Text>
+                                    <Text 
+                                        style={[typography.small300, { color: theme.colors.primary_light, marginLeft: 5 }]}
+                                    >
+                                        Cadastrar
+                                    </Text>
+                                </Pressable>
                             </View>
                         </View>
 
-                        <View style={[styles.part, isKeyboardVisible && { display: 'none' }]}>    
-                            <Text style={typography.small300}>Ou pode entrar com</Text>
-                            <View style={styles.row}>
-                                <Pressable 
-                                    style={styles.borderless}
-                                    android_ripple={{
-                                        borderless: true,
-                                        radius: 20
-                                    }}
-                                    onPress={signInGoogle}
-                                    >
-                                    <GoogleIconSVG />
-                                </Pressable>
-                                <Pressable 
-                                    style={styles.borderless}
-                                    android_ripple={{
-                                        borderless: true,
-                                        radius: 20
-                                    }}
-                                    onPress={signInAnonymous}
+                        <View 
+                            style={styles.part}
+                        >
+                            <Text style={[typography.heading400, { textAlign: 'left', marginBottom: 15, width: '100%' }]}>
+                                Cadastrar{'\n'}
+                                no <Text style={typography.heading700}>Gymnasia</Text>
+                            </Text>
+
+                            <InputTextEmail 
+                                value={email}
+                                onChangeText={setEmail}
+                                showError
+                            />
+                            <InputTextPassword
+                                value={password}
+                                onChangeText={setPassword}
+                                showError
+                            />
+                            <PrimaryButton
+                                text={"Cadastrar"}
+                                enabled={email !== "" && password !== ""}
+                                loading={loading}
+                                onPress={handleRegister}
+                            />
+
+                            <View style={[styles.row, { marginTop: 15 }]}>
+                                <Text style={typography.small300}>
+                                    Já é cadastrado?
+                                </Text>
+                                <Pressable
+                                    onPress={handleChangeToLogin}
+                                    hitSlop={20}
                                 >
-                                    <WifiOffIconSVG />
+                                    <Text style={[typography.small300, { color: theme.colors.primary_light, marginLeft: 5 }]}>
+                                        Entrar
+                                    </Text>
                                 </Pressable>
                             </View>
                         </View>
+                    </ScrollView>
+
+                    <View style={styles.part}>    
+                        <Text style={typography.small300}>Ou pode entrar com</Text>
+                        <View style={styles.row}>
+                            <Pressable 
+                                style={styles.borderless}
+                                android_ripple={{
+                                    borderless: true,
+                                    radius: 20
+                                }}
+                                onPress={handleGoogleLogin}
+                                >
+                                <GoogleIconSVG />
+                            </Pressable>
+                            <Pressable 
+                                style={styles.borderless}
+                                android_ripple={{
+                                    borderless: true,
+                                    radius: 20
+                                }}
+                                onPress={handleOfflineLogin}
+                            >
+                                <WifiOffIconSVG />
+                            </Pressable>
+                        </View>
                     </View>
-                </KeyboardAvoidingView>
-            </TouchableWithoutFeedback>
-        </SafeAreaView>
+                </View>
+            </KeyboardAvoidingView>
+        </ScrollView>
     )
 }

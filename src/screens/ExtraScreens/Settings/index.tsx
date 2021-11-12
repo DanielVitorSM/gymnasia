@@ -35,7 +35,7 @@ export function Settings() {
             <View style={styles.container}>
                 <Text style={[typography.sub500, styles.section]}>Conta</Text>
                 <Text style={typography.text500}>
-                    Status: <Text style={styles.colored}>{ !user.isAnonymous ? "Online" : "Offline" }</Text>
+                    Status: <Text style={styles.colored}>{ !user.isOffline ? "Online" : "Offline" }</Text>
                 </Text>
                 <Text style={typography.text500}>
                     Email: <Text style={styles.colored}>{ user.email || "Não encontrado" }</Text>
